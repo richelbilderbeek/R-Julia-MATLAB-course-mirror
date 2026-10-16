@@ -1,17 +1,28 @@
-name: Create Zensical website
+name: Docs
 
 on:
+  workflow_dispatch:
   push:
+    branches: [master]
+    paths:
+      - '.github/workflows/docs.yaml'
+      - 'zensical.toml'
+      - 'docs/**'
+
 jobs:
   docs:
     name: Docs
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     permissions:
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.zensical.outputs.page_url }}
+
     steps:
       - name: Zensical Action
         id: zensical
