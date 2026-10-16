@@ -1,0 +1,61 @@
+stages:
+  - build
+  - deploy
+  - verify
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+build_website:
+  stage: build
+  image: python:3.14
+  script:
+    # Checkout is automatic in GitLab
+    - echo "Python version:"
+    - python --version
+    - pip install --upgrade pip
+    - pip install pyyaml zensical
+      #- make build
+      #- echo "Contents of site directory:"
+      #- ls -la site
+    - zensical build --clean
+  artifacts:
+    paths:
+      - site/
+    expire_in: 1 week
+
+pages:
+  stage: deploy
+  script:
+    - mv site public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+linkchecking:
+  stage: verify
+  image: python:3.14
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH == "main"
+      variables:
+        SITE_URL: https://hpc.pages.naiss.se/training/R-MATLAB-Julia/
+    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "main"
+      variables:
+        SITE_URL: $CI_PROJECT_DIR/doc/
+  script:
+    - pip install linkchecker
+      #  - linkchecker "${SITE_URL}" --config linkcheckerrc
+      #    - linkchecker "${SITE_URL}" --check-extern --config linkcheckerrc || exit 64
+  allow_failure:
+    exit_codes:
+      - 1  # tmp, remove for hard failure on internal link failures
+      - 64
+
+cspell:
+  stage: verify
+  image: ghcr.io/streetsidesoftware/cspell:latest
+  script:
+    - cspell-cli 'README.md' 'docs/**/*.md'
+  allow_failure: true

@@ -1,0 +1,474 @@
+# Batch system
+
+
+!!! info "Learning outcomes for today"
+
+    - Short introduction to SLURM scheduler
+    - Show structure of a batch script
+    - Run the provided batch scrip examples
+
+!!! info "Your expectations?"
+
+    - What is a batch job?
+    - How to make a batch job?
+    - How can I run a Julia simulation in batch mode?
+
+
+??? note "Instructor note"
+
+    - Intro 5 min
+    - Lecture and 10 min
+
+!!! note "Compute allocations in this workshop" 
+
+    - Arrhenius: ``naiss2025-22-934``
+    - Pelle/Rackham: ``uppmax2025-2-360``
+    - Kebnekaise: ``hpc2n2025-151``
+    - Cosmos: ``lu2025-2-94``
+    - Dardel: ``naiss2025-22-934`` 
+    - Alvis: ``naiss2025-22-934``
+
+!!! note "Storage space for this workshop" 
+
+    - Arrhenius: ``/proj/courses-fall-2025/users/``
+    - Pelle/Rackham: ``/proj/r-matlab-julia-pelle``
+    - Kebnekaise: ``/proj/nobackup/fall-courses``
+    - Dardel: ``/cfs/klemming/projects/snic/courses-fall-2025``
+    - Alvis: ``/mimer/NOBACKUP/groups/courses-fall-2025/``
+
+!!! warning
+    - Any longer, resource-intensive, or parallel jobs must be run through a **batch script**.
+    - All examples are mainly updated for Arrhenius.
+
+The batch system used at HPC clusters in Sweden is called SLURM.
+
+SLURM is an Open Source job scheduler, which provides three key functions
+
+- Keeps track of available system resources
+- Enforces local system resource usage and job scheduling policies
+- Manages a job queue, distributing work across resources according to policies
+
+In order to run a batch job, you need to create and submit a SLURM submit file (also called a batch submit file, a batch script, or a job script).
+Guides and documentation at: [HPC2N](https://docs.hpc2n.umu.se/documentation/batchsystem/intro/){:target="_blank"}, [UPPMAX](https://docs.uppmax.uu.se/cluster_guides/slurm/){:target="_blank"},
+[LUNARC](https://lunarc-documentation.readthedocs.io/en/latest/manual/submitting_jobs/manual_basic_job/){:target="_blank"}, and
+[PDC](https://support.pdc.kth.se/doc/contact/contact_support/){:target="_blank"}.
+
+**Workflow**
+
+- Write a batch script
+
+  - Inside the batch script you need to load the modules you need, for instance Julia
+  - Possibly activate an isolated/virtual environment to access own-installed packages
+  - Ask for resources depending on if it is a parallel job or a serial job, if you need GPUs or not, etc.
+  - Give the command(s) to your Julia script
+
+- Submit batch script with ``sbatch <my-julia-script.sh>``
+
+Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are not necessary. You can choose any name that makes sense to you.
+
+## Useful commands
+
+- Submit job: ``sbatch <jobscript.sh>``
+- Get list of your jobs: ``squeue -u <username>``
+- Check on a specific job: ``scontrol show job <job-id>``
+- Delete a specific job: ``scancel <job-id>``
+- Useful info about a job: ``sacct -l -j <job-id> | less -S``
+- Url to a page with info about the job (Kebnekaise only): ``job-usage <job-id>``
+
+## Examples of batch scripts
+
+### Serial code
+
+!!! important "Hello World"
+
+    Short serial example for running on different clusters.
+
+    === "Arrhenius"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-xyz  # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH --partition cpu      # CPU partition
+        #SBATCH -n *FIXME*           # nr. tasks
+        #SBATCH --time=00:20:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        # Load any modules you need, here for Julia
+        ml julia/1.12.2
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "UPPMAX (Bianca)"
+
+        ```bash
+        #!/bin/bash -l  # -l cleans the environment in the batch job, recommended at UPPMAX
+        #SBATCH -A sens202t-uv-wxyz    # your project_ID
+        #SBATCH --time=00:10:00        # Asking for 10 minutes
+        #SBATCH -n 1                   # Asking for 1 core
+        #SBATCH --error=job.%J.err     # error file
+        #SBATCH --output=job.%J.out    # output file
+        ml julia/1.8.5 # Julia module
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "UPPMAX (Pelle)"
+
+        ```bash
+        #!/bin/bash -l  # -l cleans the environment in the batch job, recommended at UPPMAX
+        #SBATCH -A uppmax202t-uv-wxyz    # your project_ID
+        #SBATCH --time=00:10:00        # Asking for 10 minutes
+        #SBATCH -n 1                   # Asking for 1 core
+        #SBATCH --error=job.%J.err     # error file
+        #SBATCH --output=job.%J.out    # output file
+        ml Julia/1.10.9-LTS-linux-x86_64  # Julia module
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "HPC2N"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A hpc2n202w-xyz     # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "LUNARC"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A lu202w-x-yz       # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "PDC"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-wxyz # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH  -p shared           # name of the queue
+        #SBATCH  --ntasks=1          # nr. of tasks
+        #SBATCH --cpus-per-task=1    # nr. of cores per-task
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        # Load dependencies and Julia version
+        ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+
+        julia script.jl              # run the serial script
+        ```
+
+    === "script.jl"
+
+        Julia example code.
+
+        ```julia
+        y = "Hello World"
+        println(y)
+        ```
+
+    Send the script to the batch:
+
+    ```bash
+    $ sbatch <batch script>
+    ```
+
+### Serial code + self-installed package in virt. env.
+
+
+!!! important "Virtual environment"
+
+    Short serial example for running on Julia with a virtual environment. Create an environment ``my-third-env``
+    and install the package ``DFTK``. Here, there are batch scripts for using this environment (it is assumed that
+    the batch scripts are in the ``my-third-env`` folder):
+
+    === "Arrhenius"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-xyz  # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH --partition cpu      # CPU partition
+        #SBATCH -n *FIXME*           # nr. tasks
+        #SBATCH --time=00:20:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        # Load any modules you need, here for Julia
+        ml julia/1.12.2
+
+        # Move to the directory where the ".toml" files
+        # for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "UPPMAX (Bianca)"
+
+        ```bash
+        #!/bin/bash -l     # -l cleans the environment in the batch job, recommended at UPPMAX
+        #SBATCH -A sens202t-uv-wxyz  # Change to your own after the course
+        #SBATCH --time=00:10:00       # Asking for 10 minutes
+        #SBATCH -n 1                  # Asking for 1 core
+        #SBATCH --error=job.%J.err    # error file
+        #SBATCH --output=job.%J.out   # output file
+
+        ml julia/1.8.5                # Julia module
+
+        # Move to the directory where the ".toml" files for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "UPPMAX (Pelle)"
+
+        ```bash
+        #!/bin/bash -l     # -l cleans the environment in the batch job, recommended at UPPMAX
+        #SBATCH -A uppmax202t-uv-wxyz  # Change to your own after the course
+        #SBATCH --time=00:10:00       # Asking for 10 minutes
+        #SBATCH -n 1                  # Asking for 1 core
+        #SBATCH --error=job.%J.err    # error file
+        #SBATCH --output=job.%J.out   # output file
+
+        ml Julia/1.10.9-LTS-linux-x86_64       # Julia module
+
+        # Move to the directory where the ".toml" files for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "HPC2N"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A hpc2n202w-xyz     # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        # Move to the directory where the ".toml" files
+        # for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "LUNARC"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A lu202w-x-yz       # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        # Move to the directory where the ".toml" files
+        # for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "PDC"
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-wxyz # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH  -p shared           # name of the queue
+        #SBATCH  --ntasks=1          # nr. of tasks
+        #SBATCH --cpus-per-task=1    # nr. of cores per-task
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        # Load dependencies and Julia version
+        ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+
+        # Move to the directory where the ".toml" files
+        # for the environment are located
+        julia --project=. serial-env.jl  # run the script
+        ```
+
+    === "serial-env.jl"
+
+        Julia example code where an environment is used.
+
+        ```julia
+            using Pkg
+            Pkg.status()
+        ```
+
+    You should see the installed packages in the output file. In the present case
+    because I installed the ``DFTK`` package only in ``my-third-env`` environment, I can
+    see the following output:
+
+    ```julia
+    Status `/path-to-project-storage/my-third-env/Project.toml`
+    [acf6eb54] DFTK v0.6.2
+    ```
+
+# Exercises
+
+## Exercise 1. Run a serial script
+
+Run the serial script ``serial-sum.jl``:
+
+```julia 
+    x = parse( Int32, ARGS[1] )
+    y = parse( Int32, ARGS[2] )
+    summ = x + y
+    println("The sum of the two numbers is ", summ)
+```
+
+This scripts accepts two integers as command line arguments.
+
+
+??? hint "Answer"
+
+    === "Arrhenius"
+        
+        This batch script is for NSC.
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-wxyz # your project_ID
+        #SBATCH -J job               # name of the job
+        #SBATCH --partition cpu      # CPU partition
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:04:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml julia/1.12.2
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+    === "HPC2N"
+
+        This batch script is for Kebnekaise.
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A hpc2n202w-xyz     # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+    === "UPPMAX (Bianca/Rackham)"
+
+        This batch script is for Bianca/Rackham.
+
+        ```bash
+        #!/bin/bash -l
+        #SBATCH -A naiss202t-uv-wxyz # Change to your own after the course
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:05:00 # Asking for 5 minutes
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+        module load julia/1.8.5
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+    === "UPPMAX (Pelle)"
+
+        This batch script is for Pelle.
+
+        ```bash
+        #!/bin/bash -l
+        #SBATCH -A uppmax202t-uv-wxyz # Change to your own after the course
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:05:00 # Asking for 5 minutes
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+        module load Julia/1.10.9-LTS-linux-x86_64 
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+    === "LUNARC"
+
+        This batch script is for LUNARC.
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A lu202w-x-yz       # your project_ID
+        #SBATCH -J job-serial        # name of the job
+        #SBATCH -n 1                 # nr. tasks
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        ml purge  > /dev/null 2>&1   # recommended purge
+        ml Julia/1.8.5-linux-x86_64  # Julia module
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+    === "PDC"
+
+        This batch script is for PDC.
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss202t-uv-wxyz # your project_ID
+        #SBATCH -J job               # name of the job
+        #SBATCH  -p shared           # name of the queue
+        #SBATCH  --ntasks=1          # nr. of tasks
+        #SBATCH --cpus-per-task=1    # nr. of cores per-task
+        #SBATCH --time=00:03:00      # requested time
+        #SBATCH --error=job.%J.err   # error file
+        #SBATCH --output=job.%J.out  # output file
+
+        # Load dependencies and Julia version
+        ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+
+        julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+
+!!! summary
+
+   - The SLURM scheduler handles allocations to the calculation nodes
+   - Batch jobs runs without interaction with user
+   - A batch script consists of a part with SLURM parameters describing the allocation and a second part describing 
+   the actual work within the job, for instance one or several Julia scripts.
+
+

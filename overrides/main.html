@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block extrahead %}
+  {{ super() }}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap"\>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const header = document.querySelector('.header-class');
+        if (!header) return;
+        const THRESHOLD = 40;
+        function onScroll() {
+            const y = (document.scrollingElement || document.documentElement).scrollTop;
+            if (y > THRESHOLD) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+            }
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchBox = document.querySelector('.md-search');
+            const headerRow = document.querySelector('.header-div-row');
+            if (searchBox && headerRow) {
+                headerRow.appendChild(searchBox);
+                }
+            });
+    </script>
+{% endblock %}
+{% block header %}
+<div class="header-class">
+    <div class="header-div-column">
+        <a href="https://user.naiss.se/">
+            <img src="https://training.naiss.se/images/NAISS-Training-logo-black.png"
+                 alt="NAISS Logo" style="max-width: 180px;">
+        </a>
+    </div>
+    <div class="header-div-row">
+        <a class="header-a" href="https://user.naiss.se/allocations/">Allocations</a>
+        <a class="header-a" href="https://user.naiss.se/contact/contact_support/">Support</a>
+        <a class="header-a" href="https://training.naiss.se/">Training</a>
+        <a class="header-a" href="https://user.naiss.se/applications/">Software</a>
+        <a class="header-a" href="https://www.naiss.se">naiss.se</a>
+    </div>
+</div>
+{{ super() }}
+{% endblock %}
