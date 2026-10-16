@@ -48,10 +48,10 @@ Login info
 
 
 
-UPPMAX – Rackham
-SSH: rackham.uppmax.uu.se
-ThinLinc: rackham-gui.uppmax.uu.se
-From web browser: https://rackham-gui.uppmax.uu.se/
+UPPMAX – Pelle
+SSH: pelle.uppmax.uu.se
+ThinLinc: pelle-gui.uppmax.uu.se
+From web browser: https://pelle-gui.uppmax.uu.se/
 HPC2N - Kebnekaise
 SSH: kebnekaise.hpc2n.umu.se
 ThinLinc: kebnekaise-tl.hpc2n.umu.se

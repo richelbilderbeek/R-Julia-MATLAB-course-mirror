@@ -51,13 +51,11 @@ tags:
 
     HPC cluster|Julia   |MATLAB  |R       |Other comments
     -----------|--------|--------|--------|--------------
-    Alvis      |Unknown |Unknown |Unknown |.
     Bianca     |Unknown |Unknown |Unknown |.
     COSMOS     |Yes     |No      |Yes     |.
     Dardel     |Yes     |No      |Yes     |.
     Kebnekaise |Yes     |No      |Yes     |.
     LUMI       |Unknown |Unknown |Unknown |. 
-    Rackham    |Yes     |No      |Yes     |.
     Pelle      |Yes     |No      |Yes     |.
     Tetralith  |Yes     |No      |Yes     |Seems to eat up jobs
 
@@ -758,18 +756,6 @@ module load R/4.4.0-hpc1-gcc-11.3.0-bare
 To install that package from the terminal,
 [check this course's material on how to do so](../../r/packages.md).
   
-
-## T3. 'namespace ‘rlang’ 0.4.12 is already loaded, but >= 1.1.0 is required'
-
-```bash
-Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
-  namespace ‘rlang’ 0.4.12 is already loaded, but >= 1.1.0 is required
-Calls: <Anonymous> ... waldo_compare -> loadNamespace -> namespaceImport -> loadNamespace
-Execution halted
-```
-
-This only happens on Rackham, since 2025-09-25.
-
 ## MATLAB error
 
 ```matlab

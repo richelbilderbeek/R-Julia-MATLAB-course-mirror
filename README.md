@@ -11,6 +11,8 @@ This repository contains the source code for the UPPMAX/HPC2N
 
 - [Go to the nicely rendered website](https://hpc.pages.naiss.se/training/R-matlab-julia-HPC/).
 
+<!-- RJCB: is this still needed?
+
 ## Getting PDFs of the material
 
 You can clone the repository:
@@ -25,6 +27,8 @@ with this online tool: <https://cloudconvert.com/rst-to-pdf>
 The documentation files you see on the rendered pages
 (<https://hpc.pages.naiss.se/training/R-matlab-julia-HPC/>)
 are found under `R-matlab-julia-HPC/docs/<language>`.
+
+-->
 
 ## Build locally
 
@@ -53,7 +57,7 @@ update pip and install the requirements:
 
 ```console
 pip install --upgrade pip
-pip install -r mkdocs-requirements.txt
+pip install zensical
 ```
 
 You may have to deactivate and reactivate the `venv`
@@ -63,7 +67,7 @@ at this point to make Bash find
 Build and deploy the website, from this project's root folder:
 
 ```console
-mkdocs serve
+zensical serve
 ```
 
 <!-- RJCB: do we still need this?
@@ -93,35 +97,13 @@ mkdocs serve
 
 -->
 
-## Where is it indicated which files are not checked for broken URLs?
-
-In the file [`.github/workflows/check_links.yaml` line 34](.github/workflows/check_links.yaml#34).
-
-## Where is it indicated which files are not checked for spelling?
-
-In the file [`.github/workflows/check_spelling.yaml` line 39](.github/workflows/check_spelling.yaml#39).
-
-## Where is it indicated which files are not checked for Markdown style?
-
-In the file [`.markdownlintignore`](.markdownlintignore).
-
-## Which admonitions work?
-
-<!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
-
-Theme      |Admonitions test page
------------|------------------------
-ReadTheDocs|[Admonitions test page](https://uppmax.github.io/linux-command-line-102/misc/test_admonitions/)
-materials  |[Admonitions test page](https://uppmax.github.io/naiss_intro_python/misc/test_admonitions/)
-
-<!-- markdownlint-enable MD013 -->
-
 ## Credits
 
 - The old and online version is built with Sphinx
   using a theme provided by Read the Docs
-- The newer version is built with MkDocs
+- A newer version is built with MkDocs
   using the ReadTheDocs theme
+- The newest version is build with Zensical
 
 ## Files used by continuous integration scripts
 
@@ -137,4 +119,3 @@ Filename                                    |Descriptions
 [.lycheeignore](.lycheeignore)              |?URLs ignored by the link checker
 
 <!-- markdownlint-enable MD013 -->
-

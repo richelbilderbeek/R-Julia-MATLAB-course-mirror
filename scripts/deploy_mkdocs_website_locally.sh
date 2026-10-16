@@ -20,7 +20,7 @@ fi
 
 # Install notes
 #
-# pip install mkdocs-material --break-system-packages
+# pip install zensical --break-system-packages
 #
 # or (untested):
 #

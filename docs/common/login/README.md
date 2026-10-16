@@ -7,13 +7,13 @@
 
     Be able to follow this course:
 
-    - Step 1: [You have fulfilled the prerequisites](../prereqs.md)
+    - Step 1: [You have fulfilled the prerequisites](../../prereqs.md)
       (you have already done this)
     - **Step 2a**: [You can log in (see below)](#step-1-log-in)
       (this session)
-    - **Step 2b**: You can [use a text editor](use_text_editor.md)
+    - **Step 2b**: You can [use a text editor](../use_text_editor.md)
       on your HPC cluster (this session)
-    - (optional) Step 3: [Use the tarball with exercises](use_tarball.md).
+    - (optional) Step 3: [Use the tarball with exercises](../use_tarball.md).
       This step is optional, as we also do this under course time
 
 <!-- 
@@ -23,15 +23,15 @@ This content may be important, yet not at this page.
 
 !!! info "Cluster-specific approaches"
 
-    The course is a cooperation between **UPPMAX** (Rackham, Snowy, Bianca),
+    The course is a cooperation between **UPPMAX** (Pelle, Bianca),
     **HPC2N** (Kebnekaise), and **LUNARC** (COSMOS) and will focus on the
     compute systems at all these centres, as well as select resources at
     NSC (Tetralith) and PDC (Dardel).
 
     Although there are differences we will only have **few separate sessions**.
 
-    Most participants will use NSC's or Dardel's systems for the course,
-    as Rackham, Kebnekaise and Cosmos are only for local
+    Most participants will use the Arrhenius HPC cluster for the course,
+    as Pelle, Kebnekaise and COSMOS are only for local
     (UU, UmU, IRF, MIUN, SLU, LTU, LU) users.
 
     The general information given in the course will be true
@@ -64,7 +64,7 @@ It may be important somewhere and I hope it will be moved there.
       follow the **HPC2N** track below.
     - If you have user account and *research* project on COSMOS,
       follow the **LUNARC** track below.
-    - If you have user account and course/research project on Rackham,
+    - If you have user account and course/research project on Pelle,
       follow the **UPPMAX** track below.
     - If you have user account and course/research project on Tetralith,
       follow the **NSC** track below.
@@ -99,8 +99,8 @@ For beginners: use the **bold** login method.
 
 HPC cluster|Login method             |Documentation                                                                                                |YouTube video
 -----------|-------------------------|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------
-Arrhenius  |SSH                      |[Documentation](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/login/login/)                                  |[YouTube video]()
-Arrhenius  |**ThinLinc**             |[Documentation](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/login/thinlinc/)                      |[YouTube video]()
+Arrhenius  |SSH                      |[Documentation](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/login/login/)       |[YouTube video](https://youtu.be/oBTzgT3ODjM)
+Arrhenius  |**Local ThinLinc client**|[Documentation](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/login/thinlinc/)    |[YouTube video](https://youtu.be/7fBitTggm7E)
 Bianca     |SSH                      |[Documentation](https://docs.uppmax.uu.se/getting_started/login_bianca_console_password/)                    |[YouTube video](https://youtu.be/7mKDxnXqi_M)
 Bianca     |**Website**              |[Documentation](https://docs.uppmax.uu.se/getting_started/login_bianca_remote_desktop_website/)              |[YouTube video](https://youtu.be/Ni9nyCf7me8)
 COSMOS     |**Local ThinLinc client**|[Documentation](https://lunarc-documentation.readthedocs.io/en/latest/getting_started/using_hpc_desktop/)    |[YouTube video](https://youtu.be/wn7TgElj_Ng)
@@ -112,7 +112,8 @@ Kebnekaise |SSH                      |[Documentation](https://docs.hpc2n.umu.se/
 Kebnekaise |**Website**              |[Documentation](https://docs.hpc2n.umu.se/documentation/access/)                                             |[YouTube video](https://youtu.be/_O4dQn8zPaw)
 LUMI       |**SSH**                  |[Documentation](https://docs.lumi-supercomputer.eu/firststeps/loggingin/)                                    |[YouTube video](https://youtu.be/bPdvn2gajgU)
 Pelle      |SSH                      |[Documentation](https://docs.uppmax.uu.se/getting_started/login_pelle_console_password/)                     |[YouTube video](https://youtu.be/zsw3QD_NinU)
-Pelle      |**Local ThinLinc client**|[Documentation](https://docs.uppmax.uu.se/getting_started/login_pelle_remote_desktop_local_thinlinc_client/) |[YouTube video](https://youtu.be/0rVy83X89Go)
+Pelle      |Local ThinLinc client    |[Documentation](https://docs.uppmax.uu.se/getting_started/login_pelle_remote_desktop_local_thinlinc_client/) |[YouTube video](https://youtu.be/0rVy83X89Go)
+Pelle      |**Website**              |[Documentation](https://docs.uppmax.uu.se/getting_started/login_pelle_remote_desktop_website/)               |[YouTube video](https://youtu.be/XjLMA0cAu1o)
 
 <!-- markdownlint-enable MD013 -->
 
@@ -137,15 +138,15 @@ with the YouTube videos
 
 !!! info "Type-along"
 
-    Please log in to Rackham, Kebnekaise, or other cluster that you are using.
+    Please log in to Pelle, Kebnekaise, or other cluster that you are using.
 
     === "UPPMAX"
         
-        1. Log in to Rackham!
+        1. Log in to Pelle!
 
-        - Terminal: ``ssh -X <user>@rackham.uppmax.uu.se``
-        - ThinLinc app: ``<user>@rackham-gui.uppmax.uu.se``
-        - ThinLinc in web browser: ``https://rackham-gui.uppmax.uu.se``
+        - Terminal: ``ssh -X <user>@pelle.uppmax.uu.se``
+        - ThinLinc app: ``<user>@pelle-gui.uppmax.uu.se``
+        - ThinLinc in web browser: ``https://pelle-gui.uppmax.uu.se``
 
         1. If not already: **create a working directory**
            where you can code along.
@@ -277,8 +278,8 @@ with the YouTube videos
 
 ## Test an editor
 
-Learn how to use an text editor at [Use a text editor](use_text_editor.md).
+Learn how to use an text editor at [Use a text editor](../use_text_editor.md).
 
 ## Download and extract the tarball with exercises
 
-Learn how to download and extract the tarball with exercises at [Use the tarball with exercises](use_tarball.md).
+Learn how to download and extract the tarball with exercises at [Use the tarball with exercises](../use_tarball.md).

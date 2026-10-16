@@ -84,7 +84,6 @@ Use the documentation of your HPC cluster for help.
     HPC cluster| User documentation for that HPC cluster
     -----------|-----------------------------------------------------------------------------------
     Arrhenius  | [Arrhenius HPC documentation](https://hpc.pages.naiss.se/user-documentation/support-docs/)
-    Alvis      | [Alvis user documentation](https://www.c3se.chalmers.se/about/Alvis/)
     Bianca     | [Bianca user documentation](http://docs.uppmax.uu.se/)
     COSMOS     | [COSMOS user documentation](https://lunarc-documentation.readthedocs.io/en/latest)
     Dardel     | [Dardel user documentation](https://support.pdc.kth.se/doc/contact/contact_support/)
@@ -106,7 +105,6 @@ Use the documentation of your HPC cluster for help.
     HPC Cluster|Documentation
     -----------|------------
     Arrhenius  |[Arrhenius documentation](https://richel.bilderbeek.pages.naiss.se/support-docs/arrhenius_hpc/software_development/rstudio/)
-    Alvis      |[UPPMAX documentation](https://docs.uppmax.uu.se/naiss/rstudio_on_alvis/)
     Bianca     |[UPPMAX documentation](https://docs.uppmax.uu.se/software/rstudio_on_bianca/)
     COSMOS     |[UPPMAX documentation](https://docs.uppmax.uu.se/naiss/rstudio_on_cosmos/)
     Dardel     |[UPPMAX documentation](https://docs.uppmax.uu.se/naiss/rstudio_on_dardel/)

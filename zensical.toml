@@ -55,13 +55,14 @@ nav = [
   { "R" = [
     { "Schedule" = "r/schedule.md" },
     { "Intro" = "r/intro/README.md" },
-    { "Load and run" = "r/load_run.md" },
+    { "Load and run" = "r/load_run/README.md" },
     { "Packages" = "r/packages.md" },
     { "Batch" = "r/batch.md" },
     { "Interactive" = "r/interactive.md" },
     { "RStudio" = "r/rstudio/README.md" },
-    { "Summary" = "r/summary/README.md" }
-#    { "Evaluation" = "r/evaluation.md" }
+    { "Summary" = "r/summary/README.md" },
+    { "Evaluation" = "r/evaluation.md" },
+    { "Videos" = "r/videos.md" }
   ]},
   { "MATLAB" = [
     { "Schedule" = "matlab/schedule.md" },
@@ -97,19 +98,19 @@ nav = [
       { "With Julia" = "advanced/MLjulia.md" },
       { "With MATLAB" = "advanced/MLmatlab.md" }
     ]},
-    { "Summary" = "advanced/summary.md" }
-#    { "Evaluation" = "advanced/evaluation.md" }
+    { "Summary" = "advanced/summary.md" },
+    { "Evaluation" = "advanced/evaluation.md" }
   ]},
-#  { "Misc" = [
-#    { "Evaluations" = "evaluations/README.md" },
-#    { "Lesson plans" = "lesson_plans/README.md" },
-#    { "Meeting notes" = "meeting_notes/README.md" },
-#    { "Reflections" = "reflections/README.md" }
-#  ]},
   { "Extra reading" = [
     { "More about R packages" = "r/morepackages.md" },
     { "More about Matlab" = "matlab/extra.md" },
     { "More about Julia" = "julia/extra.md" }
+  ]},
+  { "Misc" = [
+    { "Evaluations" = "evaluations/README.md" },
+    { "Lesson plans" = "lesson_plans/README.md" },
+    { "Meeting notes" = "meeting_notes/README.md" },
+    { "Reflections" = "reflections/README.md" }
   ]}
 ]
 

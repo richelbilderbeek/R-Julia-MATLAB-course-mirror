@@ -26,7 +26,7 @@ Need help? Contact support:
 
 HPC cluster |HPC Center  | How to contact support
 ------------|------------|-------------------------------------------------------------------------------
-Arrhenuys   | NAISS      | [Contact NAISS support](https://supr.naiss.se/support/) 
+Arrhenius   | NAISS      | [Contact NAISS support](https://supr.naiss.se/support/) 
 COSMOS      | LUNARC     | [Contact LUNARC support](https://www.lunarc.lu.se/getting-help/)
 Dardel      | PDC/NAISS  | [Contact PDC support](https://support.pdc.kth.se/doc/contact/contact_support/)
 Kebnekaise  | HPC2N      | [Contact HPC2N support](https://docs.hpc2n.umu.se/support/contact/)

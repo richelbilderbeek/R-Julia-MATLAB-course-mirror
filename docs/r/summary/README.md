@@ -9,9 +9,7 @@ module spider R
 You can load the module to be able to run R:
 
 ```bash
-module load GCC/11.2.0 OpenMPI/4.1.1 R/4.1.2
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1
-module load R/4.1.1
+module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
 ```
 
 You can run the R interpreter

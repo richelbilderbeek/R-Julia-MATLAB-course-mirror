@@ -31,7 +31,7 @@ Most HPC centres in Sweden use the same or a similar module system for their sof
 
 !!! caution  
 
-    - Note that the module systems at UPPMAX, HPC2N, LUNARC, NSC, and PDC are slightly different.
+    - Note that the module systems at UPPMAX, HPC2N, LUNARC, and PDC are slightly different.
     - There is no system MATLAB that comes preloaded like Python at any of these HPC resources, but `ml load matlab` with no release date will load the latest release, which is periodically updated. For reproducibility reasons, you should be sure to load the same release throughout a given project.
     - While all modules at UPPMAX and NSC not directly related to bio-informatics are shown by `ml avail`, modules at the other centers may be hidden until one has loaded a prerequisite, like the compiler `GCC`.
     - You need to use `module spider` to see all modules at HPC2N, LUNARC, and PDC, and `ml avail` for those available to load given your currently loaded prerequisites.
@@ -44,25 +44,12 @@ Most HPC centres in Sweden use the same or a similar module system for their sof
 
 Below we have examples for how to check for MATLAB versions on different clusters. Follow along at your cluster.
 
-=== "UPPMAX (Rackham and Pelle) and NSC (Tetralith)"
+=== "UPPMAX (Pelle)"
 
     Check all available MATLAB versions with:
 
     ```bash
     module avail matlab
-    ```
-    Output on Rackham as of 22 September 2025:
-    
-    ```bash
-    ---------------------------- /sw/mf/rackham/applications ----------------------------
-       matlab/R2014a    matlab/R2018a    matlab/R2022b          matlab/7.10
-       matlab/R2015a    matlab/R2018b    matlab/R2023a          matlab/7.13
-       matlab/R2015b    matlab/R2019a    matlab/R2023b (D)      matlab/8.0
-       matlab/R2016a    matlab/R2020b    matlab/7.4             matlab/8.1
-       matlab/R2017a    matlab/R2022a    matlab/7.8
-
-      Where:
-       D:  Default Module
     ```
 
     Output on Pelle as of 22 September 2025:
@@ -76,16 +63,6 @@ Below we have examples for how to check for MATLAB versions on different cluster
        D:  Default Module
     ```
 
-    Output on Tetralith as of 27 Feb 2025:
-
-    ```bash
-    --------------------- /software/sse2/tetralith_el9/modules ---------------------
-       MATLAB/recommendation (D)    MATLAB/2023b-bdist
-       MATLAB/2023a-bdist           MATLAB/2024a-hpc1-bdist
-
-      Where:
-       D:  Default Module
-    ```
 
 === "HPC2N"
 
@@ -213,7 +190,7 @@ Try loading a MATLAB module at the command line. First, go back and check which 
 
 === "UPPMAX"
 
-     **Rackham.** To load version 2023b, do:
+     **Bianca.** To load version 2023b, do:
 
      ```bash
      module load matlab/R2023b
@@ -262,23 +239,6 @@ Try loading a MATLAB module at the command line. First, go back and check which 
      ml matlab/2024b
      ```
 
-=== "NSC (Tetralith)"
-
-     To load version 2023b, do:
-
-     ```bash
-     module load MATLAB/2023b-bdist
-     ```
-
-     Note: all Uppercase except for the letter after the year.
-     For short, you can also use:
-
-     ```bash
-     ml MATLAB/2023b
-     ```
-
-     If you check with ``ml`` which version is loaded, you will see the ``-bdist`` suffix was added automatically. Versions without ``-bdist`` at the end only appear with ``ml spider matlab`` and they do not appear to be loadable.
-
 === "PDC (Dardel)"
 
      Go back and check which MATLAB modules were available, and what their prerequisites are. To load version 2024b, do:
@@ -317,7 +277,7 @@ The GUI is often the recommended interface where it is offered. SLURM jobs can b
 
 Try starting MATLAB at the command line. We will use the same versions as in the previous section.
 
-=== "UPPMAX (Rackham and Pelle?) and NSC (Tetralith)"
+=== "UPPMAX (Bianca and Pelle)"
 
      Once you've loaded your preferred version of MATLAB, type:
 
@@ -390,7 +350,7 @@ Try starting MATLAB at the command line. We will use the same versions as in the
 
 ## Start the MATLAB GUI
 
-Running the MATLAB GUI requires that users be logged into a ThinLinc session. Refer to [the login section](../common/login/README.md##step-1-log-in) for help.
+Running the MATLAB GUI requires that users be logged into a ThinLinc session. Refer to [the login section](../common/login/README.md#step-1-log-in) for help.
 
 === "HPC2N (Kebnekaise)"
   
@@ -422,25 +382,6 @@ Running the MATLAB GUI requires that users be logged into a ThinLinc session. Re
      ```
 
      In the above example, ``-n 4`` means the job will run on 4 cores. Pelle nodes have 96 cores. Please refer to [this link](https://docs.uppmax.uu.se/cluster_guides/snowy/#using-the-batch-system) for allowed combinations of ``interactive`` parameters.
-
-
-=== "NSC (Tetralith)"
-
-    The best way to start the MATLAB GUI on Tetralith depends on how intensively you plan to use the GUI. Most of the time, it is recommended to use the ``interactive`` command first to get an allocation on a compute node. The commands you will need to enter look like the following (change the MATLAB version and interactive job specifications as needed):
-
-     ```bash
-     interactive -N 1 --exclusive -t 4:00:00
-     module load MATLAB/2024a-hpc1-bdist
-     matlab -softwareopengl
-     ```
-
-    For short (<<1 hour) tasks requiring few resources, once you've loaded your preferred version of MATLAB, you can use the following command to start MATLAB on a login node:
-  
-     ```bash
-     vglrun matlab -nosoftwareopengl
-     ```
-  
-    You do not need to include `-singleCompThread` because `maxNumCompThreads` will be set to 1 automatically to account for starting on a login node.
 
 === "LUNARC (COSMOS)"
 

@@ -3,6 +3,7 @@
 ![The R logo](r_logo_50.png)
 
 ???- note "Prefer this session as video?"
+
     See [this YouTube video](https://youtu.be/N-TRzv9LdF4)
     to see this session as a video.
 
@@ -29,15 +30,13 @@
 
 !!! note "Course learning outcomes"
 
-    - use the module system to load R
-    - use the module system to load site-installed R packages
-    - find out which versions of R and packages are installed
-    - run R scripts
+    - I have loaded the modules to run a specific version of R
+    - I have run an R script from the command-line
     - write a batch script for running R
     - install R packages from CRAN
     - see how to install other R packages yourself
     - start batch jobs
-    - run RStudio
+    - I have run RStudio
 
     on the NAISS clusters Arrhenius and Dardel. Tabs exist for the pre-NAISS systems COSMOS, Kebnekaise, and Pelle.
 

@@ -14,13 +14,13 @@ Time  | Topic                                        | Teacher(s)
 9:45  | Break                                        | .
 10:00 | [Introduction](intro/README.md)              | Richèl Bilderbeek
 .     | [Syllabus](intro/README.md)                  | Richèl Bilderbeek
-10:20 | [Load modules and run](load_run.md)          | Richèl Bilderbeek
+10:20 | [Load modules and run](load_run/README.md)   | Richèl Bilderbeek
 11:00 | Break                                        | .
 11:15 | Packages                                     | Birgitte Brydsö
 12:00 | Lunch                                        | .
 13:00 | Batch                                        | Birgitte Brydsö
 14:00 | Break                                        | .
-14:15 | [RStudio](rstudio.md)                        | Richèl Bilderbeek
+14:15 | [RStudio](rstudio/README.md)                 | Richèl Bilderbeek
 14:45 | RStudio On-Demand                            | Birgitte Brydsö
 15:15 | [Summary](summary/README.md)                 | Richèl Bilderbeek
 .     | [Evaluation](evaluation.md)                  | Richèl Bilderbeek

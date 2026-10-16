@@ -275,7 +275,7 @@ and, in a general form, is plotted like this:
 ## Question -1: change your Zoom name
 
 Change your Zoom name, to include your HPC cluster and favorite
-programming language, e.g. make `Sven` into `Sven [Alvis, R]`.
+programming language, e.g. make `Svante` into `Svante [Arrhenius, R]`.
 
 You can do so by right-click on the video of yourself,
 then click 'Rename' to change your Zoom name.
@@ -285,14 +285,13 @@ then click 'Rename' to change your Zoom name.
 HPC cluster name |Main breakout room
 -----------------|------------------
 Arrhenius        |Room 1
-Alvis            |Room 2
-Bianca           |Room 3
-COSMOS           |Room 4
-Dardel           |Room 5
-Kebnekaise       |Room 6
-LUMI             |Room 7
-Pelle            |Room 8
-Tetralith        |Room 9
+Bianca           |Room 2
+COSMOS           |Room 3
+Dardel           |Room 4
+Kebnekaise       |Room 5
+LUMI             |Room 6
+Pelle            |Room 7
+Tetralith        |Room 8
 
 ## Question 1
 

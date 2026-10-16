@@ -48,5 +48,5 @@ We recommend `nano` unless you are used to another editor:
     or
 
     ```bash
-    python2 example.py
+    python3 example.py
     ```

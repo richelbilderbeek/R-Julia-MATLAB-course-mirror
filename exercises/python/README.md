@@ -2,13 +2,13 @@
 
 Batch scripts can be recognized from the ending .sh
 
-In many cases there are batch scripts for both Kebnekaise and Rackham (or Snowy). In some cases there are
+In many cases there are batch scripts for both Kebnekaise and Pelle. In some cases there are
 also separate .py files for the clusters.
 
 The batch scripts that do not have "kebnekaise-", "-rackham", or "-snowy" in their name should have a description
 inside that tells what they are for.
 
-You could try creating a batch job for Rackham if only one for Kebnekaise exist! Or try running different Python codes.
+You could try creating a batch job for Pelle if only one for Kebnekaise exist! Or try running different Python codes.
 
 
 ## add.py example

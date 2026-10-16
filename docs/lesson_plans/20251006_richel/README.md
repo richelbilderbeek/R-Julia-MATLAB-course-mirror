@@ -26,7 +26,6 @@ Progress is clear from the lesson material:
 
 HPC Cluster|Documentation
 -----------|------------
-Alvis      |Only [OpenOnDemand doc](https://www.c3se.chalmers.se/documentation/connecting/ondemand/)
 Berzelius  |[As good as no documentation](https://nsc.liu.se/software/catalogue/tetralith/modules/rstudio.html)
 Bianca     |[Documentation](https://docs.uppmax.uu.se/software/rstudio_on_bianca/)
 COSMOS     |No documentation

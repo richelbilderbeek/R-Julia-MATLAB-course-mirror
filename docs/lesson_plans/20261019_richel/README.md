@@ -3,8 +3,9 @@
 - Date: 2026-10-19
 - Course: R
 - Author: Richel
+- [GitLab repository](https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC)
 - [Lesson plan](../../lesson_plans/20261019_richel/README.md)
-- [Evaluation](../../evaluations/20261019/README.md)
+- [Evaluation](../../evaluations/20261019_r/README.md)
 - [Reflection](../../reflections/20261019_richel/README.md)
 
 ## 2026-10-15
@@ -33,16 +34,16 @@ this table to track my progress):
 
 <!-- markdownlint-disable MD013 --><!-- Tables cannot be split up over lines, hence will break 80 characters per line -->
 
-Time  | Topic                                        | Status
-------|----------------------------------------------|-----------
-.     | The common things                            | Updated some images by Arrhenius ones
-9:00  | (optional) [First login](../common/login/README.md) | Unknown
-10:00 | [Introduction](intro/README.md)              | Unknown
-.     | [Syllabus](intro/README.md)                  | Unknown
-10:20 | [Load modules and run](load_run.md)          | Unknown
-14:15 | [RStudio](rstudio.md)                        | Done
-15:15 | [Summary](summary/README.md)                 | Unknown
-.     | [Evaluation](evaluation.md)                  | Unknown
+Time  | Topic                   | Status
+------|-------------------------|-----------
+.     | The common things       | Done, last check needed
+9:00  | (optional) First login  | Done, last check needed
+10:00 | Introduction            | Done, last check needed
+.     | Syllabus                | Done, last check needed
+10:20 | Load modules and run    | Done, last check needed
+14:15 | RStudio                 | Done, last check needed
+15:15 | Summary                 | Done, last check needed
+.     | Evaluation              | Done, last check needed, need form to be created
 
 <!-- markdownlint-enable MD013 -->
 
@@ -53,6 +54,9 @@ And also:
 I heard from BC that RStudio does not work on Arrhenius. That simplifies my
 teaching :-)
 
+The NAISS GitLab runners do not work well. I spent some time on making
+a GitHub not-really-mirror. I got it to work, i.e. it can deploy
+a Zensical website.
 
 ## References
 
