@@ -1,17 +1,16 @@
-name: Docs
+name: create_zensical_website
 
 on:
   workflow_dispatch:
   push:
-    branches: [master]
     paths:
-      - '.github/workflows/docs.yaml'
+      - '.github/workflows/create_zensical_website.yaml'
       - 'zensical.toml'
       - 'docs/**'
 
 jobs:
   docs:
-    name: Docs
+    name: create_zensical_website
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
