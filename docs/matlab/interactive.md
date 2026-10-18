@@ -21,20 +21,19 @@
 
 In order to run interactively with more memory or more threads/processes, you need to have compute nodes allocated to run on, and this is done through the Slurm system.
 
-## Interactive sessions at NSC, PDC, HPC2N, UPPMAX and LUNARC
+## Interactive sessions at Arrhenius, PDC, HPC2N, UPPMAX and LUNARC
 
 Here we define an interactive session as a session with direct access to a compute node.
 Or alternatively: an interactive session is a session, in which there is no queue before a command is run on a compute node.
 
-This differs between HPC2N and UPPMAX :
 
-- HPC2N: the user remains on a login node.
+- PDC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute - Arrhenius: the user is actually on a computer node. Whatever command is done, it is run on the compute node
+node- HPC2N: the user remains on a login node.
   All commands can be sent directly to the compute node using `srun`
 - UPPMAX: the user is actually on a computer node.
   Whatever command is done, it is run on the compute node
 - LUNARC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
-- NSC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
-- PDC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
+
 
 ### Start an interactive session
 
@@ -43,15 +42,15 @@ one needs to allocate resources on the cluster first.
 
 The command to request an interactive node differs per HPC cluster:
 
-| Cluster | `interactive` | `salloc`     | GfxLauncher | Open OnDemand |
-|---------|:-------------:|--------------|-------------|---------------|
-| HPC2N   | Works         | Recommended  | N/A         |  Recommended  |
-| UPPMAX  | Recommended   | Works        | N/A         |  N/A  
-| LUNARC  | Works         | N/A          | Recommended |  N/A  
-| NSC     | Recommended   | N/A          | N/A         |  N/A  
-| PDC     | N/A           | Recommended  | Possible    |  N/A  
+| Cluster     | `interactive` | `salloc`     | GfxLauncher | Open OnDemand |
+|-------------|:-------------:|--------------|-------------|---------------|
+| Kebnekaise  | Works         | Recommended  | N/A         |  Recommended  |
+| Pelle/Bianca| Recommended   | Works        | N/A         |  N/A  
+| Cosmos      | Works         | Works         | Recommended |  N/A  
+| Arrhenius   | Recommended   | N/A          | N/A         |  N/A  
+| Dardel      | N/A           | Recommended  | Possible    |  N/A  
 
-Example, HPC2N vs. UPPMAX (also valid for NSC, PDC and LUNARC):
+Example, HPC2N vs. UPPMAX (also valid for Arrhenius, PDC and LUNARC):
 
 ```mermaid
 graph TD
@@ -95,16 +94,16 @@ graph TD
 
     Short serial example for running on different clusters.
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        $ interactive -n <tasks> --time=HHH:MM:SS -A naiss2025-22-934
+        $ interactive -n <tasks> --time=HHH:MM:SS -A naiss2026-4-1022-cpu
         ```
 
     === "PDC"
 
         ```bash
-        $ salloc -n <ntasks> --time=HHH:MM:SS -A naiss2025-22-934 -p <partition>
+        $ salloc -n <ntasks> --time=HHH:MM:SS -A naiss2026-4-1022 -p <partition>
         ```
 
         Where <partition> is ``shared``, ``main`` or ``gpu``
@@ -127,17 +126,16 @@ graph TD
     === "LUNARC"
 
         ```bash
-        $ interactive -n <tasks> --time=HHH:MM:SS -A lu2025-2-94
+        $ interactive -n <tasks> --time=HHH:MM:SS -A <project>
         ```
 
     === "HPC2N"
 
         ```bash
-        $ salloc -n <tasks> --time=HHH:MM:SS -A hpc2n2025-151
+        $ salloc -n <tasks> --time=HHH:MM:SS -A hpc2ncourses2026-017
         ```
 
-where <tasks> is the number of tasks (or cores, for default 1 task per core), time is given in hours, minutes, and seconds 
-(maximum T168 hours), and then you give the id for your project.
+where <tasks> is the number of tasks (or cores, for default 1 task per core), time is given in hours, minutes, and seconds  and then you give the id for your project.
 
 
 - Your request enters the job queue just like any other job, and interactive/salloc will tell you that it is waiting for the requested resources.
@@ -162,7 +160,7 @@ logout
 !!! important "Documentation at the centers"
 
    - [Interactive allocation on PDC](https://support.pdc.kth.se/doc/contact/contact_support/?sub=login/interactive_hpc/){:target="_blank"}
-   - [Interactive allocation on NSC](https://www.nsc.liu.se/support/running-applications/#interactive-jobs){:target="_blank"}
+   - [Interactive allocation on Arrhenius](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/job_management/interactive/){:target="_blank"}
    - [Interactive allocation on UPPMAX](https://docs.uppmax.uu.se/cluster_guides/start_interactive_session/){:target="_blank"}
    - [Interactive allocation on HPC2N](https://docs.hpc2n.umu.se/documentation/batchsystem/job_submission/#interactive){:target="_blank"}
    - [Interactive allocation on LUNARC](https://lunarc-documentation.readthedocs.io/en/latest/manual/manual_interactive/#starting-an-interactive-session){:target="_blank"}
@@ -177,10 +175,10 @@ logout
     
     Requesting 4 cores for 10 minutes, and load Matlab
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        [sm_bcarl@tetralith3 ~]$ interactive -n 4 -t 0:30:0 -A naiss2025-22-934
+        [sm_bcarl@arrhenius2 ~]$ interactive -n 4 -t 0:30:0 -A naiss2026-4-1022-cpu
         salloc: Pending job allocation 43071298
         salloc: job 43071298 queued and waiting for resources
         salloc: job 43071298 has been allocated resources
@@ -188,7 +186,7 @@ logout
         salloc: Waiting for resource configuration
         salloc: Nodes n760 are ready for job
 
-        [bjornc@n760 ~]$ module load MATLAB/2023b-bdist
+        [bjornc@n760 ~]$ module load MATLAB/2025b
         ```
 
         Let us check that we actually run on the compute node:
@@ -206,7 +204,7 @@ logout
     === "PDC"
 
         ```bash
-        claremar@login1:~> salloc --ntasks=4 -t 0:30:00 -p shared --qos=normal -A naiss2025-22-934
+        claremar@login1:~> salloc --ntasks=4 -t 0:30:00 -p shared --qos=normal -A naiss2026-4-1022
         salloc: Pending job allocation 9102757
         salloc: job 9102757 queued and waiting for resources
         salloc: job 9102757 has been allocated resources

@@ -61,6 +61,6 @@ a Zensical website.
 ## References
 
 
-- `[Brinkman et al, 2015]` Brinkman, D., Tichelaar, J., Van Agtmael, M. V., De Vries, T., & Richir, M. (2015). Self‐reported confidence in prescribing skills correlates poorly with assessed competence in fourth‐year medical students. The Journal of Clinical Pharmacology, 55. https://doi.org/10.1002/jcph.474
-- `[Javed and Bhatti, 2022]` Javed, M., & Bhatti, U. (2022). Students’ performance in clinics and self-perceived Confidence in performing Endodontic procedures: A correlation study. Pakistan Journal of Medical Sciences, 39, 203 - 208. https://doi.org/10.12669/pjms.39.1.6870
-- `[O'Donoghue et al., 2018]` O'Donoghue, D., Davison, G., Hanna, L., McNaughten, B., Stevenson, M., & Thompson, A. (2018). Calibration of confidence and assessed clinical skills competence in undergraduate paediatric OSCE scenarios: a mixed methods study. BMC Medical Education, 18. https://doi.org/10.1186/s12909-018-1318-8
+- `[Brinkman et al, 2015]` Brinkman, D., Tichelaar, J., Van Agtmael, M. V., De Vries, T., & Richir, M. (2015). Self‐reported confidence in prescribing skills correlates poorly with assessed competence in fourth‐year medical students. The Journal of Clinical Pharmacology, 55. <https://doi.org/10.1002/jcph.474>
+- `[Javed and Bhatti, 2022]` Javed, M., & Bhatti, U. (2022). Students’ performance in clinics and self-perceived Confidence in performing Endodontic procedures: A correlation study. Pakistan Journal of Medical Sciences, 39, 203 - 208. <https://doi.org/10.12669/pjms.39.1.6870>
+- `[O'Donoghue et al., 2018]` O'Donoghue, D., Davison, G., Hanna, L., McNaughten, B., Stevenson, M., & Thompson, A. (2018). Calibration of confidence and assessed clinical skills competence in undergraduate paediatric OSCE scenarios: a mixed methods study. BMC Medical Education, 18. <https://doi.org/10.1186/s12909-018-1318-8>

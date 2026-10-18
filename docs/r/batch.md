@@ -15,40 +15,33 @@
 
 !!! note "Compute allocations in this workshop" 
 
-    - Pelle/Rackham: ``uppmax2025-2-360``
-    - Kebnekaise: ``hpc2n2025-151``
-    - Cosmos: ``lu2025-2-94``
-    - Tetralith: ``naiss2025-22-934``
-    - Dardel: ``naiss2025-22-934`` 
-    - Alvis: ``naiss2025-22-934``
+    - NAISS Arrhenius: ``naiss2026-4-1022``
+    - Pelle: ``uppmax2025-2-393``
+    - Kebnekaise: ``hpc2ncourses2026-017``
+    - Dardel: ``naiss2026-4-1022`` 
 
 !!! note "Storage space for this workshop" 
 
-    - Pelle/Rackham: ``/proj/r-matlab-julia-pelle``
-    - Kebnekaise: ``/proj/nobackup/fall-courses``
-    - Tetralith: ``/proj/courses-fall-2025/users/``
-    - Dardel: ``/cfs/klemming/projects/snic/courses-fall-2025``
-    - Alvis: ``/mimer/NOBACKUP/groups/courses-fall-2025/``
+    - NAISS Arrhenius: ``/nobackup/proj/disk/fall-courses-naiss``
+    - Pelle: ``/proj/r-matlab-julia-pelle``
+    - Kebnekaise: ``/proj/nobackup/fall-courses-2026``
+    - Dardel: ``/cfs/klemming/projects/snic/fall-courses-naiss``
 
-## Overview of the UPPMAX systems
+## Overview of an HPC cluster
 
-![UPPMAX systems](../img/uppmax.png)
+![Generic HPC cluster - thanks to Rebecca Pitts who made this image that I lightly modified](../img/clusterlayout-v2.png)
 
-## Overview of the HPC2N system
+### A CPU node
 
-![HPC2N system](../img/hpc2n.png)
+![A generic CPU node - thanks to Rebecca Pitts who made this image](../img/cpu-core-schema.svg)
 
-## Overview of the LUNARC system
+### A GPU node
 
-![Cosmos resource](../img/cosmos-resources.png)
-
-## Overview of the NSC system
-
-![Tetralith](../img/mermaid-tetralith.png)
+![A generic GPU node - thanks to Rebecca Pitts who made this image](../img/gpu-core-schema.svg)
 
 Any longer, resource-intensive, or parallel jobs must be run through a **batch script**.
 
-The batch system used at UPPMAX, HPC2N, LUNARC, NSC, and PDC (and most other HPC centres in Sweden) is called Slurm.  
+The batch system used at NAISS, UPPMAX, HPC2N, LUNARC, and PDC (and most other HPC centres in Sweden) is called Slurm.  
 
 Slurm is an Open Source job scheduler, which provides three key functions
 
@@ -58,7 +51,13 @@ Slurm is an Open Source job scheduler, which provides three key functions
 
 In order to run a batch job, you need to create and submit a SLURM submit file (also called a batch submit file, a batch script, or a job script).
 
-Guides and documentation at: https://docs.hpc2n.umu.se/documentation/batchsystem/intro/ and https://docs.uppmax.uu.se/cluster_guides/slurm/ and https://lunarc-documentation.readthedocs.io/en/latest/manual/manual_intro/ and https://www.nsc.liu.se/support/batch-jobs/introduction/ and https://support.pdc.kth.se/doc/support-docs/run_jobs/job_scheduling/ 
+Guides and documentation at: 
+
+- https://user.naiss.se/arrhenius_hpc/quickstart/ 
+- https://docs.hpc2n.umu.se/documentation/batchsystem/intro/ 
+- https://docs.uppmax.uu.se/cluster_guides/slurm/ 
+- https://lunarc-documentation.readthedocs.io/en/latest/manual/manual_intro/ 
+- https://support.pdc.kth.se/doc/support-docs/run_jobs/job_scheduling/ 
 
 ## Workflow
 
@@ -81,13 +80,13 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 - Url to a page with info about the job (Kebnekaise only): ``job-usage <job-id>``
 
 
-.. keypoints::
+!!! note "keypoints"
 
-   - The Slurm scheduler handles allocations to the calculation nodes
-   - Interactive sessions was presented in the previous presentation
-   - Batch jobs runs without interaction with the user
-   - A batch script consists of a part with Slurm parameters describing the allocation and a second part describing the actual work within the job, for instance one or several R scripts.
-      - Remember to include possible input arguments to the R script in the batch script.
+    - The Slurm scheduler handles allocations to the calculation nodes
+    - Interactive sessions was presented in the previous presentation
+    - Batch jobs runs without interaction with the user
+    - A batch script consists of a part with Slurm parameters describing the allocation and a second part describing the actual work within the job, for instance one or several R scripts.
+        - Remember to include possible input arguments to the R script in the batch script.
     
 
 !!! warning "Warning: Modules on Dardel"
@@ -135,13 +134,48 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 
     Short serial batch example for running the code ``hello.R``
 
-    === "UPPMAX"
+    === "NAISS Arrhenius"
+
+        Short serial example script for Arrhenius. Loading R/4.5.2
+
+        ```bash
+        #!/bin/bash
+        #SBATCH -A naiss2026-4-1022-cpu
+        #SBATCH --time=00:04:00 # Asking for 4 minutes
+        #SBATCH -n 1 # Asking for 1 core
+        #SBATCH -p cpu
+
+        # Load any modules you need, here R/4.5.2
+        module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
+
+        # Run your R script (here 'hello.R')
+        R --no-save --quiet < hello.R
+        ```
+
+    === "PDC Dardel"
+   
+        Short serial example for running on Dardel. Loading R/4.4.1 
+
+        #!/bin/bash -l 
+        #SBATCH -A naiss2025-22-934 
+        #SBATCH --time=00:10:00 # Asking for 10 minutes
+        #SBATCH -n 1 # Asking for 1 core
+        #SBATCH -p main
+
+        # Load any modules you need, here R/4.5.2
+        module load PDC/26.03  R/4.5.2-cpeGNU-26.03
+
+        # Run your R script (here 'hello.R')
+        R --no-save --quiet < hello.R
+        ```
+ 
+    === "UPPMAX Pelle"
 
          Short serial example script for Pelle. Loading R/4.4.2
 
          ```bash
          #!/bin/bash -l
-         #SBATCH -A uppmax2025-2-360 # Course project id. Change to your own project ID after the course
+         #SBATCH -A uppmax2026-2-393 # Course project id. Change to your own project ID after the course
          #SBATCH --time=00:10:00 # Asking for 10 minutes
          #SBATCH -n 1 # Asking for 1 core
             
@@ -152,24 +186,24 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
          R --no-save --quiet < hello.R
          ``` 
       
-    === "HPC2N"
+    === "HPC2N Kebnekaise"
 
         Short serial example for running on Kebnekaise. Loading R/4.4.1 and prerequisites   
        
         ```bash
         #!/bin/bash
-        #SBATCH -A hpc2n2025-151 # Change to your own project ID
+        #SBATCH -A hpc2ncourses2026-017 # Change to your own project ID
         #SBATCH --time=00:10:00 # Asking for 10 minutes
         #SBATCH -n 1 # Asking for 1 core
        
-        # Load any modules you need, here R/4.4.1 and prerequisites 
-        module load GCC/13.2.0 R/4.4.1
+        # Load any modules you need, here R/4.5.2 and prerequisites 
+        module load GCC/14.3.0 R/4.5.2
             
         # Run your R script (here 'hello.R')
         R --no-save --quiet < hello.R
         ```            
             
-    === "LUNARC"
+    === "LUNARC Cosmos"
 
         Short serial example for running on Cosmos. Loading R/4.2.1 and prerequisites
 
@@ -186,28 +220,6 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         R --no-save --quiet < hello.R
         ```
 
-    === "NSC" 
-
-        Short serial example for running on Tetralith. Loading R/4.2.2 
-
-        ```bash 
-        #!/bin/bash
-        #SBATCH -A naiss2025-22-934
-        #SBATCH --time=00:10:00 # Asking for 10 minutes
-        #SBATCH -n 1 # Asking for 1 core
-
-        # Load any modules you need, here R/4.2.2 
-        module load R/4.2.2-hpc1-gcc-11.3.0-bare 
-
-        # Run your R script (here 'hello.R')
-        R --no-save --quiet < hello.R 
-        ```
-
-    === "PDC" 
-
-        Short serial example for running on Dardel. Loading R/4.4.1  
-
-        ```bash 
         #!/bin/bash -l
         #SBATCH -A naiss2025-22-934
         #SBATCH --time=00:10:00 # Asking for 10 minutes
@@ -220,10 +232,6 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         # Run your R script (here 'hello.R')
         R --no-save --quiet < hello.R             
         ```
-
-    === "C3SE"
-
-        Alvis is only for running GPU code. 
 
     === "hello.R" 
    
@@ -247,14 +255,39 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 !!! hint "Type-along"
 
     Short parallel example, using foreach and doParallel
-   
+  
+    === "NAISS Arrhenius"
+ 
+        ```bash
+        #!/bin/bash
+
+        # Set account. Remember what partition, for instance cpu  
+        #SBATCH -A naiss2026-4-1022-cpu
+
+        # Set the time. Here 10 min 
+        #SBATCH -t 00:10:00
+
+        # ask for some number of cores, here 16 cores, experiment for what works best 
+        #SBATCH -n 16
+
+        # name output and error file
+        #SBATCH -o mpi_process_%j.out
+        #SBATCH -e mpi_process_%j.err
+
+        # Load some modules you need
+        module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11 
+
+        # Run your mpi_executable R job 
+        R -q --slave -f parallel_foreach.R
+        ```
+
     === "UPPMAX"
 
         Short parallel example (Since we are using packages "foreach" and "doParallel", you need to use module R/4.4.2-gfbf-2024a and the R-bundle-CRAN/2024.11-foss-2024a module. 
 
         ```bash
         #!/bin/bash -l
-        #SBATCH -A uppmax2025-2-360
+        #SBATCH -A uppmax2025-2-393
         #SBATCH -t 00:10:00
         #SBATCH -N 1
         #SBATCH -c 4
@@ -272,13 +305,13 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
        
         ```bash
         #!/bin/bash
-        #SBATCH -A hpc2n2025-151 # Change to your own project ID
+        #SBATCH -A hpc2ncourses2026-017 # Change to your own project ID
         #SBATCH -t 00:10:00
         #SBATCH -N 1
         #SBATCH -c 4
            
         ml purge > /dev/null 2>&1
-        ml GCC/13.2.0 R/4.4.1 OpenMPI/4.1.6 R-bundle-CRAN/2024.06
+        ml GCC/14.3.0 R/4.5.2 OpenMPI/5.0.8 R-bundle-CRAN/2025.11
             
         # Batch script to submit the R program parallel_foreach.R 
         R -q --slave -f parallel_foreach.R
@@ -291,7 +324,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         ```bash
         #!/bin/bash
         # A batch script for running the R program parallel_foreach.R
-        #SBATCH -A lu2025-2-94 # Change to your own project ID
+        #SBATCH -A luXXXX-Y-ZZZ # Change to your own project ID
         #SBATCH -t 00:10:00
         #SBATCH -N 1
         #SBATCH -c 4
@@ -303,29 +336,6 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         R -q --slave -f parallel_foreach.R
         ``` 
 
-    === "NSC" 
-
-        Short parallel example (using packages "foreach" and "doParallel" which you at Tetralith need to install first) for running on Tetralith. Loading R/4.2.2.   
-        Installing ``foreach`` and ``doParallel`` (with R module ``R/4.2.2-hpc1-gcc-11.3.0-bare`` loaded but not inside R): 
-
-        - ``R --quiet --no-save --no-restore -e "install.packages('foreach', repos='http://ftp.acc.umu.se/mirror/CRAN/')"`` 
-        - and ``R --quiet --no-save --no-restore -e "install.packages('doParallel', repos='http://ftp.acc.umu.se/mirror/CRAN/')"`` 
-
-        ```bash 
-        #!/bin/bash
-        # A batch script for running the R program parallel_foreach.R 
-        #SBATCH -A naiss2025-22-934
-        #SBATCH -t 00:10:00
-        #SBATCH -N 1
-        #SBATCH -c 4
-
-        ml purge > /dev/null 2>&1
-        ml R/4.2.2-hpc1-gcc-11.3.0-bare 
-
-        # Batch script to submit the R program parallel_foreach.R
-        R -q --slave -f parallel_foreach.R 
-        ``` 
-
     === "PDC" 
           
         Short parallel example (using packages "foreach" and "doParallel" which are included in the R module) for running on Dardel. Loading R/4.4.1. 
@@ -333,7 +343,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         ```bash
         #!/bin/bash -l
         # A batch script for running the R program parallel_foreach.R
-        #SBATCH -A naiss2025-22-934 
+        #SBATCH -A naiss2026-4-1022
         #SBATCH -t 00:10:00
         #SBATCH -N 1
         #SBATCH -c 4
@@ -343,22 +353,18 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         # when you logged in. Otherwise uncomment the two following lines. 
         #ml purge > /dev/null 2>&1
         #ml restore preload
-        module load PDC/23.12 
-        module load R/4.4.1-cpeGNU-23.12 
+        module load PDC/26.03
+        module load R/4.5.2-cpeGNU-26.03  
 
         # Batch script to submit the R program parallel_foreach.R
         R -q --slave -f parallel_foreach.R
         ```
-            
-    === "C3SE" 
-
-        Alvis is only for running GPU code on. 
 
     === "parallel_foreach.R"
- 
-        This R script uses packages "foreach" and "doParallel". 
-       
-        ```R
+
+        This R script uses packages "foreach" and "doParallel".
+
+        ```bash
         library(parallel)
         library(foreach)
         library(doParallel)
@@ -374,7 +380,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         # Loop to max number of cores
         for (n in 1:no_cores) {
           # print how many cores we are using
-          print(n)
+          print(n)   
           # Set start time
           start_time <- Sys.time()
           # Create a cluster
@@ -401,11 +407,30 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
     $ sbatch <batch script>
     ```
 
-#### Rmpi
+#### Rmpi / pbdMPI 
 
 !!! hint "Type-along"
 
-    Short parallel example using package “Rmpi” ("pbdMPI on Dardel")  
+    Short parallel example using package “Rmpi” ("pbdMPI on Dardel and Arrhenius")  
+
+    === "NAISS Arrhenius" 
+
+        Short parallel example (using package "pbdMPI", so we need to load both the module R/4.5.2 and the R-bundle-CRAN/2025.11
+
+        ```bash 
+        #!/bin/bash
+        # Set account. Remember what partition, for instance cpu
+        #SBATCH -A naiss2026-4-1022-cpu
+        # Set the time. Here 10 min
+        #SBATCH -t 00:10:00
+        # ask for some number of cores, here 8 cores
+        #SBATCH -n 8
+
+        # Load some modules you need
+        module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11
+
+        mpprun Rscript pbdMPI.R  
+        ```
 
     === "UPPMAX"
 
@@ -413,7 +438,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 
         ```bash
         #!/bin/bash -l
-        #SBATCH -A uppmax2025-2-360
+        #SBATCH -A uppmax2025-2-393
         #Asking for 10 min.
         #SBATCH -t 00:10:00
         #SBATCH -n 8
@@ -435,7 +460,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
        
         ```bash
         #!/bin/bash
-        #SBATCH -A hpc2n2025-151 # Change to your own project ID
+        #SBATCH -A hpc2ncourses2026-017 # Change to your own project ID
         #Asking for 10 min.
         #SBATCH -t 00:10:00
         #SBATCH -n 8
@@ -443,8 +468,8 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         export OMPI_MCA_mpi_warn_on_fork=0
             
         ml purge > /dev/null 2>&1
-        ml GCC/13.2.0 R/4.4.1
-        ml OpenMPI/4.1.6 R-bundle-CRAN/2024.06
+        ml GCC/14.3.0 R/4.5.2
+        ml OpenMPI/5.0.8 R-bundle-CRAN/2025.11
             
         mpirun -np 1 Rscript Rmpi.R 
         ``` 
@@ -455,7 +480,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
        
         ```bash
         #!/bin/bash
-        #SBATCH -A lu2025-2-94 # Change to your own project ID
+        #SBATCH -A luXXXX-Y-ZZ # Change to your own project ID
         # Asking for 10 min.
         #SBATCH -t 00:10:00
         #SBATCH -n 8
@@ -469,26 +494,6 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         mpirun -np 1 R CMD BATCH --no-save --no-restore Rmpi.R output.out
         ```
         
-    === "NSC" 
-
-        Short parallel example (using packages "pbdMPI as "Rmpi" does not work correctly on NSC). Loading R/4.2.2. 
-
-        Note: for NSC you first need to install "pdbMPI" (``module load R/4.2.2-hpc1-gcc-11.3.0-bare``, start ``R``, ``install.packages('pbdMPI')``, pick CRAN mirror (Denmark, Finland, Sweden or other closeby)) 
-
-        ```bash  
-        #!/bin/bash
-        #SBATCH -A naiss2025-22-934 
-        # Asking for 15 min.
-        #SBATCH -t 00:15:00
-        #SBATCH -n 8
-        #SBATCH --exclusive 
-
-        ml purge > /dev/null 2>&1
-        ml R/4.2.2-hpc1-gcc-11.3.0-bare 
-
-        srun --mpi=pmix Rscript pbdMPI.R  
-        ```           
-
     === "PDC" 
 
         Short parallel example (using packages "pbdMPI"). Loading R/4.4.1. 
@@ -502,7 +507,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 
         ```bash 
         #!/bin/bash -l 
-        #SBATCH -A naiss2025-22-934
+        #SBATCH -A naiss2026-4-1022 
         # Asking for 10 min.
         #SBATCH -t 00:10:00
         #SBATCH --nodes 2
@@ -514,8 +519,8 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         # when you logged in. Otherwise leave the two following lines outcommented. 
         #ml purge > /dev/null 2>&1
         #ml restore preload
-        ml PDC/24.11
-        ml R/4.4.2-cpeGNU-24.11
+        ml PDC/26.03
+        ml R/4.5.2-cpeGNU-26.03 
 
         srun -n 4 Rscript pbdMPI.R
         ```
@@ -594,21 +599,23 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
 
 There are generally either not GPUs on the login nodes or they cannot be accessed for computations. To use them you need to either launch an interactive job or submit a batch job.
 
-#### UPPMAX only
+#### NAISS Arrhenius 
 
-!!! note "Rackham/Snowy or Pelle"
+Arrhenius has 382 GPU nodes, each with four Grace Hopper Superchips from NVIDIA. In order to access them, add something like this to your batch script or interactive job (depending on how many GPUs you need): 
 
-    - Rackham’s compute nodes do not have GPUs. You need to use Snowy for that. 
-    - The new cluster Pelle has GPUs. 
+```bash 
+#SBATCH -n 8
+#SBATCH -c 72
+#SBATCH --gpus 8
+#SBATCH -A naiss<project_number>-gpu
+#SBATCH -p gpu
+```
 
-On Rackham, you need to use this batch command (for x being the number of cards, 1 or 2):
+[More here](https://user.naiss.se/arrhenius_hpc/job_management/scripts/) 
 
-```bash
-#SBATCH -M snowy
-#SBATCH --gres=gpu:x
-``` 
+#### UPPMAX
 
-On Pelle, you need to use this batch command 
+On Pelle, you need to use this batch command: 
 
 for L40s GPUs (up to 10 GPU cards) 
 
@@ -685,16 +692,6 @@ These nodes are configured as exclusive access and will not be shared between us
 
 where <number> is 1 or 2 (Two of the nodes have 1 GPU and two have 2 GPUs).
 
-#### NSC
-
-Tetralith has Nvidia T4 GPUs. In order to access them, add this to your batch script or interactive job:
-
-```bash 
-#SBATCH -n 1
-#SBATCH -c 32
-#SBATCH --gpus-per-task=1
-``` 
-
 #### PDC
 
 Dardel has AMD Instinct™ MI250X GPU chips. In order to access them, add this to your batch script or interactive job: 
@@ -705,58 +702,50 @@ Dardel has AMD Instinct™ MI250X GPU chips. In order to access them, add this t
 #SBATCH -p gpu  
 ``` 
 
-#### C3SE 
-
-Alvis is meant for GPU jobs. There is no node-sharing on multi-node jobs (--exclusive is automatic). 
-
-NOTE: Requesting ``-N 1`` does not mean 1 full node
-
-```bash
-#SBATCH -p alvis
-#SBATCH -N <nodes>
-#SBATCH --gpus-per-node=<type>:x
-```
-
-where ``<type>`` is one of 
-
-- V100
-- T4
-- A100
-
-and ``x`` is number of GPU cards 
-
-- 1-4 for V100
-- 1-8 for T4
-- 1-4 for A100 
-
 !!! note
 
-    For more about how to use GPUs at the centres, see the ["Introduction to GPUs"](../../advanced/gpus] section. 
+    For more about how to use GPUs at the centres, see the ["Introduction to GPUs"](../../advanced/gpus) section. 
 
 ## Exercises
 
 !!! warning "Challenge: Serial batch script for R" 
 
-    Run the serial batch script from further up on the page, but for the add2.R code. Remember the arguments. This is not for Alvis since that resource is only for GPU code. 
+    Run the serial batch script from further up on the page, but for the add2.R code. Remember the arguments.  
     
+!!! note "Solution for NAISS Arrhenius" 
+
+    ??? note "Serial script on Arrhenius" 
+
+        ```bash
+        #!/bin/bash -l
+        #SBATCH -A naiss2026-4-1022-cpu # Change to your own after the course
+        #SBATCH --time=00:10:00 # Asking for 10 minutes
+        #SBATCH -n 1 # Asking for 1 core
+
+        # Load any modules you need, here for R/4.5.2
+        module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
+
+        # Run your R script
+        Rscript add2.R 2 3
+        ```
+
+
 !!! note "Solution for UPPMAX" 
 
-    ??? note "Serial script on Rackham" 
+    ??? note "Serial script on Pelle" 
           
         ```bash
         #!/bin/bash -l
-        #SBATCH -A uppmax2025-2-360 # Change to your own after the course
+        #SBATCH -A uppmax2025-2-393 # Change to your own after the course
         #SBATCH --time=00:10:00 # Asking for 10 minutes
         #SBATCH -n 1 # Asking for 1 core
              
-        # Load any modules you need, here for R/4.1.1
-        module load R/4.1.1
+        # Load any modules you need, here for R/4.4.2
+        module load R/4.4.2-gfbf-2024a 
              
         # Run your R script 
         Rscript add2.R 2 3 
         ```
-
-        Same for Pelle, except you should use R/4.4.2-gfbf-2024a 
 
 !!! note "Solution for HPC2N" 
 
@@ -764,12 +753,12 @@ and ``x`` is number of GPU cards
           
         ```bash
         #!/bin/bash
-        #SBATCH -A hpc2n2025-151 # Change to your own project ID
+        #SBATCH -A hpc2ncourses2026-017 # Change to your own project ID
         #SBATCH --time=00:10:00 # Asking for 10 minutes
         #SBATCH -n 1 # Asking for 1 core
              
-        # Load any modules you need, here for R/4.1.2
-        module load GCC/11.2.0  OpenMPI/4.1.1 R/4.1.2
+        # Load any modules you need, here for R/4.4.1
+        module load GCC/14.3.0 R/4.5.2 
             
         # Run your R script 
         Rscript add2.R 2 3 
@@ -781,30 +770,13 @@ and ``x`` is number of GPU cards
 
         ```bash
         #!/bin/bash
-        #SBATCH -A lu2025-2-94 # Change to your own project ID
+        #SBATCH -A luXXXX-Y-ZZ # Change to your own project ID
         #SBATCH --time=00:10:00 # Asking for 10 minutes
         #SBATCH -n 1 # Asking for 1 core
              
-        # Load any modules you need, here for R/4.2.1
-        module load GCC/11.3.0  OpenMPI/4.1.4 R/4.2.1
+        # Load any modules you need, here for R/4.4.1
+        module load GCC/13.2.0 R/4.4.1
              
-        # Run your R script 
-        Rscript add2.R 2 3 
-        ``` 
-
-!!! note "Solution for NSC" 
-    
-    ??? note "Serial script on Tetralith" 
-           
-        ```bash
-        #!/bin/bash
-        #SBATCH -A naiss2025-22-934 
-        #SBATCH --time=00:10:00 # Asking for 10 minutes
-        #SBATCH -n 1 # Asking for 1 core
-
-        # Load any modules you need, here for R/4.2.2 
-        module load R/4.2.2-hpc1-gcc-11.3.0-bare 
-
         # Run your R script 
         Rscript add2.R 2 3 
         ``` 
@@ -815,21 +787,16 @@ and ``x`` is number of GPU cards
            
         ```bash
         #!/bin/bash
-        #SBATCH -A naiss2025-22-934 
+        #SBATCH -A naiss2026-4-1022
         #SBATCH --time=00:10:00 # Asking for 10 minutes
         #SBATCH -n 1 # Asking for 1 core
         #SBATCH -p main 
 
-        # Load any modules you need, here for R/4.4.1 
-        module load PDC/23.12 R/4.4.1-cpeGNU-23.12 
+        # Load any modules you need, here for R/4.5.2
+        module load PDC/26.03  R/4.5.2-cpeGNU-26.03 
 
         # Run your R script 
         Rscript add2.R 2 3 
         ```
    
-
-!!! warning "Challenge: Parallel job run" 
-
-    Try making a batch script for running the parallel example with "foreach" from further up on the page. 
-
 

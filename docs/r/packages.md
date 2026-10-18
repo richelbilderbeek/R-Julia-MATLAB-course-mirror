@@ -151,29 +151,25 @@ We might want to know where the ``R`` interpreter will be searching for packages
 
 Arrhenius, Dardel, Pelle, Kebnekaise, and Cosmos all offer larger or smaller amounts of preinstalled packages.
 
-!!! note "HPC2N"
+!!! note "NAISS - Arrhenius"
+ 
+    On NAISS cluster Arrhenius about 112 packages come with the "R" module. Many more can be found in the "R-bundle-CRAN/2025.11" module and the "R-bundle-Bioconductor/3.22" module. 
+
+!!! note "Dardel - PDC"
+
+    On PDC about 250 packages come with the ``R`` module.
+
+!!! note "Kebnekaise - HPC2N"
 
     - On HPC2N it depends on the version, but for R/4.4.1 only a smaller number of these (around 110 packages) come with the ``R`` module, but additional ones are in the ``R-bundle-Bioconductor``. Most of the packages are in the module ``R-bundle-CRAN`` and a few more in ``R-bundle-CRAN-extra``. For older versions of R, most packages come with the R module (around 750 packages). Older versions of R also usually have OpenMPI as prerequisite. Use ``module spider <module>/<version>`` to check for prerequisites, as usual. 
 
-!!! note "UPPMAX"
+!!! note "Pelle - UPPMAX"
 
     On UPPMAX the module ``R`` contains only a smaller number of packages (110), but almost all packages in the CRAN and BioConductor repositories are in the ``R-bundle-CRAN`` respectively ``R-bundle-Bioconductor`` modules. 
 
-!!! note "LUNARC"
+!!! note "Cosmos - LUNARC"
 
     On LUNARC most of the R packages come with the ``R`` module. 
-
-!!! note "NSC"
-
-    On NSC, a small number of the R packages come with the ``R`` module. You will have to install the rest yourself.  
-
-!!! note "PDC"
-
-    On PDC about 250 packages come with the ``R`` module. 
-
-!!! note "C3SE" 
-
-    On Alvis at C3SE, around 1340 packages are installed with R/4.2.1 - but much fewer with R/4.3.3. 
 
 There are many different ways to check if the package you are after is already installed - chances are it is! The simplest way is probably to simply try loading the package from within ``R`` (you can also get a list of all packages with ``installed.packages()`` but that can be overwhelming): 
 
@@ -184,9 +180,55 @@ library(package-name)
 To learn about other ways, see the page "More about R packages" under "Extra reading" in the left menu. 
 
 
-!!! note "<img src="../../img/shell-logo_small.png"> Exercise"
+!!! note "<img src="../img/shell-logo_small.png"> Exercise"
 
     Start R (remember to load a module + prerequisites if you have not already). Check if the packages ``pillar`` and ``caret`` are installed, as shown above. 
+
+=== "NAISS (Arrhenius)" 
+
+    !!! note "Solution" 
+
+         ```bash
+         $ module load buildtool-easybuild/5.2.1-hpca3ef7d197  GCC/14.3.0 R/4.5.2
+         $ R
+
+         R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+         Copyright (C) 2025 The R Foundation for Statistical Computing
+         Platform: x86_64-pc-linux-gnu
+  
+         R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+           Natural language support but running in an English locale
+
+         R is a collaborative project with many contributors.
+         Type 'contributors()' for more information and
+         'citation()' on how to cite R or R packages in publications.
+
+         Type 'demo()' for some demos, 'help()' for on-line help, or
+         'help.start()' for an HTML browser interface to help.
+         Type 'q()' to quit R.
+
+         > library(pillar)
+         > library(caret)
+         Error in library(caret) : there is no package called ‘caret’
+         > 
+         ```
+
+         So "pillar" is installed, but not "caret". The latter can however be found in "R-bundle-CRAN/2025.11" (which has the prerequisite "MPICH/4.3.2"): 
+
+         ```bash
+         $ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11 
+         $ R
+ 
+         ... <snip> ... 
+
+         > library(caret)
+         Loading required package: ggplot2
+         Loading required package: lattice
+         > 
+         ```
 
 === "UPPMAX (Pelle)"
 
@@ -290,37 +332,6 @@ To learn about other ways, see the page "More about R packages" under "Extra rea
         > 
         ```
 
-=== "NSC"
-   
-    !!! note "Solution" 
- 
-        ```bash
-        $ ml R/4.2.2-hpc1-gcc-11.3.0-bare
-        $ R 
-
-        R version 4.2.2 (2022-10-31) -- "Innocent and Trusting"
-        Copyright (C) 2022 The R Foundation for Statistical Computing
-        Platform: x86_64-pc-linux-gnu (64-bit)
-
-        R is free software and comes with ABSOLUTELY NO WARRANTY.
-        You are welcome to redistribute it under certain conditions.
-        Type 'license()' or 'licence()' for distribution details.
-
-        R is a collaborative project with many contributors.
-        Type 'contributors()' for more information and
-        'citation()' on how to cite R or R packages in publications.
-
-        Type 'demo()' for some demos, 'help()' for on-line help, or
-        'help.start()' for an HTML browser interface to help.
-        Type 'q()' to quit R.
-             
-        > library(pillar)
-        Error in library(pillar) : there is no package called ‘pillar’
-        > library(caret)
-        Error in library(caret) : there is no package called ‘caret’
-        > 
-        ```
-             
 === "PDC"
 
     !!! note "Solution" 
@@ -353,65 +364,40 @@ To learn about other ways, see the page "More about R packages" under "Extra rea
         >
         ```
         
-=== "C3SE" 
-
-    !!! note "Solution" 
-
-        ```bash 
-        $ ml R/4.2.1-foss-2022a
-        $ R
-        
-        Copyright (C) 2022 The R Foundation for Statistical Computing
-        Platform: x86_64-pc-linux-gnu (64-bit)
-
-        R is free software and comes with ABSOLUTELY NO WARRANTY.
-        You are welcome to redistribute it under certain conditions.
-        Type 'license()' or 'licence()' for distribution details.
-
-          Natural language support but running in an English locale
-
-        R is a collaborative project with many contributors.
-        Type 'contributors()' for more information and
-        'citation()' on how to cite R or R packages in publications.
-
-        Type 'demo()' for some demos, 'help()' for on-line help, or
-        'help.start()' for an HTML browser interface to help.
-        Type 'q()' to quit R.
-    
-        > library(pillar)
-        > library(caret)
-        Loading required package: ggplot2
-        Loading required package: lattice
-        >
-        ```
-
 ## Installing your own packages
 
-Sometimes you will need R packages that are not already installed. The solution
-to this is to install your own packages. These packages will usually come from
-CRAN (https://cran.r-project.org/) - the Comprehensive R Archive Network, or
-sometimes from other places, like GitHub or R-Forge
+Sometimes you will need R packages that are not already installed. The solution to this is to install your own packages. These packages will usually come from CRAN [https://cran.r-project.org/](https://cran.r-project.org/) - the Comprehensive R Archive Network, or sometimes from other places, like GitHub or R-Forgei
 
-Here we will look at installing R packages with automatic download and with
-manual download. It is also possible to install from inside Rstudio. 
+Here we will look at installing R packages with automatic download and with manual download. It is also possible to install from inside Rstudio. 
 
 ### Setup
 
-We need to create a place for the own-installed packages to be and to tell R
-where to find them. The initial setup only needs to be done once, but separate
-package directories need to be created for each R version used. 
+We need to create a place for the own-installed packages to be and to tell R where to find them. The initial setup only needs to be done once, but separate package directories need to be created for each R version used. 
 
-R reads the ``$HOME/.Renviron`` file to setup its environment. It should be
-created by R on first run, or you can create it with the command: ``touch
-$HOME/.Renviron``
+R reads the ``$HOME/.Renviron`` file to setup its environment. It should be created by R on first run, or you can create it with the command: ``touch $HOME/.Renviron``
 
-**NOTE**: In this example we are going to assume you have chosen to place the R packages in a directory under your home directory, but in general it might be good to use the project storage for space reasons. As mentioned, you will need
-separate ones for each R version.
+**NOTE**: In this example we are going to assume you have chosen to place the R packages in a directory under your home directory, but in general it might be good to use the project storage for space reasons. As mentioned, you will need separate ones for each R version.
 
 If you have not yet installed any packages to R yourself, the environment file should be empty and you can update it like this: 
 
+**For placing R packages in home directory:**
+
 ```bash 
 $ echo R_LIBS_USER="$HOME/R-packages-%V" > ~/.Renviron
+```
+
+**For placing R packages in your project storage:**
+
+Good if you install many R packages which would take up a lot of space. 
+
+```bash 
+$ echo R_LIBS_USER="/path/to/project-storage/my-dir/R-packages-%V" > ~/.Renviron
+```
+
+**Example for on Arrhenius in course project storage:**
+
+```bash 
+$ echo R_LIBS_USER="/nobackup/proj/disk/fall-courses-naiss/personal/<your-dir>/R-packages-%V" > ~/.Renviron
 ```
 
 !!! warning
@@ -427,32 +413,34 @@ $ R_LIBS_USER="/home/u/user/R-packages-%V"
 
 **NOTE** Replace ``/home/u/user`` with the value of ``$HOME``. Run ``echo $HOME`` to see its value.
 
+**For Arrhenius:** 
+
+```bash 
+$ R_LIBS_USER="/nobackup/proj/disk/fall-courses-naiss/personal/<your-dir>/R-packages-%V"
+```
+
+**NOTE** Replace ``<your-dir>`` with the value of your personal directory under the course project storage directory.
+
 **NOTE** The ``%V`` should be written as-is, it's substituted at runtime with the active R version.
 
 **NOTE** At Dardel (PDC) the path is ``/cfs/klemming/home/u/user`` but you can see it with ``echo $HOME``. 
 
-For each version of R you are using, create a directory matching the pattern
-used in ``.Renviron`` to store your packages in. This example is shown for R
-version 4.1.1 (change to version suitable for your centre):
+For each version of R you are using, create a directory matching the pattern used in ``.Renviron`` to store your packages in. This example is shown for R version 4.5.2 (change to version suitable for your centre):
 
 ```bash
-$ mkdir -p $HOME/R-packages-4.1.1
+$ mkdir -p $HOME/R-packages-4.5.2
 ```
 
 !!! note
 
     If you will be installing many R packages yourself, it is a good idea to place them in your project storage instead, as they can take up a lot of space and your home directory is not very large.
 
-    In that case you would instead do the setup as: 
+    In that case, install in the project storage as shown a bit up. 
+
+    And then create directories for each R version you use there, like this, for R/4.5.2. DO NOT JUST DO IT FOR R/4.5.2! Change to the version you will be using, depending on centre! See under [Package libraries](#package-libraries). 
 
     ```bash
-    $ echo R_LIBS_USER="<path-to-your-space-on-proj-storage>/R-packages-%V" > ~/.Renviron
-    ```
-
-    And then create directories for each R version you use there, like this, for R/4.1.1. DO NOT JUST DO IT FOR R/4.1.1! Change to the version you will be using, depending on centre! See under [Package libraries](#package-libraries). 
-
-    ```bash
-    mkdir -p <path-to-your-space-on-proj-storage>/R-packages-4.1.1
+    mkdir -p <path-to-your-space-on-proj-storage>/R-packages-4.5.2
     ```
 
 
@@ -483,8 +471,7 @@ installed as well.
       
 #### Example
 
-In this example, we will install the R package ``nuggets`` and use the
-repository http://ftp.acc.umu.se/mirror/CRAN/ 
+In this example, we will install the R package ``nuggets`` and use the repository http://ftp.acc.umu.se/mirror/CRAN/ 
 
 **Note**: You need to load R (and any prerequisites, and possibly R-bundle-Bioconductor if you need packages from that) before installing packages. 
 
@@ -504,47 +491,38 @@ repository http://ftp.acc.umu.se/mirror/CRAN/
 
     1)
 
+    - NAISS/Arrhenius: ``buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11``
+    - PDC (Dardel): ``module load PDC/23.12 R/4.4.1-cpeGNU-23.12``
     - UPPMAX (Pelle): ``module load R/4.4.2-gfbf-2024a``
-    - UPPMAX (Rackham): ``module load R_packages/4.1.1``
-    - HPC2N: ``module load GCC/11.3.0  OpenMPI/4.1.4 R/4.2.1``
-    - LUNARC: ``module load GCC/11.3.0  OpenMPI/4.1.4 R/4.2.1``
-    - NSC: ``module load R/4.2.2-hpc1-gcc-11.3.0-bare`` 
-    - PDC: ``module load PDC/23.12 R/4.4.1-cpeGNU-23.12`` 
-    - C3SE: ``module load R/4.2.1-foss-2022a`` 
+    - HPC2N (Kebnekaise): ``module load GCC/13.2.0 R/4.4.1``
+    - LUNARC (Cosmos): ``module load GCC/11.3.0  OpenMPI/4.1.4 R/4.2.1``
 
     2)
 
-    - ``echo R_LIBS_USER="$HOME/R-packages-%V" > ~/.Renviron``
-
-    OR (option if UPPMAX, HPC2N, NSC, PDC, or C3SE)
-
+    - NAISS/Arrhenius: ``echo R_LIBS_USER="/nobackup/proj/disk/fall-courses-naiss/personal/<your-dir>/R-packages-%V" > ~/.Renviron`` 
     - UPPMAX: ``echo R_LIBS_USER="/proj/r-matlab-julia-pelle/<yourdir>/R-packages-%V" > ~/.Renviron``
-    - HPC2N: ``echo R_LIBS_USER="/proj/nobackup/fall-courses/<yourdir>/R-packages-%V" > ~/.Renviron``
-    - NSC: ``echo R_LIBS_USER="/proj/courses-fall-2025/<yourdir>/R-packages-%V" > ~/.Renviron``
-    - PDC: ``echo R_LIBS_USER="/cfs/klemming/projects/supr/courses-fall-2025/<yourdir>/R-packages-%V" > ~/.Renviron``
-    - C3SE: ``echo R_LIBS_USER=/mimer/NOBACKUP/groups/courses-fall-2025/<yourdir>/R-packages-%V" > ~/.Renviron``
+    - HPC2N: ``echo R_LIBS_USER="/proj/nobackup/fall-courses-2026/<yourdir>/R-packages-%V" > ~/.Renviron``
+    - PDC: ``echo R_LIBS_USER="/cfs/klemming/projects/supr/fall-courses-2026/<yourdir>/R-packages-%V" > ~/.Renviron``
+
+    OR (particularly on LUNARC (Cosmos)): 
+
+    - ``echo R_LIBS_USER="$HOME/R-packages-%V" > ~/.Renviron``
 
     3) Create directory for R packages:
 
+    - NAISS/Arrhenius: 
+        - ``mkdir -p /nobackup/proj/disk/fall-courses-naiss/personal/<your-dir>/R-packages-4.5.2
+        - OR mkdir -p $HOME/R-packages-4.5.2
     - LUNARC: ``mkdir -p $HOME/R-packages-4.2.1``
     - UPPMAX (Pelle):
         - ``mkdir -p $HOME/R-packages-4.4.2``
         - OR ``mkdir -p /proj/r-matlab-julia-pelle/<yourdir>/R-packages-4.4.2``
-    - UPPMAX (Rackham):
-        - ``mkdir -p $HOME/R-packages-4.1.1``
-        - OR ``mkdir -p /proj/r-matlab-julia-pelle/<yourdir>/R-packages-4.1.1``
     - HPC2N:
-        - ``mkdir -p $HOME/R-packages-4.2.1``
-        - OR ``mkdir -p /proj/nobackup/fall-courses/<yourdir>/R-packages-4.2.1``
-    - NSC: 
-        - ``mkdir -p $HOME/R-packages-4.2.2``
-        - OR ``mkdir -p /proj/courses-fall-2025/users/<yourdir>/R-packages-4.2.2``
+        - ``mkdir -p $HOME/R-packages-4.4.1``
+        - OR ``mkdir -p /proj/nobackup/fall-courses/<yourdir>/R-packages-4.4.1``
     - PDC: 
         - ``mkdir -p $HOME/R-packages-4.4.1``
         - OR ``mkdir -p /cfs/klemming/projects/supr/courses-fall-2025/<yourdir>/R-packages-4.4.1```
-    - C3SE: 
-        - ``mkdir -p $HOME/R-packages-4.2.1``
-        - OR ``mkdir -p /mimer/NOBACKUP/groups/courses-fall-2025/<yourdir>/R-packages-4.2.1``
 
     4) Either of
 
@@ -570,39 +548,16 @@ For other ways to install R packages, including from GitHub or manually, look at
         - from inside R with ``installed.packages()``
 	- from BASH shell with the 
 	    - ``ml help R/<version>`` at UPPMAX
-	    - ``ml spider R/<version>`` at HPC2N
-            - ``ml spider R/<version>`` at LUNARC 
-            - ``ml spider R/version>`` at NSC
-            - ``ml spider R/version> at PDC``
+	    - ``ml spider R/<version>`` elsewhere
     - Installation of R packages can be done either from within R or from the
      command line (BASH shell)
     - CRAN is the recommended place to look for R-packages, but many packages can be found on GitHub and if you want the development version of a package you likely need to get it from GitHub or other place outside CRAN. You would then either download and install manually or install with something like devtools, from within R. 
 
-#### Extra example, NSC
-
-For NSC you need to install ``doParallel`` and ``foreach``, and ``pbdMPI`` (since ``Rmpi`` does not work) yourself to do the exercises in the section about batch. You can either do that now, exactly the same way a above for ``nuggets`` or you do it later today, during the batch session. 
-
-- If you have the setup done, and R loaded, then: 
-    - Start R
-    - Then ``install.packages('foreach', repos='http://ftp.acc.umu.se/mirror/CRAN/')``  
-    - and ``install.packages('doParallel', repos='http://ftp.acc.umu.se/mirror/CRAN/')``
-    - and ``install.packages('pbdMPI', repos='http://ftp.acc.umu.se/mirror/CRAN/')``
-
-
-#### Extra example, PDC
-
-For PDC the package ``Rmpi`` does not work correctly, so we will instead use the package ``pbdMPI``, which you need to install yourself to do one of the exercises in the advanced section about parallelism. You can either do that now, or you can do it that day, during the parallel session.
-
-- If you have the setup done, and the R module loaded, then (on the command line, not inside R):
-    - First copy the tarball: ``cp /cfs/klemming/projects/snic/r-matlab-julia-naiss/pbdMPI_0.5-2.tar.gz .`` while standing in your own directory that you are running R scripts from.  
-    - Then do: ``R CMD INSTALL pbdMPI_0.5-2.tar.gz --configure-args=" --with-mpi-include=/opt/cray/pe/mpich/8.1.28/ofi/gnu/12.3/include --with-mpi-libpath=/opt/cray/pe/mpich/8.1.28/ofi/gnu/12.3/lib --with-mpi-type=MPICH2" --no-test-load``
-
-    
 ## Install own packages on Bianca
 
 - If an R package is not not available on Bianca already (like Conda repositories) you may have to use the wharf to install the library/package
 - Typical workflow
-    - Install on Rackham
+    - Install on Pelle 
     - Transfer to Wharf
     - Move package to local Bianca R package path
     - Test your installation
@@ -614,7 +569,7 @@ For PDC the package ``Rmpi`` does not work correctly, so we will instead use the
 
 !!! important "Install a package with automatic download"
 
-    1. First do the setup of `.Renviron` and create the directory for installing R packages (Recommended load R version 4.4.1 on Pelle, 4.1.2 on Kebnekaise, 4.2.1 on LUNARC, 4.2.2 on NSC, and 4.4.1 on PDC)
+    1. First do the setup of `.Renviron` and create the directory for installing R packages (Recommended load R version 4.5.2 on Arrhenius, 4.4.1 on Pelle, 4.1.2 on Kebnekaise, 4.2.1 on LUNARC, and 4.4.1 on PDC)
     2. From the command line. Suggestion: ``anomalize``
     3. From inside R. Suggestion: ``BGLR``
     4. Start R and see if the library can be loaded. 
@@ -624,9 +579,47 @@ For PDC the package ``Rmpi`` does not work correctly, so we will instead use the
     Remember to pick a repo that is nearby, to install from: https://cran.r-project.org/mirrors.html 
 
 
+!!! important "Solution for R 4.5.2 on Arrhenius (change <user>)" 
+
+    === "Setup"
+
+        First load R and its prerequisites if you have not already done so. 
+      
+        ```bash
+        $ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
+        $ echo R_LIBS_USER="/nobackup/proj/disk/fall-courses-naiss/personal/<user>/R-packages-%V" > ~/.Renviron
+        $ mkdir -p /nobackup/proj/disk/fall-courses-naiss/personal/<user>/R-packages-4.5.2
+        ```     
+
+    === "Command line"
+
+        Installing package "anomalize". Using the repo http://ftp.acc.umu.se/mirror/CRAN/
+
+        ```bash
+        $ R --quiet --no-save --no-restore -e "install.packages('anomalize', repo='http://ftp.acc.umu.se/mirror/CRAN/')"
+        ```
+
+    === "Inside R"
+
+        Installing package "BGLR". Using the repo http://ftp.acc.umu.se/mirror/CRAN/
+
+        ```R
+        > install.packages('BGLR', repo='http://ftp.acc.umu.se/mirror/CRAN/')
+        ```
+
+    === "Load library"
+
+        ```R
+        $ R
+        > library("anomalize")
+        > library("BGLR")
+        ```
+
+        "BGLR" outputs some text/advertisment when loaded. You can ignore this.
+
 !!! important "Solution for 4.4.2 on Pelle (change <user>)" 
 
-    Solution is very similar for the other centres - just change the R version (for instance to 4.2.1 for LUNARC and 4.4.1 for HPC2N and 4.0.0 for NSC and 4.4.2 for PDC).  
+    Solution is very similar for the other centres - just change the R version (for instance to 4.2.1 for LUNARC and 4.4.1 for HPC2N and 4.4.2 for PDC).  
 
     === "Setup"
       

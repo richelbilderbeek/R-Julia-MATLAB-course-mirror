@@ -7,6 +7,7 @@ docs/matlab/MatlabGUIslurm.md
 docs/matlab/matlab-addons.md
 docs/matlab/matlab-local-desktop.md
 docs/matlab/slurmMatlab.md
+docs/meeting_notes/*.md
 docs/r/batch.md
 docs/r/interactive.md
 docs/r/morepackages.md
@@ -43,7 +44,6 @@ exercises/julia/batchJulia/Solutions/1/*.md
 exercises/julia/batchJulia/Solutions/2/*.md
 exercises/julia/batchJulia/Solutions/3/*.md
 
-meeting_notes/*.md
 
 sphinx-myst_test/README.md
 sphinx-myst_test/docs/julia/summaryJulia.md

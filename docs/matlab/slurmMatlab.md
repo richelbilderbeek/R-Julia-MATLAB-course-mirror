@@ -11,26 +11,23 @@
 
     **Compute allocations in this workshop**
 
-    - Pelle/Rackham: ``uppmax2025-2-360``
-    - Kebnekaise: ``hpc2n2025-151``
-    - Cosmos: ``lu2025-2-94``
-    - Tetralith: ``naiss2025-22-934``
-    - Dardel: ``naiss2025-22-934``
-    - Alvis: ``naiss2025-22-934`` 
+    - NAISS Arrhenius: ``naiss2026-4-1022`` (add `-cpu` or `-gpu`)
+    - Pelle: ``uppmax2025-3-393``
+    - Kebnekaise: ``hpc2ncourses2026-017``
+    - Dardel: ``naiss2026-4-1022``
      
     **Storage space for this workshop**
 
-    - Rackham: ``/proj/r-matlab-julia-pelle``
-    - Kebnekaise: ``/proj/nobackup/fall-courses``
-    - Tetralith: ``/proj/courses-fall-2025/users/``
-    - Dardel: ``/cfs/klemming/projects/snic/courses-fall-2025``
-    - Alvis: ``/mimer/NOBACKUP/groups/courses-fall-2025/``
+    - NAISS Arrhenius: ``/nobackup/proj/disk/fall-courses-naiss``
+    - Pelle: ``/proj/r-matlab-julia-pelle``
+    - Kebnekaise: ``/proj/nobackup/fall-courses-2026``
+    - Dardel: ``/cfs/klemming/projects/supr/fall-courses-naiss``
 
 !!! warning
 
     Any longer, resource-intensive, or parallel jobs must be run through a **batch script**.
 
-The batch system used at UPPMAX, HPC2N, LUNARC, NSC, and PDC is called SLURM. The same is the case at most of the Swedish HPC centres.
+The batch system used at all/most of the Swedish HPC centres is called SLURM. 
 
 SLURM is an Open Source job scheduler, which provides three key functions:
 - Keeps track of available system resources
@@ -41,12 +38,11 @@ Users ask for compute resources via the `sbatch` command (as those who attended 
 
 - To run a batch job, you must create and submit a SLURM submit file (also called a batch submit file, a batch script, or a job script).
 - Guides and documentation at: 
+    - <a href="https://user.naiss.se/arrhenius_hpc/job_management/scheduling/" target="_blank">https://user.naiss.se/arrhenius_hpc/job_management/scheduling/</a>
     - <a href="https://docs.hpc2n.umu.se/documentation/batchsystem/intro/" target="_blank">https://docs.hpc2n.umu.se/documentation/batchsystem/intro/</a> 
     - <a href="https://docs.uppmax.uu.se/cluster_guides/slurm/" target="_blank">https://docs.uppmax.uu.se/cluster_guides/slurm/</a> 
     - <a href="https://lunarc-documentation.readthedocs.io/en/latest/manual/submitting_jobs/manual_basic_job/" target="_blank">https://lunarc-documentation.readthedocs.io/en/latest/manual/submitting_jobs/manual_basic_job/</a> 
-    - <a href="https://www.nsc.liu.se/support/batch-jobs/introduction/" target="_blank">https://www.nsc.liu.se/support/batch-jobs/introduction/</a> 
     - <a href="https://support.pdc.kth.se/doc/run_jobs/job_scheduling/" target="_blank">https://support.pdc.kth.se/doc/run_jobs/job_scheduling/</a>
-    - <a href="https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/" target="_blank">https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/</a> 
 
 MATLAB is well integrated with SLURM, so there are several ways to run these jobs:
 
@@ -76,12 +72,12 @@ Configuration only needs to be run once per version of MATLAB on each cluster. T
 
 The instructions for each facility are linked below: 
 
+- [Running MATLAB on Arrhenius](https://user.naiss.se/applications/matlab/arrhenius/) . [Configuring MATLAB on Arrhenius](https://user.naiss.se/applications/matlab/matlab_local/) 
+- If you are running MATLAB (including parallel) directly on Arrhenius, you have to do so as an interactive job and then no configuration is needed. 
 - [HPC2N: Configure MATLAB](https://www.hpc2n.umu.se/resources/software/configure-matlab-2018)
 - [UPPMAX: MATLAB configuration](https://docs.uppmax.uu.se/software/matlab_conf/)
 - [LUNARC: Configuration at the command line](https://lunarc-documentation.readthedocs.io/en/latest/guides/applications/MATLAB/#configuration-at-the-command-line)
-- [NSC: MATLAB (scroll down to "Before submitting your first job")](https://www.nsc.liu.se/software/installed/tetralith/matlab/).
 - PDC: no need to configure
-- C3SE: no need to configure 
 
 !!! warning
 
@@ -89,8 +85,33 @@ The instructions for each facility are linked below:
     - **Do NOT run configCluster(.sh) on Dardel!**
 
 For most clusters, configuration can be done at the regular terminal using a shell script called `configCluster.sh`.
-At most clusters, it is possible to run `configCluster` (without ".sh") on the MATLAB command line; for NSC, this is the only way to run the configuration program.
+At most clusters, it is possible to run `configCluster` (without ".sh") on the MATLAB command line.
 The tabs below demonstrate the preferred method for each cluster where configuration is required the first time you use a given version of MATLAB.
+
+!!! warning "For Arrhenius, parallel jobs"
+
+    This setup is intended for job submission when MATLAB is installed on your machine and jobs are run remotely on the cluster.
+
+    You can also run it directly on Arrhenius, as an interactive job. Then **no** configuration is needed. 
+
+=== "NAISS Arrhenius"
+
+    - Download the MATLAB plugin scripts from [here](https://gitlab.naiss.se/hpc/user-documentation/support-docs/-/raw/main/software/matlab/naiss.Desktop.zip) 
+    - This setup is intended for job submission when MATLAB is installed on your machine and jobs are run remotely on the cluster. This setup needs to be done once per cluster, per version of MATLAB installed on your machine.
+    - Start MATLAB and run
+
+    ```bash
+    userpath
+    ```
+    - The MATLAB plugin scripts should be extraced and placed in the folder returned by the call to `userpath`.
+    - Now run 
+
+    ```bash
+    configCluster
+    ```
+    - This should be run inside the MATLAB on your OWN computer. 
+    - Submission to the cluster requires SSH credentials. You will be prompted for username and one-time password (verification code).
+    - Jobs will now run on the cluster rather than on your local machine.
 
 === "UPPMAX"
 
@@ -107,7 +128,7 @@ The tabs below demonstrate the preferred method for each cluster where configura
      ```
      
      **Example:**
-     [running configCluster.sh at HPC2N](../../img/configcluster.png)
+     [running configCluster.sh at HPC2N](../img/configcluster.png)
 
 === "LUNARC"
 
@@ -156,24 +177,16 @@ The tabs below demonstrate the preferred method for each cluster where configura
       [bbrydsoe@cosmos3 ~]$
       ```
       
-=== "NSC"
-
-     ```bash
-     module load MATLAB/2024a-hpc1-bdist
-     matlab -nodisplay -nodesktop -nosplash -softwareopengl
-     >> configCluster
-     ```
-     
-     Choose "tetralith" when prompted.
 
 !!! example "**Challenge 1.** Log in and Configure MATLAB."
 
     1. Log into your chosen HPC cluster if you have not already.
-    2. Load the newest version of MATLAB (find with ``ml spider MATLAB``). Note that on Dardel it has a prerequisite which you must load first, and that only the matlab/r2024a-ps (prerequisite PDCOLD/23.12) allows access from the shell/terminal without you having to give your own Mathworks credentials.
+    2. Load the newest version of MATLAB 
+        - find with ``ml spider MATLAB``. 
+        - Note that on Dardel it has a prerequisite which you must load first, and that only the matlab/r2024a-ps (prerequisite PDCOLD/23.12) allows access from the shell/terminal without you having to give your own Mathworks credentials.
     3. Depending on cluster, now do 
-        - NSC: Run configCluster inside MATLAB on the terminal (start with ``matlab -singleCompThread -nodisplay -nosplash -nodesktop ``).
+        - NAISS Arrhenius: You do not do ``configCluster`` when running interactively on a node on Arrhenius. 
         - PDC: You do not do ``configCluster``
-        - C3SE: You do not do ``configCluster``
         - HPC2N. Run ``configCluster.sh`` on the terminal
         - UPPMAX: Run ``configCluster.sh <project-id>`` on the terminal
         - LUNARC. Run ``configCluster.sh <project-id> on the terminl  
@@ -295,6 +308,23 @@ If you want to run a MATLAB program on the cluster with batch, you have to set s
     >> c=parcluster('local');
     ```
 
+!!! info "Additional instructions specific to Arrhenius" 
+
+    - At Arrhenius, you do **NOT** set any ``AdditionalProperties``. You instead work in an interactive session.
+    - To start an interactive session on **Arrhenius**...
+       - ...on a full node: use `salloc -N 1 -t 00:30:00 -A naiss2026-4-1022-cpu -p cpu`
+       - ...on a subset of the cores on a node (here 24): use `salloc -c 24 -t 1:00:00 -A naiss2026-4-1022-cpu -p cpu`
+    - There is not currently support for GPU in the MATLAB installed at Arrhenius 
+    - Example: 
+    ```bash
+    interactive -A naiss2026-4-1022-cpu -c 1 -p cpu -t 01:00:00
+    ```
+    - When the node is reserved, start MATLAB with: 
+    ```bash 
+    ml MATLAB/2025b
+    matlab &
+    ``` 
+
 !!! info "Additional instructions specific to Dardel"
 
     The process at PDC (Dardel) is more involved than at other facilities:
@@ -312,40 +342,13 @@ If you want to run a MATLAB program on the cluster with batch, you have to set s
     matlab -nodisplay -nodesktop -nosplash
     ```
 
-**Example, for C3SE** 
-
-Asking for one hour. Starting from the login node. 
-
-```bash
-$ srun --account=naiss2025-22-934 --gpus-per-node=T4:1 --time=01:00:00 --pty /bin/bash
-```
-
-Then on the compute node: 
-
-```bash
-$ ml MATLAB/2024b
-$ matlab -singleCompThread -nodisplay -nosplash -nodesktop
-Opening log file:  /cephyr/users/brydso/Alvis/java.log.65485
-
-                              < M A T L A B (R) >
-                    Copyright 1984-2024 The MathWorks, Inc.
-                   R2024b (24.2.0.2712019) 64-bit (glnxa64)
-                                August 22, 2024
-
- 
-To get started, type doc.
-For product information, visit www.mathworks.com.
- 
->> c=parcluster('local');
-```
-
 **Example, for HPC2N**
 
 Asking for 1 hour walltime.
 
 ```matlab
 >> c=parcluster('kebnekaise');
->> c.AdditionalProperties.AccountName = 'hpc2n2025-062';
+>> c.AdditionalProperties.AccountName = 'hpc2ncourses2026-017';
 >> c.AdditionalProperties.WallTime = '01:00:00';
 >> c.saveProfile
 ```
@@ -396,13 +399,12 @@ For product information, visit www.mathworks.com.
     - **HPC2N:** `CLUSTER=kebnekaise`
     - **UPPMAX:** no CLUSTER, as said above - i.e. just ``c=parcluster;``
     - **LUNARC:** `CLUSTER=cosmos R2023b`
-    - **NSC:** `CLUSTER=tetralith`
-    - **C3SE:** `c=parcluster('local');` NO OTHER JOB SETTINGS! Here you start an interactive session first, as shown above! 
     - **PDC:** no `CLUSTER`, as said above - i.e. just ``c=parcluster;`` NO OTHER JOB SETTINGS! Here you instead start an interactive session first!
-    
+    - **NAISS Arrhenius:** no `CLUSTER`, as said above - i.e. just ``c=parcluster;`` NO OTHER JOB SETTINGS! Here you instead start an interactive session first!
+
     Remember, the `project-id` is the compute allocation number given for your choice of cluster at the top of this webpage.
     
-    Since we are just doing a short test, you can use 15 min instead of 1 hour. Also remember the `c.AdditionalProperties.ProcsPerNode=20` if you are on UPPMAX. Test that the settings were added by viewing `c.AdditionalProperties` (not PDC or C3SE).
+    Since we are just doing a short test, you can use 15 min instead of 1 hour. Also remember the `c.AdditionalProperties.ProcsPerNode=20` if you are on UPPMAX. Test that the settings were added by viewing `c.AdditionalProperties` (not PDC or Arrhenius).
 
 
 ### Running a job from within the MATLAB terminal interface
@@ -550,7 +552,30 @@ ans =
 
 ##### `parpool`
 
-On the clusters where this works, you can start a ``parpool`` and then (for instance) run a parallel code inside MATLAB.
+On the clusters where this works (Arrhenius for instance), you can start a ``parpool`` and then (for instance) run a parallel code inside MATLAB.
+
+**Parpool Example, for NAISS Arrhenius:** As shown before, first start an interactive session, then load MATLAB and start it. 
+Then create a parpool at the size of (at most) what you asked for in number of cores. 
+
+```matlab
+>> p=parpool(24)
+Starting parallel pool (parpool) using the 'local' profile ... connected to 24 workers.
+p =
+Pool with properties:
+Connected: true
+NumWorkers: 24
+Cluster: local
+AttachedFiles: {}
+IdleTimeout: 30 minute(s) (30 minutes remaining)
+SpmdEnabled: true
+>> parallel_example
+t =
+2.4711
+ans =
+2.4711
+```
+
+You can [download a parallel_example.m](../parallel_example.m) here. 
 
 **Parpool Example, for PDC:** As shown earlier, first start an interactive session, login to the compute node you got, then load matlab and start it. Then create a parpool of the size (at most) that you asked for in number of cores.
 
@@ -584,12 +609,29 @@ The difference here is that when the batch script has been submitted, you cannot
 
 !!! warning
 
-    `parpool` can only be used on UPPMAX, Cosmos, Dardel, Kebnekaise, and Alvis.
+    `parpool` can only be used on UPPMAX, Cosmos, Dardel, Kebnekaise, and NAISS Arrhenius.
 
 
 ### Serial batch jobs
 
-Here is an example of a serial batch job formatted for each of the 6 facilities covered.
+Here is an example of a serial batch job formatted for the facilities covered.
+
+=== "NAISS Arrhenius" 
+
+    ```bash 
+    #!/bin/bash
+    #SBATCH -A naiss2026-4-1022-cpu 
+    #SBATCH -p cpu
+    #SBATCH -n 1
+    # Asking for 30 min (change as you want)
+    #SBATCH -t 00:30:00
+    #SBATCH --error=matlab_%J.err
+    #SBATCH --output=matlab_%J.out
+ 
+    module load matlab/2025b
+
+    time matlab -nojvm -nodisplay -nosplash -r "monte_carlo_pi(100000)"
+    ```
 
 === "UPPMAX"
 
@@ -669,30 +711,6 @@ Here is an example of a serial batch job formatted for each of the 6 facilities 
      time matlab -nojvm -nodisplay -r "monte_carlo_pi(100000)"
      ```
          
-=== "NSC"
-
-     ```bash
-     #!/bin/bash
-     # Change to your actual project number later
-     #SBATCH -A naiss2025-22-934
-     #SBATCH --ntasks=1
-     #SBATCH --cpus-per-task=1
-     #SBATCH --ntasks-per-core=1
-     # Asking for 15 min (change as you want)
-     #SBATCH -t 00:15:00
-     #SBATCH --error=matlab_%J.err
-     #SBATCH --output=matlab_%J.out
-
-     # Clean the environment
-     module purge > /dev/null 2>&1
-     module load MATLAB/2024a-hpc1-bdist
-
-     # Executing the matlab program monte_carlo_pi.m for the value n=100000
-     # (n is number of steps - see program).
-     # The command 'time' is timing the execution
-     time matlab -singleCompThread -nojvm -nodisplay -r "monte_carlo_pi(100000)"
-     ```
-
 === "PDC"
 
      ```bash
@@ -715,22 +733,6 @@ Here is an example of a serial batch job formatted for each of the 6 facilities 
      # The command 'time' is timing the execution
      time matlab -singleCompThread -nojvm -nodisplay -r "monte_carlo_pi(100000)"
      ```
-
-=== "C3SE" 
-
-    ```bash
-    #!/bin/bash
-    # Remember to change this to your own project ID after the course!
-    #SBATCH -A NAISS2025-22-934
-    #SBATCH -t 00:05:00
-    #SBATCH -p alvis
-    #SBATCH -N 1 --gpus-per-node=T4:1
-
-    ml purge > /dev/null 2>&1
-    module load MATLAB/2024b 
-
-    time matlab -singleCompThread -nojvm -nodisplay -r "monte_carlo_pi(100000)" 
-    ```
 
 You can download [monte_carlo_pi.m here](https://raw.githubusercontent.com/UPPMAX/R-matlab-julia-HPC/refs/heads/main/exercises/matlab/monte_carlo_pi.m) here or find it under `matlab` in the exercises directory.
 
@@ -785,6 +787,22 @@ Inside the MATLAB code, the number of CPU-cores (`NumWorkers` in MATLAB terminol
      Try making a batch script to run the ``parallel_example.m`` in the example from inside MATLAB above. You can use the above batch script as template.
 
 ??? note "Solutions"
+
+    === "NAISS Arrhenius" 
+
+        ```bash 
+        #!/bin/bash
+        #SBATCH -A naiss2026-4-1022-cpu 
+        #SBATCH -p cpu
+        #SBATCH -c 16 
+        #SBATCH -t 00:30:00
+
+        # Load the MATLAB module
+        ml matlab/2025b
+
+        # Launch the MATLAB calculation
+        matlab -nosplash -nodesktop -nodisplay -r "parallel_example(16)"
+        ```
 
     === "UPPMAX"
             
@@ -867,32 +885,6 @@ Inside the MATLAB code, the number of CPU-cores (`NumWorkers` in MATLAB terminol
         srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "parallel_example(16)"
         ```
 
-    === "NSC"
-
-        ```bash
-        #!/bin/bash
-        # Change to your actual project number
-        #SBATCH -A naiss2025-22-934
-        # Remember, there are 4 workers and 1 master!
-        #SBATCH --ntasks=5
-        #SBATCH --cpus-per-task=1
-        #SBATCH --ntasks-per-core=1
-        # Asking for 30 min (change as you want)
-        #SBATCH -t 00:30:00
-        #SBATCH --error=matlab_%J.err
-        #SBATCH --output=matlab_%J.out
-
-        # Clean the environment
-        module purge > /dev/null 2>&1
-
-        # Change depending on resource and MATLAB version
-        # to find out available versions: module spider matlab
-        module add MATLAB/2024a-hpc1-bdist
-
-        # Executing a parallel matlab program
-        srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "parallel_example(16)"
-        ```
-
     === "PDC"
 
         ```bash
@@ -918,23 +910,6 @@ Inside the MATLAB code, the number of CPU-cores (`NumWorkers` in MATLAB terminol
         matlab -nodisplay -nodesktop -nosplash -r "parallel_example(16)"
         ```
 
-    === "C3SE" 
-
-        ```bash
-        #!/bin/bash
-        # Remember to change this to your own project ID after the course!
-        #SBATCH -A NAISS2025-22-934
-        #SBATCH -t 00:05:00
-        #SBATCH -p alvis
-        #You always need to ask for GPUs on Alvis! And you should not use it for anything but GPU jobs! 
-        #SBATCH -N 1 --gpus-per-node=T4:1
-
-        ml purge > /dev/null 2>&1
-        module load MATLAB/2024b
-
-        time matlab -singleCompThread -nojvm -nodisplay -r "parallel_example(16)"
-        ```
-
 !!! note "GPU code"
 
     Using MATLAB with GPUs will be covered in the [Introduction to GPUs](../advanced/gpus.md) section on the fourth day ("Advanced material"). 
@@ -946,4 +921,6 @@ Inside the MATLAB code, the number of CPU-cores (`NumWorkers` in MATLAB terminol
     - A batch script consists of a part with SLURM parameters describing the allocation and a second part describing the actual work within the job, for instance one or several MATLAB scripts.
     - You can run MATLAB as a batch job through a batch script or from inside MATLAB (shell or GUI)
     - Remember to include possible input arguments to the MATLAB script in the batch script.
-    - **You need to configure MATLAB before submitting batch jobs** (except on Dardel).
+    - **You need to configure MATLAB before submitting batch jobs** (except on Dardel and Arrhenius).
+    - Arrhenius does not currently have MATLAB for GPUs installed 
+

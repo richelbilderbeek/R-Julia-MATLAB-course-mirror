@@ -60,6 +60,7 @@ nav = [
     { "Batch" = "r/batch.md" },
     { "Interactive" = "r/interactive.md" },
     { "RStudio" = "r/rstudio/README.md" },
+    { "RStudio through OpenOnDemand" = "r/rstudio-ondemand.md"},
     { "Summary" = "r/summary/README.md" },
     { "Evaluation" = "r/evaluation.md" },
     { "Videos" = "r/videos.md" }

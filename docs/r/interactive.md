@@ -17,38 +17,23 @@
    
 !!! note "Objectives"
 
-    - Show how to reach the calculation nodes on UPPMAX and HPC2N
+    - Show how to reach the calculation nodes on your centre 
     - Test some commands on the calculation nodes
 
 !!! note "Compute allocations in this workshop" 
 
-   - Rackham/Pelle: ``uppmax2025-2-360``
-   - Kebnekaise: ``hpc2n2025-151``
-   - Cosmos: ``lu2025-2-94``
-   - Tetralith: ``naiss2025-22-934``
-   - Dardel: ``naiss2025-22-934``
-   - Alvis: ``naiss2025-22-934``
+   - Arrhenius: ``nais2026-4-1022`` (remember to add either `-cpu` or `-gpu`) 
+   - Pelle: ``uppmax2025-2-393``
+   - Kebnekaise: ``hpc2ncourses2026-017``
+   - Dardel: ``naiss2026-4-1022``
 
-## Overview of the UPPMAX systems
+## Overview of an HPC cluster
 
-![UPPMAX systems](../img/uppmax.png)
-
-## Overview of the HPC2N system
-
-![HPC2N system](../img/hpc2n.png)
-
-## Overview of the LUNARC system
-
-![Cosmos resource](../img/cosmos-resources.png)
-
-## Overview of the NSC system
-
-![Tetralith](../img/mermaid-tetralith.png)
+![Generic HPC cluster - thanks to Rebecca Pitts who made this image that I lightly modified](../img/clusterlayout-v2.png)
 
 ## General
 
-In order to run interactively, you need to have compute nodes allocated to run
-on, and this is done through the batch system.  
+In order to run interactively, you need to have compute nodes allocated to run on, and this is done through the batch system (including through OpenOnDemand where available).  
 
 !!! warning
 
@@ -62,43 +47,37 @@ To run interactively, you need to allocate resources on the cluster first. You c
       
 - First, you make a request for resources with ``interactive``/``salloc``, like this:
 
+=== "NAISS Arrhenius (interactive)" 
+
+    ```bash 
+    $ salloc --nodes=1 -t 1:00:00 -A naiss2026-<cpu|gpu> -p <partition>      
+    ```
+
 === "UPPMAX (interactive)"
 
     ```bash
-    $ interactive -n <tasks> --time=HHH:MM:SS -A uppmax2025-2-360 
+    $ interactive -n <tasks> --time=HHH:MM:SS -A uppmax2025-2-393
     ``` 
   
 === "HPC2N (salloc)" 
 
     ```bash
-    $ salloc -n <tasks> --time=HHH:MM:SS -A hpc2n2024-025 
+    $ salloc -n <tasks> --time=HHH:MM:SS -A hpc2ncourses2026-017 
     ```          
 
 === "LUNARC (interactive)"
 
     ```bash
-    interactive -A lu2025-2-94 -t HHH:MM:SS
-    ```
-
-=== "NSC (interactive)" 
-
-    ```bash
-    interactive -A naiss2025-22-934
+    interactive -A luXXXX-Y-ZZ -t HHH:MM:SS
     ```
 
 === "PDC (salloc + ssh)" 
 
     ```bash
-    salloc --time=HHH:MM:SS -A naiss2025-22-934 -p [partition]
+    salloc --time=HHH:MM:SS -A naiss2026-4-1022 -p [partition]
     ```
 
-    Where ``[partition]`` is main or gpu. After your resources have been allocated, you can login to the compute node with ``ssh <node>`` and have real interactivity. 
-
-=== "C3SE" 
-
-    ```bash
-    srun -A NAISS2025-22-934 -p alvis --gpus-per-node=T4:1 --pty bash
-    ```
+    Where ``[partition]`` is main, shared, or gpu. After your resources have been allocated, you can login to the compute node with ``ssh <node>`` and have real interactivity. 
 
 Your request enters the job queue just like any other job, and interactive/salloc will tell you that it is waiting for the requested resources. When salloc tells you that your job has been allocated resources, you can interactively run programs on those resources with ``srun`` (or login to the compute node with ssh on PDC). The commands you run with ``srun`` will then be executed on the resources your job has been allocated. If you do not preface with ``srun`` the command is run on the login node! 
       
@@ -108,10 +87,13 @@ You can now run R scripts on the allocated resources directly instead of waiting
 
     **Let us use ThinLinc or Open OnDemand (where available)**
 
+    === "NAISS Arrhenius" 
+
+        - ThinLinc: ``tl.hpc.arrhenius.naiss.se`` as the server in the client. 
+
     === "UPPMAX"
 
         - ThinLinc app: ``<user>@rackham-gui.uppmax.uu.se``
-        - ThinLinc in web browser: ``https://rackham-gui.uppmax.uu.se``   This requires 2FA!
         - ThinLinc (Pelle): ``<user>@pelle-gui.uppmax.uu.se``
         - ThinLinc (Pelle) in web browser: ``https://pelle-gui.uppmax.uu.se``   This requires 2FA!
 
@@ -127,39 +109,21 @@ You can now run R scripts on the allocated resources directly instead of waiting
             - Note that you need to setup <a href="https://lunarc-documentation.readthedocs.io/en/latest/getting_started/login_howto/" target="_blank">TFA (PocketPass)</a> to use LUNARC!
         - You can start Gfx (Open OnDemand) from inside ThinLinc! 
 
-    === "NSC (Tetralith)"
-
-        - ThinLinc: tetralith.pdc.kth.se
-            - 2FA required! https://www.nsc.liu.se/support/2fa/
-
     === "PDC"
 
         - ThinLinc: dardel-vnc.nsc.kth.se
             - SSH keys or kerberos needed! https://support.pdc.kth.se/doc/support/?section=/doc/support-docs/basics/quickstart
 
-    === "C3SE (Alvis)"
+    **Using terminal** 
 
-        - OpenOnDemand: https://alvis.c3se.chalmers.se
-            - https://www.c3se.chalmers.se/documentation/connecting/remote_graphics/
-            - Note that Alvis is accessible via SUNET networks (i.e. most Swedish university networks). If you are not on one of those networks you need to use a VPN - preferrably your own Swedish university VPN. If this is not possible, contact ``support@chalmers.se`` and ask to be added to the Chalmers's eduVPN.
+    === "Arrhenius"
 
-    **Using terminal**
-
-    === "NSC"
-
-        - SSH: ``ssh <user>@tetralith.nsc.liu.se``
-        - Note that you need to setup <a href="https://www.nsc.liu.se/support/2fa/" target="_blank">TFA</a> to use NSC!
+        - SSH: ``ssh username@login.hpc.arrhenius.naiss.se``
+        - Then start interactive job (here for CPU, change to -gpu for GPU): interactive --nodes=1 -t 1:00:00 -A naiss2026-4-1022-cpu -p cpu
 
     === "HPC2N"
 
         - SSH: ``ssh <user>@kebnekaise.hpc2n.umu.se``
-
-    === "UPPMAX"
-
-        **Rackham**
-
-        - SSH: ``ssh <user>@rackham.uppmax.uu.se``
-        - Note that you may have to setup <a href="https://docs.uppmax.uu.se/getting_started/get_uppmax_2fa/"
 
         **Pelle*
 
@@ -176,18 +140,6 @@ You can now run R scripts on the allocated resources directly instead of waiting
         - SSH: ``ssh <user>@dardel.pdc.kth.se``
         - Note that you need to setup <a href="https://support.pdc.kth.se/doc/login/ssh_login/" target="_blank">SSH keys</a> or kerberos in order to login to PDC!
 
-    === "C3SE"
-
-        - SSH: ``ssh <user>@alvis1.c3se.chalmers.se``
-               or
-               ``ssh <user>@alvis2.c3se.chalmers.se``
-        - Note that Alvis is accessible via SUNET networks (i.e. most Swedish university networks). If you are not on one of those networks you need to use a VPN - preferrably your own Swedish university VPN. If this is not possible, contact ``support@chalmers.se`` and ask to be added to the Chalmers's eduVPN.
-
-    **In any case:**  
-
-    - Remember to have X11 installed!
-    - On Mac
-       - install XQuartz
     - On Windows
        - Use MobaXterm or
        - install XMING and use with Putty or PowerShell
@@ -197,10 +149,53 @@ You can now run R scripts on the allocated resources directly instead of waiting
 
 **Requesting 4 cores for 10 minutes, then running R**
 
+=== "NAISS Arrhenius" 
+
+    ```bash 
+    [bbrydsoe@arrhenius1 ~]$ interactive -n 4 --time=00:10:00 -A naiss2026-4-1022-cpu -p cpu
+    salloc: Granted job allocation 3985564
+    salloc: Waiting for resource configuration
+    salloc: Nodes n216 are ready for job
+    [bbrydsoe@n216 ~]$ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
+    [bbrydsoe@n216 ~]$ R
+
+    R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+    Copyright (C) 2025 The R Foundation for Statistical Computing
+    Platform: x86_64-pc-linux-gnu
+
+    R is free software and comes with ABSOLUTELY NO WARRANTY.
+    You are welcome to redistribute it under certain conditions.
+    Type 'license()' or 'licence()' for distribution details.
+
+      Natural language support but running in an English locale
+
+    R is a collaborative project with many contributors.
+    Type 'contributors()' for more information and
+    'citation()' on how to cite R or R packages in publications.
+
+    Type 'demo()' for some demos, 'help()' for on-line help, or
+    'help.start()' for an HTML browser interface to help.
+    Type 'q()' to quit R.
+
+    >
+    ```
+
+    Let us check that we actually run on the compute node: 
+
+    ```bash 
+    [bbrydsoe@n216 ~]$ srun hostname
+    n216
+    n216
+    n216
+    n216
+    ```
+
+    We are. Notice that we got a response from all four cores we have allocated. 
+
 === "UPPMAX"
 
     ```bash
-    [bjornc@pelle2 ~]$ interactive -A uppmax2025-2-360 -n 4 -t 10:00
+    [bjornc@pelle2 ~]$ interactive -A uppmax2025-2-393 -n 4 -t 10:00
     This is a temporary version of interactive-script for Pelle
     Most interactive-script functionality is removed
     salloc: Pending job allocation 82050
@@ -248,7 +243,7 @@ You can now run R scripts on the allocated resources directly instead of waiting
         b-cn0241.hpc2n.umu.se
         ``` 
       
-        We are. Notice that we got a response from all four cores we have allocated.   
+        We are. Notice that we got a response from all four cores we have allocated.           
       
 **Running a script**
    
@@ -274,7 +269,7 @@ print(paste("The sum of the two numbers is", res))
   
 **Running the script**
 
-- Note that the commands are the same for both HPC2N and UPPMAX!
+- Note that after loading the modules, the commands are the same for all the centres! 
       
 Running a R script in the allocation we made further up. Notice that since we asked for 4 cores, the script is run 4 times, since it is a serial script
          
@@ -314,6 +309,16 @@ When you have finished using the allocation, either wait for it to end, or close
 
 - We shall test RStudio first in the next session!
 
+
+=== "NAISS Arrhenius" 
+
+    ```bash
+    [bbrydsoe@n216 ~]$ exit
+    logout
+    salloc: Relinquishing job allocation 3985564
+    [bbrydsoe@arrhenius1 ~]$ 
+    ```
+
 === "UPPMAX"
    
     ```bash        
@@ -339,7 +344,7 @@ When you have finished using the allocation, either wait for it to end, or close
 !!! note "Keypoints"
 
     - Start an interactive session on a calculation node by a SLURM allocation
-       - At HPC2N: ``salloc`` ...
-       - At UPPMAX: ``interactive`` ...
+       - At PDC/Dardel, HPC2N/Kebnekaise: ``salloc`` ...
+       - At NAISS/Arrhenius, UPPMAX/Pelle, LUNARC/Cosmos: ``interactive`` ...
     - Follow the same procedure as usual by loading the R module and possible prerequisites.
     

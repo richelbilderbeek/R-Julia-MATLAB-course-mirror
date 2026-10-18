@@ -126,7 +126,7 @@ HPC cluster|R module
 Arrhenius  |`R/4.5.2` 
 COSMOS     |`R/4.2.1`
 Dardel     |`R/4.1.1`
-Kebnekaise |`R/4.1.2`
+Kebnekaise |`R/4.4.1`
 Pelle      |`R/4.5.1-gfbf-2024a`
 
 ??? hint "Answer"
@@ -139,7 +139,7 @@ Pelle      |`R/4.5.1-gfbf-2024a`
     Bianca     | `module load R/4.1.1`
     COSMOS     | `module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1`
     Dardel     | `module load PDC/23.12 R/4.1.1`
-    Kebnekaise | `module load GCC/11.2.0 OpenMPI/4.1.1 R/4.1.2`
+    Kebnekaise | `module load GCC/13.2.0 R/4.4.1`
     Pelle      | `module load 4.5.1-gfbf-2024a`
 
     <!-- markdownlint-enable MD013 -->
