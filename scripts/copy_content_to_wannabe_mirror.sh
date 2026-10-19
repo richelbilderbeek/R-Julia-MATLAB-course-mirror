@@ -34,6 +34,7 @@ for folder in $(ls --directory */); do
 done
 
 cd ~/GitHubs/R-Julia-MATLAB-course-mirror
+git pull
 git add :/
 git commit -m "Update"
 git push
