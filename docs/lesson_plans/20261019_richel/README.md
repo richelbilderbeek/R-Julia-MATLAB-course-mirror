@@ -58,6 +58,45 @@ The NAISS GitLab runners do not work well. I spent some time on making
 a GitHub not-really-mirror. I got it to work, i.e. it can deploy
 a Zensical website.
 
+## 2026-10-19
+
+The NAISS GitLab runners still do not work well. I spent some time on making
+a script to copy files from the GitLab to the mirror. I invited the other
+teachers to copy files to the pseudo-mirror, so that they can manage.
+
+Arrhenius RStudio may be online today after lunch. That is during the session.
+
+```text
+[richel@arrhenius3 ~]$ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2
+
+[richel@arrhenius3 ~]$ module spider RStudio
+################################################################################################################################################
+# NOTE: on this system, 'module spider' is primarily intended for use with modules for development/building software (buildenv-*, buildtool-*) #
+# to find libraries and tools that are only shown when the necessary prerequisite development modules have been loaded. However, centrally     #
+# provided software applications (e.g., pre-built simulation software, etc.) are mainly available as modules directly visible by               #
+# 'module avail' and generally do not require loading other modules first to become visible.                                                   #
+################################################################################################################################################
+
+--------------------------------------------------------------------------------------------------
+  rstudioapi: rstudioapi/0.17.1 (E)
+--------------------------------------------------------------------------------------------------
+    This extension is provided by the following modules. To access the extension you must load one of the following modules. Note that any module names in parentheses show the module location in the software hierarchy.
+
+
+       R/4.5.2 (buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0)
+       R/4.5.2 (buildtool-easybuild/5.2.1-hpca3ef7d197 Core/GCC/14.3.0)
+       R/4.5.2-CUDA-12.9.1 (GPU/buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0)
+       R/4.5.2-CUDA-12.9.1 (GPU/buildtool-easybuild/5.2.1-hpca3ef7d197 Core/GCC/14.3.0)
+
+
+Names marked by a trailing (E) are extensions provided by another module.
+
+
+[richel@arrhenius3 ~]$ 
+```
+
+Ready!
+
 ## References
 
 
