@@ -116,7 +116,7 @@ bash benchmark_2d_integration.sh [account] [language]
 For example:
 
 ```bash
-bash benchmark_2d_integration.sh staff r
+bash benchmark_2d_integration.sh naiss2026-4-1022-cpu r
 ```
 
 If you use the incorrect spelling, the script will help you.
@@ -146,10 +146,10 @@ the benchmark script will (try to) download it for you.
     For example:
 
     ```bash
-    sbatch -A staff -n 1 do_r_2d_integration.sh
+    sbatch -A naiss2026-4-1022-cpu -n 1 do_r_2d_integration.sh
 
     # On Dardel
-    sbatch -A staff -n 1 -p main do_r_2d_integration.sh
+    sbatch -A naiss2026-4-1022-cpu -n 1 -p main do_r_2d_integration.sh
     ```
 
 There are 3 Slurm scripts, 1 per language:
@@ -233,7 +233,7 @@ On your HPC cluster:
     [The 'Benchmark script' section](#benchmark-script) shows how:
 
     ```bash
-    bash benchmark_2d_integration.sh staff r
+    bash benchmark_2d_integration.sh naiss2026-4-1022-cpu r
     ```
     
     You can use [our projects overview page](../../projects.md)
