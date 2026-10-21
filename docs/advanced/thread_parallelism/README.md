@@ -565,8 +565,7 @@ and other programming languages:
     there are many things going on here and many answers are correct:
 
     - Measurements are messier than you may have thought
-    - Julia is 30x faster than R
-    - The MATLAB code is single-threaded
+    - Julia is the fastest language for this calculation
     - R works best at being efficient in parallel
     - HPC clusters differ
     - The points on Kebnekaise differ more than other HPC clusters:

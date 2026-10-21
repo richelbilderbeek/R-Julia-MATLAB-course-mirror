@@ -8,6 +8,7 @@
     "docs/evaluations/**"
   ],
   "words": [
+    "println", "summ",
     "Alvis","Anders","Bilderbeek","Bioconda",
     "Nanz","Furia","Rashed","Helmy","Fouad","Zheng",
     "Biopython","Birgitte","BLAS","Brendle",

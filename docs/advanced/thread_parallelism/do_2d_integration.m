@@ -26,6 +26,9 @@ disp(['Grid size: ', num2str(grid_size)]);
 
 assert(abs(integration2d(100, 1, 1)) < 0.0001);
 
+% Start the parallel pool
+parpool("Threads",n_workers)
+
 % Start timer
 tic;
 

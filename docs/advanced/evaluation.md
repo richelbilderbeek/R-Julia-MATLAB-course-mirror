@@ -13,7 +13,7 @@ It takes into account that one may need to leave early too.
 
 ???- hint "Where can I find the results of earlier evaluations?"
 
-<!--    At [the 'Evaluations' page](../evaluations/README.md). -->
+    At [the 'Evaluations' page](../evaluations/README.md).
 
 ## Any feedback during the day
 

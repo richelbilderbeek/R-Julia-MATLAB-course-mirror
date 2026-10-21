@@ -19,11 +19,11 @@
 
 !!! example "Start Jupyter"
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        $ ml Python/3.11.5-env-hpc1-gcc-2023b-eb
-        $ ml julia/1.10.2-bdist
+        $ ml buildtool-easybuild/5.2.1-hpca3ef7d197 GCC JupyterLab/4.4.9
+        $ ml Julia/1.12.2
         $ julia -p 4
         ```
 
@@ -111,13 +111,13 @@ julia> notebook(dir=".",detached=true)
         - then starting a web browser in ThinLinc and open the URL copied in previous step
     - One can even use the home computer, see [here](https://uppmax.github.io/HPC-python/day2/IDEs.html#jupyter)
 
-    === "NSC"
+    === "Arrhenius"
 
          First start an interactive session
 
          ```bash
-         $ ml Python/3.11.5-env-hpc1-gcc-2023b-eb
-         $ ml julia/1.10.2-bdist
+         $ ml buildtool-easybuild/5.2.1-hpca3ef7d197 GCC JupyterLab/4.4.9
+         $ ml Julia/1.12.2
          $ jupyter-lab --ip=$HOSTNAME
          ```
 

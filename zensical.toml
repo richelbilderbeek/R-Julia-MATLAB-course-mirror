@@ -1,5 +1,4 @@
 [project]
-#site_name = "Introduction to R, MATLAB, and Julia in HPC"
 docs_dir = "docs"
 auto_nav = false
 
@@ -7,10 +6,6 @@ auto_nav = false
 #custom_fences = [
 #  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }
 #]
-
-
-# This was used for MkDocs
-# site_dir = "site"
 
 # The site_name is shown in the page header and the browser window title
 #
@@ -34,7 +29,7 @@ site_description = "Material for the NAISS course: Introduction to R, MATLAB, an
 # Read more: https://zensical.org/docs/setup/basics/#site_url
 site_url = "https://hpc.pages.naiss.se/training/R-matlab-julia-HPC"
 repo_url = "https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC"
-edit_uri = "blob/main/docs/"
+edit_uri = "-/edit/main/docs/"
 
 nav = [
   { "Overview" = "index.md" },

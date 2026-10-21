@@ -1,0 +1,37 @@
+HPC cluster: arrhenius
+Slurm job account used: naiss2026-4-1022-cpu
+Number of cores booked in Slurm: 64
+Grid size: 16384
+New text for the first line: args = [ "64" "16384" ];
+Running the MATLAB file:
+MATLAB requires a Java Runtime Environment to run the command
+'java.net.InetAddress.getLocalHost.getHostAddress'.
+
+Error in matlabrc (line 120)
+ip = char(java.net.InetAddress.getLocalHost.getHostAddress);
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Caused by:
+    Unable to resolve the name
+    'java.net.InetAddress.getLocalHost.getHostAddress'.
+ 
+Number of workers: 64
+Grid size: 16384
+Starting parallel pool (parpool) using the 'Threads' profile ...
+Connected to parallel pool with 64 workers.
+
+ans = 
+
+ ThreadPool with properties: 
+
+           NumWorkers: 64
+                 Busy: false
+            FileStore: [1x1 parallel.FileStore]
+           ValueStore: [1x1 parallel.ValueStore]
+
+Integral value: 5.0238e-14
+Integral error: 5.0238e-14
+Time spent on 1 core (seconds): 6.29
+Time spent on all cores (seconds): 402.5628
+language,hpc_cluster,grid_size,n_workers,core_secs
+matlab,arrhenius,16384,64,402.5628
+Parallel pool using the 'Threads' profile is shutting down.

@@ -213,7 +213,7 @@ environment directory):
     === "Arrhenius"
 
         ```bash
-        $ ml julia/1.12.2-bdist
+        $ ml Julia/1.12.2-bdist
         $ julia
         ```
 
@@ -270,7 +270,7 @@ environment directory):
 
         ```bash
         $ ml Python/3.11.5-env-hpc1-gcc-2023b-eb
-        $ ml julia/1.10.2-bdist
+        $ ml Julia/1.10.2-bdist
         $ julia
         ```
 

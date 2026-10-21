@@ -89,7 +89,7 @@ fi
 
 if [ ${hpc_cluster} == "dardel" ]
 then
-  module load PDC/24.11 matlab/r2023a
+  module load PDC matlab/r2024b
 fi
 
 if [ ${hpc_cluster} == "kebnekaise" ]
