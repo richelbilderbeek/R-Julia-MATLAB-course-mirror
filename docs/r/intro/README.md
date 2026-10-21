@@ -15,7 +15,7 @@
 
 ???- note "For teachers"
 
-    Learning outomes are:
+    Learning outcomes are:
 
     - Learners have seen an overview of the course
     - Learners have seen an first overview of the R programming language

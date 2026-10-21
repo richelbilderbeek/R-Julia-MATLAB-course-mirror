@@ -46,7 +46,7 @@ function extract_hpc_cluster(hostname::String = get(ENV, "HOSTNAME", ""))
     elseif occursin(r"^login\d$", hostname)
         return "dardel"
     elseif occursin(r"^n\d{1,6}$", hostname)
-        return "tetralith"
+        return "arrhenius"
     elseif occursin(r"^nid\d{1,6}$", hostname)
         return "dardel"
     elseif occursin(r"^pelle\d*\.uppmax\.uu\.se$", hostname)

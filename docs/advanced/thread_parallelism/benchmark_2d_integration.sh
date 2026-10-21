@@ -14,7 +14,16 @@
 #
 # Example:
 #
+#   # Arrhenius
+#   bash benchmark_2d_integration.sh naiss2026-4-1022-cpu r
+#
+#   # Most others
 #   bash benchmark_2d_integration.sh staff r
+#
+# Notes:
+#
+# - For MATLAB, there are 64 jobs started, but the first ones will fail,
+#   as MATLAB does not support more than ?32 cores
 #
 
 if [ "$#" -ne 2 ]; then
@@ -80,23 +89,22 @@ if [ ! "$(get_language_script_name r)" == "do_2d_integration.R" ] ; then echo "I
 # Detect HPC cluster
 hpc_cluster="unknown"
 
+[[ "${HOSTNAME}" =~ arrhenius[1-9].hpc.arrhenius.naiss.se$ ]] && hpc_cluster="arrhenius"
+[[ "${HOSTNAME}" =~ ^n[0-9]{1,4}$ ]] && hpc_cluster="arrhenius"
 [[ "${HOSTNAME}" =~ bianca.uppmax.uu.se$ ]] && hpc_cluster="bianca"
 [[ "${HOSTNAME}" =~ ^sens[0-9]+-b[0-9]+$ ]] && hpc_cluster="bianca"
-
-
-
 [[ "${HOSTNAME}" =~ ^cosmos[1-4].int.lunarc$ ]] && hpc_cluster="cosmos"
 [[ "${HOSTNAME}" =~ ^login[1-4]$ ]] && hpc_cluster="dardel"
 [[ "${HOSTNAME}" =~ ^b-an0[1-4].hpc2n.umu.se$ ]] && hpc_cluster="kebnekaise"
 [[ "${HOSTNAME}" =~ ^pelle[1-4].uppmax.uu.se$ ]] && hpc_cluster="pelle"
 [[ "${HOSTNAME}" =~ ^rackham[1-4].uppmax.uu.se$ ]] && hpc_cluster="rackham"
-[[ "${HOSTNAME}" =~ ^tetralith[1-4].nsc.liu.se$ ]] && hpc_cluster="tetralith"
 
 echo "HPC cluster: ${hpc_cluster}"
 
 function is_valid_hpc_cluster() 
 { 
   if [ "$1" == "alvis" ]; then return 0; fi
+  if [ "$1" == "arrhenius" ]; then return 0; fi
   if [ "$1" == "bianca" ]; then return 0; fi
   if [ "$1" == "cosmos" ]; then return 0; fi
   if [ "$1" == "dardel" ]; then return 0; fi
@@ -104,11 +112,11 @@ function is_valid_hpc_cluster()
   if [ "$1" == "lumi" ]; then return 0; fi
   if [ "$1" == "pelle" ]; then return 0; fi
   if [ "$1" == "rackham" ]; then return 0; fi
-  if [ "$1" == "tetralith" ]; then return 0; fi
   return 1;
 }
 
 # Testing
+if ! is_valid_hpc_cluster "arrhenius" ; then echo "Internal error: 'arrhenius' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "alvis" ; then echo "Internal error: 'alvis' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "bianca" ; then echo "Internal error: 'bianca' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "cosmos" ; then echo "Internal error: 'cosmos' is a valid hpc_cluster"; exit 41; fi
@@ -117,13 +125,13 @@ if ! is_valid_hpc_cluster "kebnekaise" ; then echo "Internal error: 'kebnekaise'
 if ! is_valid_hpc_cluster "lumi" ; then echo "Internal error: 'lumi' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "pelle" ; then echo "Internal error: 'pelle' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "rackham" ; then echo "Internal error: 'rackham' is a valid hpc_cluster"; exit 41; fi
-if ! is_valid_hpc_cluster "tetralith" ; then echo "Internal error: 'tetralith' is a valid hpc_cluster"; exit 41; fi
 
 # Using
 if ! is_valid_hpc_cluster "${hpc_cluster}"
 then
   echo "ERROR: '${hpc_cluster}' with hostname '${HOSTNAME}' is not valid hpc_cluster."
   echo "Supported hpc_clusters: "
+  echo "- arrhenius"
   echo "- alvis"
   echo "- bianca"
   echo "- cosmos"
@@ -132,7 +140,6 @@ then
   echo "- lumi"
   echo "- pelle"
   echo "- rackham"
-  echo "- tetralith"
   exit 42
 fi
 
@@ -140,7 +147,7 @@ fi
 slurm_script_name="do_${language}_2d_integration.sh"
 echo "Slurm script name: ${slurm_script_name}"
 
-base_url="https://raw.githubusercontent.com/UPPMAX/R-matlab-julia-HPC/refs/heads/main/docs/advanced/thread_parallelism"
+base_url="https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC/-/raw/main/docs/advanced/thread_parallelism"
 slurm_script_url="${base_url}/${slurm_script_name}"
 echo "Slurm script URL: ${slurm_script_url}"
 

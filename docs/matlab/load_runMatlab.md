@@ -3,14 +3,17 @@
 !!! info "Objectives"
 
     - Load MATLAB
+    - Start MATLAB shell
     - Run MATLAB scripts
     - Start the MATLAB graphical user interface (GUI)
+
+!!! warning "Recording"
 
 !!! important
 
     Different recommended procedures for each HPC center:
     
-    - **UPPMAX, Arrhenius, and HPC2N**: use module system to load at command line
+    - **Arrhenius, UPPMAX, and HPC2N**: use module system to load at command line
     - **LUNARC**: recommended to use Desktop On-Demand menu, but interactive and non-interactive command lines available
     - **PDC**: recommended to load at command line; can run interactively on a compute node with X-forwarding and `salloc`. ThinLinc access is restricted to 30 users for the whole Dardel cluster.
 
@@ -31,16 +34,19 @@ Most HPC centres in Sweden use the same or a similar module system for their sof
 
 !!! caution  
 
-    - Note that the module systems at UPPMAX, HPC2N, LUNARC, and PDC are slightly different.
-    - While all modules at UPPMAX not directly related to bio-informatics are shown by `ml avail`, modules at the other centers may be hidden until one has loaded a prerequisite, like the compiler `GCC`.
-    - You need to use `module spider` to see all modules at HPC2N, LUNARC, and PDC, and `ml avail` for those available to load given your currently loaded prerequisites.
-    - On Arrhenius some modules are visible, like MATLAB, whereas others are hidden and you need to use `module spider`
-    - New sessions on Dardel (PDC) start with 13 modules loaded, but only one of them is sticky (i.e. will remain loaded after a `ml purge` command). We highly recommended that you save the preloaded modules as a collection so that you can quickly restore the default modules if you accidentally use `ml purge` instead of `ml unload <module>`.
+    - Note that the module systems at the different clusters are slightly different.
+    - On **Arrhenius** some modules are visible, like MATLAB, whereas others are hidden and you need to use `module spider`
+    - While all modules at **UPPMAX** not directly related to bio-informatics are shown by `ml avail`, modules at the other centers may be hidden until one has loaded a prerequisite, like the compiler `GCC`.
+    - You need to use `module spider` to see all modules at **HPC2N, LUNARC, and PDC**, and `ml avail` for those available to load given your currently loaded prerequisites.
+    - New sessions on Dardel (**PDC**) start with 13 modules loaded, but only one of them is sticky (i.e. will remain loaded after a `ml purge` command). We highly recommended that you save the preloaded modules as a collection so that you can quickly restore the default modules if you accidentally use `ml purge` instead of `ml unload <module>`.
 
+## Principles
 
-## Check for MATLAB versions
+!!! info "Demo on Arrhenius"
 
-### Type-Along
+    You may follow on your cluster, but there is time during exercises to go back if you got lost.
+
+### 1. Check for MATLAB versions
 
 Below we have examples for how to check for MATLAB versions on different clusters. Follow along at your cluster.
 
@@ -62,7 +68,7 @@ Below we have examples for how to check for MATLAB versions on different cluster
 
       Where:
        D:  Default Module
- ```
+    ```
 
 
 === "UPPMAX (Pelle)"
@@ -96,7 +102,7 @@ Below we have examples for how to check for MATLAB versions on different cluster
     module spider MATLAB
     ```
 
-    As of 26 Sep 2024, the above outputs the following on Kebnekaise:
+    As of 19 Oct 2026, the above outputs the following on Kebnekaise:
     
     ```bash
     ----------------------------------------------------------------------------
@@ -108,11 +114,10 @@ Below we have examples for how to check for MATLAB versions on different cluster
           with traditional programming languages such as C, C++, and Fortran.
 
          Versions:
-            MATLAB/2019b.Update2
-            MATLAB/2021a
-            MATLAB/2021b
-            MATLAB/2022b.Update3
-            MATLAB/2023a.Update4
+            MATLAB/2023a.Update4-build2
+            MATLAB/2024b
+            MATLAB/2025b-r2
+            MATLAB/2026a-r2
          Other possible modules matches:
             MATLAB-parallel-support
 
@@ -142,7 +147,7 @@ Below we have examples for how to check for MATLAB versions on different cluster
 
     Or, if on Desktop On-Demand, select `Applications` in the top left corner and hover over ``Applications - Matlab`` (see also GUI section below).
 
-    As of 27 Feb 2025, `ml spider matlab` on COSMOS outputs the following:
+    As of 19 Oct 2026, `ml spider matlab` on COSMOS outputs the following:
 
     ```bash
     ----------------------------------------------------------------------------
@@ -153,6 +158,7 @@ Below we have examples for how to check for MATLAB versions on different cluster
             matlab/2023a
             matlab/2023b
             matlab/2024b
+            matlab/2025b
 
     ----------------------------------------------------------------------------
     For detailed information about a specific "matlab" package (including how to
@@ -172,7 +178,7 @@ Below we have examples for how to check for MATLAB versions on different cluster
     ml spider matlab
     ```
     
-    As of 17 Mar 2025, the above command outputs the following on Dardel:
+    As of 19 Oct 2026, the above command outputs the following on Dardel:
     
     ```bash
     Versions:
@@ -183,6 +189,10 @@ Below we have examples for how to check for MATLAB versions on different cluster
       matlab/r2024a-ps
       matlab/r2024a
       matlab/r2024b
+      matlab/r2025a
+      matlab/r2025b
+      matlab/r2026a
+
     ```
 
     On Dardel, all MATLAB versions have a prerequisite that needs to be loaded (it will called something like PDC/xx.xx or PDCOLD/xx.xx). To view the prerequisites for a specific version of MATLAB, do
@@ -202,16 +212,30 @@ Below we have examples for how to check for MATLAB versions on different cluster
            https://www.mathworks.com
     ```
 
-## Load a MATLAB module
+### 2. Load a MATLAB module
 
 For reproducibility, we recommend ALWAYS loading a specific module instead of using the default version!
 
-For this course, we recommend using MATLAB R2023x at UPPMAX (R2023b), NSC (2023b), and HPC2N (2023b), or R2024b at LUNARC (2024b). At PDC, we recommend r2024b.
+For this course, we recommend these MATLAB versions 
+- Arrhenius 2025b
+- UPPMAX R2023b
+- HPC2N 2023b
+- LUNARC 2024b
+- PDC r2026a
 
-### Type-along
+Load a MATLAB module in the command line. First, go back and check which MATLAB modules were available.
 
-Try loading a MATLAB module at the command line. First, go back and check which MATLAB modules were available.
+=== "Arrhenius"
 
+     To load version 2025b, do:
+
+     ```bash
+     module load MATLAB/2025b
+     ```
+
+     Note: MATLAB is all uppercase.
+     For short, you can also use `ml` instead of `module load`
+     
 === "UPPMAX"
 
      **Bianca.** To load version 2023b, do:
@@ -265,31 +289,31 @@ Try loading a MATLAB module at the command line. First, go back and check which 
 
 === "PDC (Dardel)"
 
-     Go back and check which MATLAB modules were available, and what their prerequisites are. To load version 2024b, do:
+     Go back and check which MATLAB modules were available, and what their prerequisites are. To load version 2026a, do:
 
      ```bash
-     module load PDC/23.12
-     module load matlab/r2024b
+     module load PDC/26.0
+     module load matlab/r2026a
      ```
 
      Notes: the module name is all lowercase including the ``r`` before the year.
      For short, you can also use:
 
      ```bash
-     ml PDC/23.12 matlab/r2024b
+     ml PDC/26.0 matlab/r2026a
      ```
 
-## Start MATLAB at the Command Line
+### 3. Start MATLAB from the Command Line
 
 Most of the time, you will run either MATLAB live scripts (``.mlx``) or basic script or function files (``.m``).
-Live scripts can only be opened and worked on in the GUI, while basic function or script files can also be run from a batch script and/or at the command line.
 
-!!! note
+- Live scripts can only be opened and worked on in the GUI
+- Basic function or script files can also be run from a batch script and/or at the command line.
 
-    At the command line, function definition is typically not supported unless the function is short and anonymous.
-    User-defined functions must generally be written up and saved to separate `.m` files.
+The GUI is often the recommended interface where it is offered. 
 
-The GUI is often the recommended interface where it is offered. SLURM jobs can be set up through the ``Parallel Computing Toolbox``, which will be discussed later. The resources required to run the GUI and those required to run a job submitted to SLURM are separate, so do not worry if the maximum allocation time for a MATLAB GUI session is much less than the limit for a SLURM job.
+- SLURM jobs can be set up through the ``Parallel Computing Toolbox``, which will be discussed later. 
+- The resources required to run the GUI and those required to run a job submitted to SLURM are separate, so do not worry if the maximum allocation time for a MATLAB GUI session is much less than the limit for a SLURM job.
 
 !!! important "`-singleCompThread`"
 
@@ -297,7 +321,10 @@ The GUI is often the recommended interface where it is offered. SLURM jobs can b
     
     Setting `-singleCompThread` does **not** prevent MATLAB from sending parallelised and/or multi-threaded jobs to SLURM or the MATLAB Distributed Computing Server (MDCS).
 
-### Type-along
+#### 3a. MATLAB shell in the terminal
+
+![MATLAB GUI, Rackham](../img/Rackham-Matlab.png)
+
 
 Try starting MATLAB at the command line. We will use the same versions as in the previous section.
 
@@ -323,8 +350,6 @@ Try starting MATLAB at the command line. We will use the same versions as in the
 
 === "HPC2N (Kebnekaise)"
 
-     The GUI can be started in a ThinLinc session by going to "Application" &rarr; "HPC2N Applications" &rarr; "Applications" &rarr; "Matlab <version>" and clicking the desired version.
-
      To start MATLAB in the terminal, load matlab/2023b or your preferred version, and then type:
 
      ```bash
@@ -334,22 +359,11 @@ Try starting MATLAB at the command line. We will use the same versions as in the
      to start MATLAB in the terminal. The `-singleCompThread` is important to prevent MATLAB from hogging a whole node, and the `-nodisplay` flag prevents the GUI from launching.
 
 === "LUNARC (COSMOS)"
-
-     It is recommended that GUI be started in ThinLinc at the LUNARC HPC Desktop On-Demand.
-
-     To start MATLAB in the terminal, you must first choose the correct terminal. There are several in the Applications menu:
      
-     - three in `Applications - General`, which can safely launch either the MATLAB GUI or MATLAB command line on a compute node, 
-     - one in `Applications - Visualization`, which should be reserved for very graphics-heavy jobs, and 
-     - one in `Favorites`, which **MATLAB users should avoid** because it runs on a login node.
-     
-     Starting any of the ones under menu headings starting with `Applications -` will open a GfxLauncher popup that prompts you for your account and resource choices. Even users who have been awarded GPU time are encouraged to use the CPU-only terminal whenever possible, as they are abundant, less resource intensive, and allow longer wall times.
 
-     Once you've opened a terminal session and loaded your preferred version type:
-
-     ```bash
-     matlab -singleCompThread -nodisplay
-     ```
+    ```bash
+    matlab -singleCompThread -nodisplay
+    ```
 
 === "PDC (Dardel)"
 
@@ -360,7 +374,7 @@ Try starting MATLAB at the command line. We will use the same versions as in the
      If you, for example, wanted to start matlab/r2024a-ps in the terminal, the sequence would look as follows:
 
      ```bash
-     ml PDC/23.12  matlab/r2024a-ps
+     ml PDC/26.0  matlab/r2026a
      matlab -singleCompThread -nosplash -nodesktop -nodisplay
      ```
 
@@ -382,7 +396,7 @@ Try starting MATLAB at the command line. We will use the same versions as in the
      
          PDC users may also go through ThinLinc and open MATLAB from the On-Demand Applications menu, but this is not recommended. Only 30 users are allowed to interface with Dardel via ThinLinc at any one time, and queue times are very long.
 
-## Start the MATLAB GUI
+#### 3b. Start the MATLAB GUI
 
 Running the MATLAB GUI requires that users be logged into a ThinLinc session. Refer to [the login section](../common/login/README.md#step-1-log-in) for help.
 
@@ -390,29 +404,15 @@ Running the MATLAB GUI requires that users be logged into a ThinLinc session. Re
 
      Once logged into the remote desktop, the procedure for starting the MATLAB GUI is the same as what was shown above to start it at the command line, except that the ``-nodisplay`` flag is omitted (as are ``-nodesktop -nosplash`` if applicable). You should still include ``-singleCompThread``!
 
-     ![MATLAB GUI, Rackham](../img/Rackham-Matlab.png)
-
-     It is also possible to start the MATLAB GUI on the compute node. A MATLAB GUI session on a compute node can be run with the following commands (again, edit time, resources, project ID, and MATLAB version as needed):
-
-     ```bash
-     interactive  -n 4 -t 00:30:00 -A naiss2026-4-1022-cpu
-     module load MATLAB/2025b
-     matlab
-     ```
-
-     In the above example, ``-n 4`` means the job will run on 4 cores. Pelle nodes have 96 cores. Please refer to [this link](https://docs.uppmax.uu.se/cluster_guides/snowy/#using-the-batch-system) for allowed combinations of ``interactive`` parameters.
+     It is also possible to start the MATLAB GUI on the compute node. More about this in the [interactive session](interactive.md).
 
 === "HPC2N (Kebnekaise)"
   
     For HPC2N, once logged into the remote desktop, the procedure for starting the MATLAB GUI is the same as what was shown above to start it at the command line, except that the ``-nodisplay`` flag is omitted (as are ``-nodesktop -nosplash`` if applicable). You should still include ``-singleCompThread``!
   
-    It is possible to start the MATLAB GUI on a compute node on Kebnekaise (HPC2N). The procedure uses ``salloc`` and ``srun`` to achieve what other facilities often do with the ``interactive`` command (edit time, resources, project ID, and MATLAB version as needed):
-  
-    ```bash
-    salloc -N 1 -t 00:30:00 -A hpc2n20YY-XXX
-    module load MATLAB/2023b
-    srun matlab
-    ```
+    The GUI can be started in a ThinLinc session by going to "Application" &rarr; "HPC2N Applications" &rarr; "Applications" &rarr; "Matlab <version>" and clicking the desired version.
+
+    It is possible to start the MATLAB GUI on a compute node on Kebnekaise (HPC2N). More about this in the [interactive session](interactive.md).
 
     Finally, HPC2N also has MATLAB available through the Open OnDemand portal. We will cover this briefly [in a later lecture](https://uppmax.github.io/R-matlab-julia-HPC/common/on-demand/), and there is more specific documentation in the [HPC2N connection guides](https://docs.hpc2n.umu.se/tutorials/connections/#interactive__apps__-__matlab__proxy).
      
@@ -421,63 +421,46 @@ Running the MATLAB GUI requires that users be logged into a ThinLinc session. Re
 
      For UPPMAX users, once logged into the remote desktop, the procedure for starting the MATLAB GUI is the same as what was shown above to start it at the command line, except that the ``-nodisplay`` flag is omitted (as are ``-nodesktop -nosplash`` if applicable). You should still include ``-singleCompThread``!
 
-     ![MATLAB GUI, Rackham](../img/Rackham-Matlab.png)
-
-     It is also possible to start the MATLAB GUI on the compute node. A MATLAB GUI session on a compute node can be run with the following commands (again, edit time, resources, project ID, and MATLAB version as needed):
-
-     ```bash
-     interactive  -n 4 -t 00:30:00 -A uppmax2025-2-360
-     module load MATLAB/2023b-update4
-     matlab
-     ```
-
-     In the above example, ``-n 4`` means the job will run on 4 cores. Pelle nodes have 96 cores. Please refer to [this link](https://docs.uppmax.uu.se/cluster_guides/snowy/#using-the-batch-system) for allowed combinations of ``interactive`` parameters.
+     It is also possible to start the MATLAB GUI on the compute node. More about this in the [interactive session](interactive.md).
 
 === "LUNARC (COSMOS)"
 
-    The recommended way to open the MATLAB GUI on COSMOS is by using [Desktop On-Demand](https://uppmax.github.io/R-matlab-julia-HPC/common/on-demand/). We will go over this in the first session after lunch.
+     It is recommended that GUI be started in ThinLinc at the LUNARC HPC Desktop On-Demand. We will go over this in the first session after lunch.
 
-    There are 3 versions per MATLAB release in the Apps menu---regular, (CPU), and (HEP,CPU)---and your resource choices partly depend on which of those you select.
+    To start MATLAB in the terminal, you must first choose the correct terminal. There are several in the Applications menu:
+  
+    - three in `Applications - General`, which can safely launch either the MATLAB GUI or MATLAB command line on a compute node, 
+    - one in `Applications - Visualization`, which should be reserved for very graphics-heavy jobs, and 
+    - one in `Favorites`, which **MATLAB users should avoid** because it runs on a login node.
+     
+    Once you've opened a terminal session and loaded your preferred version type:
+ 
+     Starting any of the ones under menu headings starting with `Applications -` will open a GfxLauncher popup that prompts you for your account and resource choices. Even users who have been awarded GPU time are encouraged to use the CPU-only terminal whenever possible, as they are abundant, less resource intensive, and allow longer wall times.
 
-    ![MATLAB GUI, COSMOS](../../img/Cosmos-AppMenu-Matlab.png)
+    ![MATLAB GUI, COSMOS](../img/Cosmos-AppMenu-Matlab.png)
+
+    There are 3 versions per MATLAB release in the Apps menu---regular, (CPU), and (HEP,CPU)---and your resource choices partly depend on which of those you select
 
     The (HEP,CPU) nodes are private. The regular versions may run on either AMD/NVIDIA A40 48-core nodes or Intel/NVIDIA A40 32-core nodes, and the maximum allowed wall times for each are 24 and 48 hours, respectively. If you do not plan to do any intensive graphical work inside the GUI, you can choose the (CPU) version of your preferred release to access an AMD A100 48-core node, which also allows you to run for up to 7 days (168:00:00).
 
 === "PDC (Dardel)"
 
-    There are 2 ways to run MATLAB interactively on Dardel: via SSH with X-forwarding (recommended), or via Desktop On-Demand in a ThinLinc window. ThinLinc access to Dardel is limited to 30 users total, and even if you do get through, interactive jobs are likely to be stuck in queues for a long time.
+    There are 2 ways to run MATLAB interactively on Dardel: via SSH with X-forwarding (recommended), or via Desktop On-Demand in a ThinLinc window. ThinLinc access to Dardel is limited to 30 users total, and even if you do get through, interactive jobs are likely to be stuck in queues for a long time. More about this in [Desktop On-Demand](https://uppmax.github.io/R-matlab-julia-HPC/common/on-demand/)
 
     **SSH with X-forwarding.** When you first ssh into Dardel, you will need to have added the `-X` flag between `ssh` and your username. Once you are logged in, you need to book a compute node with `salloc`, and then SSH (again with the `-X` flag) into whichever node you are assigned to by `salloc`. The `salloc` step and its output will look something like this:
+    More about this in the [interactive session](interactive.md).
 
-    ```bash
-    salloc -N 1 -t 00:30:00 -A naiss2025-22-262 -p main
-    ```
+!!! warning "No recording"
 
-    if you request a full node, or
-    
-    ```bash
-    salloc -c 16 -t 00:30:00 -A naiss2025-22-262 -p shared
-    ```
-
-    if you request, for example, 16 cores on a shared node. Adjust the time, resources, and account number as needed. `salloc` will then print a handful of lines about the progress of allocating and queuing your job. The last line of output, something like `salloc: Nodes nid00xxxx are ready for job`, will contain the ID of the node you booked. Copy that, and then run the following lines (after the `:~>` prompt; adjust the node ID as needed):
-
-    ```bash
-    <user>@login1:~> ssh -X nid001756
-    <user>@nid001756:~> ml PDC/23.12
-    <user>@nid001756:~> ml matlab/r2024a-ps
-    <user>@nid001756:~> matlab
-    ```
-
-    The GUI will take a few minutes to load.
-
-    If you are lucky enough to get into Dardel via ThinLinc, the process looks very similar to LUNARC because Dardel uses the same Desktop On-Demand interface, except that the MATLAB versions in the app menu are under `PDC - Matlab` and are not separated by the types of nodes to run on.
-
+??? question "Questions"
 
 ### Exercises
 
 Try them yourself! Note that `$` indicates a bash prompt and `>>` indicates the MATLAB prompt; those characters should not be included at the front of your input.
 
 !!! example "**Challenge 1.** Load MATLAB in the terminal or GUI."
+
+    Follow the steps for your cluster above!
 
     Then do a few simple commands at the command line. For example,
     ```bash

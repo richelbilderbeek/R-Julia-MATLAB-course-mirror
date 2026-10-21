@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number later
-#SBATCH -A uppmax2025-2-360
+#SBATCH -A uppmax2025-3-393
 # Asking for 1 core
 #SBATCH -n 1
 # Asking for 30 min (change as you want)

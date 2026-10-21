@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A hpc2n2025-151
+#SBATCH -A hpc2ncourses2026-017
 #SBATCH -n 1
 #SBATCH --gpus=1
 #SBATCH -C l40s

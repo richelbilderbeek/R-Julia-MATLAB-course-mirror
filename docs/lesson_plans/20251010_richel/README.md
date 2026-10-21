@@ -36,7 +36,7 @@ jmol 1UN3.pdb
 To run on Pelle:
 
 ```bash
-wget https://github.com/UPPMAX/R-matlab-julia-HPC/raw/refs/heads/main/docs-mk/lesson_plans/20251010_richel/lumi_course/run_pelle.sh
+wget [now a broken URL]
 sbatch run_pelle.sh 
 ```
 

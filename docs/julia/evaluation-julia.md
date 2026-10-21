@@ -8,7 +8,7 @@ tags:
 
 This is the page for evaluating the current iteration of the course.
 
-The evaluation form for the Julia part can be found [here](https://forms.office.com/e/BU2YfesBn4).
+The evaluation form for the Julia part can be found [here](https://forms.cloud.microsoft/e/hR8v3ETJTV).
 It takes into account that one may need to leave early too.
 
 ???- hint "Where can I find the results of earlier evaluations?"
@@ -53,7 +53,7 @@ It takes into account that one may need to leave early too.
 
     - Question 3: Confidences
 
-        - I can use the module system to load a specific verison of Julia
+        - I can use the module system to load a specific version of Julia
         - I can run Julia
         - I can use the Julia interpreter
         - I can run a Julia script

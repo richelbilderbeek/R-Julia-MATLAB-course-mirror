@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A uppmax2025-2-360
+#SBATCH -A uppmax2025-3-393
 # Remember, there are 4 workers and 1 master!
 #SBATCH --ntasks=5
 #SBATCH --cpus-per-task=1

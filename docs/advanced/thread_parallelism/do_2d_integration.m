@@ -88,7 +88,7 @@ function cluster = extract_hpc_cluster(hostname)
     elseif ~isempty(regexp(hostname, '^login\d$', 'once'))
         cluster = "dardel";
     elseif ~isempty(regexp(hostname, '^n\d{1,6}$', 'once'))
-        cluster = "tetralith";
+        cluster = "arrhenius";
     elseif ~isempty(regexp(hostname, '^nid\d{1,6}$', 'once'))
         cluster = "dardel";
     elseif ~isempty(regexp(hostname, '^pelle\d*\.uppmax\.uu\.se$', 'once'))

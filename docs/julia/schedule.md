@@ -8,19 +8,19 @@ tags:
 
 Time |Topic                                                      |Teacher
 -----|-----------------------------------------------------------|------
-9:00 |[Log in](../common/login/README.md)                              |BC, PO
+9:00 |[Log in](../common/login/README.md)                        |BC, PO
 9.45 |Coffee break                                               |.
-10:00|Syllabus                                                   |BC
-10.10|[Introduction, Julia in general](./intro.md)                             | PO
-10.25|[Loading modules and running Julia codes](load_run.md)                    |BC
+10:00|[Syllabus](./intro.md)                                     |PO
+10.10|[Introduction, Julia in general](./intro.md)               | PO
+10.25|[Loading modules and running Julia codes](load_run.md)     |BC
 10.55|Break                                                      |.
-11.10|[Packages and environments](environments_packages.md)                                  |BC
+11.10|[Packages and environments](environments_packages.md)      |BC
 12:00|LUNCH                                                      |.
-13:00|[SLURM Batch scripts for Julia jobs](batch.md)                         |PO
+13:00|[SLURM Batch scripts for Julia jobs](batch.md)             |PO
 13.50|Break                                                      |.
-14:05|[IDEs and using compute nodes interactively](interactive.md)                 |BC
+14:05|[Julia from interactive session & IDEs](interactive.md)    |BC
 14.55|Break     |
-15:10|[Summary](summary.md)                                                    | ??
+15:10|[Summary](summary.md)                                      | ??
 15:20|[Evaluation](evaluation-julia.md)                                                 |.
 15:35|Q&A on-demand                                              |.
 16:00|END      

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A naiss2025-22-934
+#SBATCH -A naiss2026-4-1022
 # Remember, there are 4 workers and 1 master!
 #SBATCH -p shared
 #SBATCH -n 5

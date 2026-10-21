@@ -21,7 +21,7 @@
 
 !!! note "Compute allocations in this workshop" 
 
-    - Arrhenius: ``naiss2025-22-934``
+    - Arrhenius: ``naiss2026-4-1022``
     - Pelle/Rackham: ``uppmax2025-2-360``
     - Kebnekaise: ``hpc2n2025-151``
     - Cosmos: ``lu2025-2-94``
@@ -96,7 +96,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         #SBATCH --output=job.%J.out  # output file
 
         # Load any modules you need, here for Julia
-        ml julia/1.12.2
+        ml Julia/1.12.2
 
         julia script.jl              # run the serial script
         ```
@@ -219,7 +219,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         #SBATCH --output=job.%J.out  # output file
 
         # Load any modules you need, here for Julia
-        ml julia/1.12.2
+        ml Julia/1.12.2
 
         # Move to the directory where the ".toml" files
         # for the environment are located
@@ -366,7 +366,7 @@ This scripts accepts two integers as command line arguments.
         #SBATCH --error=job.%J.err   # error file
         #SBATCH --output=job.%J.out  # output file
 
-        ml julia/1.12.2
+        ml Julia/1.12.2
 
         julia serial-sum.jl Arg1 Arg2    # run the serial script
         ```

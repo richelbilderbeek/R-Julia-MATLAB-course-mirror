@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A naiss2025-22-934
+#SBATCH -A naiss2026-4-1022
 #SBATCH --ntasks-per-node=1
 #SBATCH -N 1
 # Ask for GPUs

@@ -57,7 +57,7 @@ Under construction
 !!! important
 
     - Allocate many cores or a full node!
-    - You do not have to explicitely run threads or other parallelism.
+    - You do not have to explicitly run threads or other parallelism.
     - Note that shared memory among the cores works within node only.
 
 !!! tip

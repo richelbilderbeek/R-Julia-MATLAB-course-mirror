@@ -99,7 +99,7 @@ R       |`%dopar%`
         - Distributing parts of arrays
         - "Lazy computing"
     - Effective storage
-        - Different file formats suits diffeent types of data
+        - Different file formats suits different types of data
         - HDF5/NetCDF lets you load parts of the file into memory
     - Allocating memory
         - Allocate more cores

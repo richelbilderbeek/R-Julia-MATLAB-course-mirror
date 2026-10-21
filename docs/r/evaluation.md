@@ -5,7 +5,7 @@ tags:
 
 # Evaluation
 
-The evaluation form for the R part can be found [here](https://forms.office.com/e/jDAQWiPbgs).
+The evaluation form for the R part can be found [here](https://forms.cloud.microsoft/e/0cVBvtyCS3).
 It takes into account that one may need to leave early too.
 
 This is the page for evaluating the current iteration of the course.
@@ -32,7 +32,7 @@ This is the page for evaluating the current iteration of the course.
 
 ## Evaluation questions
 
-- [Evaluation questions form](https://forms.office.com/e/jDAQWiPbgs)
+- [Evaluation questions form](https://forms.cloud.microsoft/e/0cVBvtyCS3)
 
 ???- hint "Why do you evaluate under lesson hours?"
 

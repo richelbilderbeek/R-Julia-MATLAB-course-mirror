@@ -1,12 +1,10 @@
 # Words cSpell shouldn't complain about
-Aarhenius
 Alvis
 ALVIS
 alvis
 analysed
 analysing
 Anders
-Arrhenuys
 Arvid
 autobuild
 Automatical
@@ -222,3 +220,4 @@ xarray
 XMING
 xpmem
 yourdir
+clusterlayout

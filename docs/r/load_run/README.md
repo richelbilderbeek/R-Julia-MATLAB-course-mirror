@@ -72,17 +72,6 @@ to start R.
      Kebnekaise | Local ThinLinc client  | [YouTube video](https://youtu.be/miAxHkSePIA)
      Pelle      | SSH                    | [YouTube video](https://youtu.be/F37ji6o7SY4)
 
-
-HPC cluster name |Main breakout room
------------------|------------------
-Arrhenius        |Room 1
-Bianca           |Room 2
-COSMOS           |Room 3
-Dardel           |Room 4
-Kebnekaise       |Room 5
-LUMI             |Room 6
-Pelle            |Room 7
-
 ## Exercise 1: start the R interpreter
 
 In your webbrowser, go to the user documentation of your HPC cluster.
@@ -174,7 +163,7 @@ Pelle      |`R/4.5.1-gfbf-2024a`
 
 To run an R script, we'll download one, after which we'll run it:
 
-- From the terminal, run `wget https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC/-/raw/main/exercises/r/hello.R`
+- From the terminal, run `wget https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC/r/raw/main/exercises/r/hello.R`
 
 - From the terminal, run `Rscript hello.R`
 

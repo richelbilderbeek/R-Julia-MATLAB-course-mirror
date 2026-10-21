@@ -188,47 +188,47 @@ To learn about other ways, see the page "More about R packages" under "Extra rea
 
     !!! note "Solution" 
 
-         ```bash
-         $ module load buildtool-easybuild/5.2.1-hpca3ef7d197  GCC/14.3.0 R/4.5.2
-         $ R
+        ```bash
+        $ module load buildtool-easybuild/5.2.1-hpca3ef7d197  GCC/14.3.0 R/4.5.2
+        $ R
 
-         R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
-         Copyright (C) 2025 The R Foundation for Statistical Computing
-         Platform: x86_64-pc-linux-gnu
+        R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+        Copyright (C) 2025 The R Foundation for Statistical Computing
+        Platform: x86_64-pc-linux-gnu
   
-         R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-           Natural language support but running in an English locale
-
-         R is a collaborative project with many contributors.
-         Type 'contributors()' for more information and
-         'citation()' on how to cite R or R packages in publications.
-
-         Type 'demo()' for some demos, 'help()' for on-line help, or
-         'help.start()' for an HTML browser interface to help.
-         Type 'q()' to quit R.
-
-         > library(pillar)
-         > library(caret)
-         Error in library(caret) : there is no package called ‘caret’
-         > 
-         ```
-
-         So "pillar" is installed, but not "caret". The latter can however be found in "R-bundle-CRAN/2025.11" (which has the prerequisite "MPICH/4.3.2"): 
-
-         ```bash
-         $ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11 
-         $ R
+        R is free software and comes with ABSOLUTELY NO WARRANTY.
+        You are welcome to redistribute it under certain conditions.
+        Type 'license()' or 'licence()' for distribution details.
  
-         ... <snip> ... 
+            Natural language support but running in an English locale
 
-         > library(caret)
-         Loading required package: ggplot2
-         Loading required package: lattice
-         > 
-         ```
+        R is a collaborative project with many contributors.
+        Type 'contributors()' for more information and
+        'citation()' on how to cite R or R packages in publications.
+
+        Type 'demo()' for some demos, 'help()' for on-line help, or
+        'help.start()' for an HTML browser interface to help.
+        Type 'q()' to quit R.
+
+        > library(pillar)
+        > library(caret)
+        Error in library(caret) : there is no package called ‘caret’
+        > 
+        ```
+
+        So "pillar" is installed, but not "caret". The latter can however be found in "R-bundle-CRAN/2025.11" (which has the prerequisite "MPICH/4.3.2"): 
+
+        ```bash
+        $ module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11 
+        $ R
+ 
+        ... <snip> ... 
+
+        > library(caret)
+        Loading required package: ggplot2
+        Loading required package: lattice
+        > 
+        ```
 
 === "UPPMAX (Pelle)"
 
@@ -366,7 +366,7 @@ Type 'license()' or 'licence()' for distribution details.
         
 ## Installing your own packages
 
-Sometimes you will need R packages that are not already installed. The solution to this is to install your own packages. These packages will usually come from CRAN [https://cran.r-project.org/](https://cran.r-project.org/) - the Comprehensive R Archive Network, or sometimes from other places, like GitHub or R-Forgei
+Sometimes you will need R packages that are not already installed. The solution to this is to install your own packages. These packages will usually come from CRAN [https://cran.r-project.org/](https://cran.r-project.org/) - the Comprehensive R Archive Network, or sometimes from other places, like GitHub or R-Forge
 
 Here we will look at installing R packages with automatic download and with manual download. It is also possible to install from inside Rstudio. 
 
@@ -444,7 +444,7 @@ $ mkdir -p $HOME/R-packages-4.5.2
     ```
 
 
-### Automatical download and install from CRAN
+### Automatic download and install from CRAN
 
 !!! note 
 
@@ -615,7 +615,7 @@ For other ways to install R packages, including from GitHub or manually, look at
         > library("BGLR")
         ```
 
-        "BGLR" outputs some text/advertisment when loaded. You can ignore this.
+        "BGLR" outputs some text/advertisement when loaded. You can ignore this.
 
 !!! important "Solution for 4.4.2 on Pelle (change <user>)" 
 
@@ -654,4 +654,4 @@ For other ways to install R packages, including from GitHub or manually, look at
         > library("BGLR")
         ``` 
 	    
-        "BGLR" outputs some text/advertisment when loaded. You can ignore this. 
+        "BGLR" outputs some text/advertisement when loaded. You can ignore this. 

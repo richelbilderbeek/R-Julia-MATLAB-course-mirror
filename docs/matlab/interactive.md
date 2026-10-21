@@ -3,7 +3,7 @@
 !!! info "Learning outcomes for today"
 
     - Be able to start interactive sessions with several cores
-    - Be able to run MATLAB and seae the available workers
+    - Be able to run MATLAB and see the available workers
 
 ??? note "Instructor note"
 
@@ -16,6 +16,8 @@
     - But this should *only* be done for shorter jobs or jobs that do not use a lot of resources, as the login nodes can otherwise become slow for all users.
     - If you want to work interactively with your code or data, you should start an interactive session.
     - If you rather will run a script which won't use any interactive user input while running, you can instead start a batch job, see next session.
+
+!!! warning "Recording"
 
 ## General
 
@@ -110,13 +112,43 @@ graph TD
 
         - We recommend ``shared``
         - Wait until you get the node
-        - ``ssh``  to the node given and then work there
+        - ``ssh``  to the node given and then work there by starting the MATLAB there
             - Example:
 
                 ```bash
-                $ ssh nid001057
+                <user>@login1:~> ssh nid001057
+                <user>@nid001756:~> ml PDC/26.0
+                <user>@nid001756:~> ml matlab/r2026a
+                <user>@nid001756:~> matlab &
                 ```
 
+        **With graphics**
+
+        When you first ssh into Dardel, you will need to have added the `-X` flag between `ssh` and your username. Once you are logged in, you need to book a compute node with `salloc`, and then SSH (again with the `-X` flag) into whichever node you are assigned to by `salloc`. The `salloc` step and its output will look something like this:
+
+        ```bash
+        salloc -N 1 -t 00:30:00 -A naiss2025-22-262 -p main
+        ```
+
+        if you request a full node, or
+    
+        ```bash
+        salloc -c 16 -t 00:30:00 -A naiss2025-22-262 -p shared
+        ```
+
+        If you request, for example, 16 cores on a shared node. Adjust the time, resources, and account number as needed. `salloc` will then print a handful of lines about the progress of allocating and queuing your job. The last line of output, something like `salloc: Nodes nid00xxxx are ready for job`, will contain the ID of the node you booked. Copy that, and then run the following lines (after the `:~>` prompt; adjust the node ID as needed):
+
+        ```bash
+        <user>@login1:~> ssh -X nid001756
+        <user>@nid001756:~> ml PDC/26.0
+        <user>@nid001756:~> ml matlab/r2026a
+        <user>@nid001756:~> matlab
+        ```
+
+        The GUI will take a few minutes to load.
+
+        If you are lucky enough to get into Dardel via ThinLinc, the process looks very similar to LUNARC because Dardel uses the same Desktop On-Demand interface, except that the MATLAB versions in the app menu are under `PDC - Matlab` and are not separated by the types of nodes to run on.
+    
     === "UPPMAX" 
 
         ```bash
@@ -164,6 +196,8 @@ logout
    - [Interactive allocation on UPPMAX](https://docs.uppmax.uu.se/cluster_guides/start_interactive_session/){:target="_blank"}
    - [Interactive allocation on HPC2N](https://docs.hpc2n.umu.se/documentation/batchsystem/job_submission/#interactive){:target="_blank"}
    - [Interactive allocation on LUNARC](https://lunarc-documentation.readthedocs.io/en/latest/manual/manual_interactive/#starting-an-interactive-session){:target="_blank"}
+
+!!! warning "No recording"
 
 ## Exercise
 
@@ -338,7 +372,7 @@ logout
         4
         ```
 
-        We are, because the *$SLURM* environment variable gives an output. Notice that we got 4, which is not the size of the physcial node but the allocation size.
+        We are, because the *$SLURM* environment variable gives an output. Notice that we got 4, which is not the size of the physical node but the allocation size.
 
 !!! important "Check from Matlab"
 

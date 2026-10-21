@@ -29,7 +29,8 @@
 
 ## Overview of an HPC cluster
 
-![Generic HPC cluster - thanks to Rebecca Pitts who made this image that I lightly modified](../img/clusterlayout-v2.png)
+<img src="../img/clusterlayout-v2.png">
+Generic HPC cluster - thanks to Rebecca Pitts who made this image that I lightly modified
 
 ### A CPU node
 
@@ -156,6 +157,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
    
         Short serial example for running on Dardel. Loading R/4.4.1 
 
+        ```bash 
         #!/bin/bash -l 
         #SBATCH -A naiss2025-22-934 
         #SBATCH --time=00:10:00 # Asking for 10 minutes
@@ -220,6 +222,7 @@ Common file extensions for batch scripts are ``.sh`` or ``.batch``, but they are
         R --no-save --quiet < hello.R
         ```
 
+        ```bash
         #!/bin/bash -l
         #SBATCH -A naiss2025-22-934
         #SBATCH --time=00:10:00 # Asking for 10 minutes

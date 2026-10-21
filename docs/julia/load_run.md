@@ -4,7 +4,7 @@
 
     At the Swedish HPC centers we call the applications available via the *module system* **modules**:
 
-    - [NSC](https://www.nsc.liu.se/software/modules/)
+    - [Arrhenius](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/software_development/module/)
     - [PDC](https://support.pdc.kth.se/doc/contact/contact_support/?sub=software/module/)
     - [UPPMAX](https://docs.uppmax.uu.se/cluster_guides/modules/)
     - [HPC2N](https://docs.hpc2n.umu.se/software/modules/)
@@ -57,7 +57,7 @@ The module activates paths to a specific version of the julia interpreter and it
 
 ### Principle
 
-- For some clusters
+- For some clusters (Arrhenius, UPPMAX,LUNARC)
 
 ``` { .console data-copy="module avail julia" }
 module avail julia
@@ -65,21 +65,18 @@ module avail julia
 
 ??? note "Example output"
 
-    From Tetralith:
+    From Arrhenius:
 
     ``` { .console data-copy="module avail julia" }
     $ module avail julia
-    ---------------------------------- /software/sse2/tetralith_el9/modules -----------------------------------
-       julia/recommendation          (D)    julia/1.6.1-nsc1-bdist    julia/1.9.4-bdist
-       julia/1.1.0-nsc1-gcc-2018a-eb        julia/1.7.2-nsc1-bdist    julia/1.10.2-bdist
-       julia/1.4.1                          julia/1.8.5-nsc1-bdist
+    ------------------------- CPU partition (epyc9005) modules -------------------------
+       Julia/recommendation (D)    Julia/1.10.11-bdist    Julia/1.12.2-bdist
 
+    --------------------------- GPU partition (h200) modules ---------------------------
+       GPU/Julia/recommendation (D)    GPU/Julia/1.10.11-bdist    GPU/Julia/1.12.2-bist
 
      Where:
       D:  Default Module
-
-    Use "module spider" to find all possible modules and extensions.
-    Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
     ```
 
 
@@ -114,6 +111,8 @@ module spider julia
             julia/1.9.3-cpeGNU-23.03
             julia/1.10.2-cpeGNU-23.03
             julia/1.10.2-cpeGNU-23.12
+            julia/1.11.4-cpeAMD-24.11
+            julia/1.12.1
          Other possible modules matches:
             Julia  libuv-julia
 
@@ -127,7 +126,7 @@ module spider julia
       Note that names that have a trailing (E) are extensions provided by other modules.
       For example:
 
-         $ module spider julia/1.10.2-cpeGNU-23.12
+         $ module spider julia/1.12.1
     -------------------------------------------------------------------------------------------------------
     ```
 
@@ -141,16 +140,21 @@ default one.
 - Use the output of existing module above!
 - Load the module!
 
-At some clusters:
+At some clusters (Example Arrhenius):
 
 ``` { .console }
-module load julia/1.8.5
+module load julia
+********************************************************************
+** Note: Julia 1.10.11 is recommended because it is a LTS release **
+********************************************************************
+*************** NO MODULE LOADED *****************
+***** Please also specify desired version ********
 ```
 
-or at cluster that includes "architecture" or "build name" in module name:
+So let's load that version
 
 ``` { .console }
-ml julia/1.10.2-bdist
+ml  Julia/1.10.11-bdist
 ```
 
 Some clusters will require other modules to be loaded (Kebnekaise and Dardel)
@@ -185,26 +189,29 @@ julia
 - In julia REPL
 
 !!! Example
-    This is what loading the Julia REPL looks like on Pelle:
+    This is what loading the Julia REPL looks like on Arrhenius:
 
     ``` { .console }
-    [username@pelle1 ~]$ ml
+    [username@arrhenius1 ~]$ ml
     No modules loaded
-    [username@pelle1 ~]$ ml Julia/1.10.9
-    [username@pelle1 ~]$ ml
+    [username@arrhenius1 ~]$ ml Julia/1.10.11
+    [username@arrhenius1 ~]$ ml
 
     Currently Loaded Modules:
-      1) Julia/1.10.9-LTS-linux-x86_64
+      1) hpc_sysenv/.1 (H,S)   2) hpc/.2.1.0 (H,S)   3) Julia/1.10.11-bdist
+
+      Where:
+       S:  Module is Sticky, requires --force to unload or purge
+       H:             Hidden Module
 
      
-
-    [username@pelle1 ~]$ julia
-               _
+    [username@arrhenius1 ~]$ julia
+                   _
        _       _ _(_)_     |  Documentation: https://docs.julialang.org
       (_)     | (_) (_)    |
        _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
       | | | | | | |/ _` |  |
-      | | |_| | | | (_| |  |  Version 1.10.9 (2025-03-10)
+      | | |_| | | | (_| |  |  Version 1.10.11 (2026-03-09)
      _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
     |__/                   |
 
@@ -315,10 +322,10 @@ where the script is a text file could contain these lines:
 
     ??? note "Solutions"
 
+        - [Arrhenius](https://hpc.pages.naiss.se/user-documentation/support-docs/applications/julia/general/)
         - [UPPMAX](http://docs.uppmax.uu.se/software/julia/)
         - [HPC2N](https://www.hpc2n.umu.se/resources/software/julia)
         - [LUNARC](The user demand on Julia has been low, so there is currently no site-specific documentation.)
-        - [NSC](https://www.nsc.liu.se/software/installed/tetralith/julia/)
         - [PDC](https://support.pdc.kth.se/doc/applications/)
 
 !!! example "Challenge 1b. Find out which versions are on your cluster from command line"
@@ -326,6 +333,15 @@ where the script is a text file could contain these lines:
     - Use the ``spider`` or ``avail`` module commands
 
     ??? note "Solutions"
+
+        === "Arrhenius"
+
+            Check all available Julia versions with:
+
+            ```console
+
+                $ module avail julia
+            ```
 
         === "UPPMAX"
 
@@ -386,22 +402,6 @@ where the script is a text file could contain these lines:
                $ module spider Julia/1.8.5-linux-x86_64
             ```
 
-        === "Tetralith"
-
-            Check all available version Julia versions with:
-
-            ```console
-
-               $ module avail Julia
-            ```
-
-            Example for Julia 1.8.5
-
-            ```console
-
-               $ module spider julia/1.8.5-nsc1-bdist
-            ```
-
         === "Dardel"
 
             Check all available version Julia versions with:
@@ -424,15 +424,28 @@ where the script is a text file could contain these lines:
 
                $ module spider Julia/1.8.5-linux-x86_64
             ```
-               
-    ??? note "Output at UPPMAX as of Oct 2025"
+    ??? note "Output at Arrhenius as of Oct 2026"
 
-        Rackham/(Bianca)
+        ``` { .console data-copy="module avail julia" }
+        $ module avail julia
+        ------------------------- CPU partition (epyc9005) modules -------------------------
+           Julia/recommendation (D)    Julia/1.10.11-bdist    Julia/1.12.2-bdist
+    
+        --------------------------- GPU partition (h200) modules ---------------------------
+           GPU/Julia/recommendation (D)    GPU/Julia/1.10.11-bdist    GPU/Julia/1.12.2-bist
+    
+         Where:
+          D:  Default Module
+        ```
+           
+    ??? note "Output at UPPMAX as of Oct 2026"
+
+        Bianca
 
         ``` console
 
           $ module avail julia
-          ----------------------------- /sw/mf/rackham/compilers -----------------------------
+          ----------------------------- /sw/mf/bianca/compilers -----------------------------
              julia/1.0.5_LTS    julia/1.6.1        julia/1.7.2    julia/1.9.3
              julia/1.1.1        julia/1.6.3        julia/1.8.5    julia/1.10.10_LTS
              julia/1.4.2        julia/1.6.7_LTS    julia/1.9.1    julia/1.11.6      (D)
@@ -450,8 +463,8 @@ where the script is a text file could contain these lines:
 
         $ ml av Julia
 
-        ---------------------------------------------------- /sw/arch/eb/modules/all --------------------
-           Julia/1.10.9-LTS-linux-x86_64    Julia/1.11.3-linux-x86_64 (D)
+        --------------------------------------------- /sw/arch/eb/modules/all ----------------------------------------------
+           Julia/1.10.9-LTS-linux-x86_64    Julia/1.11.3-linux-x86_64    Julia/1.12.6 (D)
 
           Where:
            D:  Default Module
@@ -465,7 +478,7 @@ where the script is a text file could contain these lines:
         Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
         ```
 
-    ??? note "Output at HPC2N as of Oct 2025"
+    ??? note "Output at HPC2N as of Oct 2026"
 
         ```console
 
@@ -478,10 +491,10 @@ where the script is a text file could contain these lines:
                computing
 
              Versions:
-                Julia/1.5.3-linux-x86_64
-                Julia/1.7.1-linux-x86_64
                 Julia/1.8.5-linux-x86_64
                 Julia/1.9.3-linux-x86_64
+                Julia/1.12.1-linux-x86_64
+                Julia/1.12.6
            ------------------------------------------------------------------------------------------------
              For detailed information about a specific "Julia" package (including how to load the modules) use the module's full name.
              Note that names that have a trailing (E) are extensions provided by other modules.
@@ -491,7 +504,7 @@ where the script is a text file could contain these lines:
            ------------------------------------------------------------------------------------------------
         ```
 
-    ??? note "Output at LUNARC as of Oct 2025"
+    ??? note "Output at LUNARC as of Oct 2026"
 
         ```console
 
@@ -508,21 +521,10 @@ where the script is a text file could contain these lines:
                    Julia/1.9.2-linux-x86_64
                    Julia/1.9.3-linux-x86_64
                    Julia/1.10.4-linux-x86_64
+                   Julia/1.12.2
         ```
 
-    ??? note "Output at NSC as of Mar 2025"
-
-        ```console
-
-           $ module avail julia
-
-           ---------------------------------- /software/sse2/tetralith_el9/modules -----------------------------------
-              julia/recommendation          (D)    julia/1.6.1-nsc1-bdist    julia/1.9.4-bdist
-              julia/1.1.0-nsc1-gcc-2018a-eb        julia/1.7.2-nsc1-bdist    julia/1.10.2-bdist
-              julia/1.4.1                          julia/1.8.5-nsc1-bdist
-        ```
-
-    ??? note "Output at PDC as of Oct 2025"
+    ??? note "Output at PDC as of Oct 2026"
 
         ```console
 
@@ -547,6 +549,7 @@ where the script is a text file could contain these lines:
                    julia/1.10.2-cpeGNU-23.03
                    julia/1.10.2-cpeGNU-23.12
                    julia/1.11.4-cpeAMD-24.11
+                   julia/1.12.1
                 Other possible modules matches:
                    Julia  libuv-julia
 
@@ -586,17 +589,19 @@ where the script is a text file could contain these lines:
 
 !!! example "Challenge 3.  Load and start ``julia`` the right way from the command line"
 
+    Choose the latest version
+
     ??? note "Solution"
 
         === "UPPMAX"
 
-            Rackham/Bianca
+            Bianca
             
             Go back and check which Julia modules were available. To load version 1.8.5, do:
 
             ```console
 
-              $ module load julia/1.8.5
+              $ module load julia/1.11.6
             ```
  
             Note: Lowercase ``j``.
@@ -605,7 +610,7 @@ where the script is a text file could contain these lines:
 
             ```console
 
-               $ ml julia/1.8.5
+               $ ml julia/1.11.6
             ```
 
             Pelle
@@ -614,7 +619,7 @@ where the script is a text file could contain these lines:
 
             ```console
 
-              $ module load Julia/1.10.9-LTS-linux-x86_64
+              $ module load Julia/1.12.6
             ```
             Note: Uppercase ``j``.
 
@@ -622,14 +627,14 @@ where the script is a text file could contain these lines:
 
             ```console
 
-               $ ml Julia/1.10.9-LTS-linux-x86_64
+               $ ml Julia/1.12.6
             ```
 
         === "HPC2N"
 
             ```console
 
-               $ module load Julia/1.8.5-linux-x86_64
+               $ module load Julia/1.12.6
 
             Note: Uppercase ``J``.
 
@@ -637,14 +642,14 @@ where the script is a text file could contain these lines:
 
             ```console
 
-               $ ml Julia/1.8.5-linux-x86_64
+               $ ml Julia/1.12.6
             ```
 
         === "LUNARC"
 
             ```console
 
-               $ module load Julia/1.8.5-linux-x86_64
+               $ module load Julia/1.12.2
             ```
 
             Note: Uppercase ``J``.
@@ -653,29 +658,14 @@ where the script is a text file could contain these lines:
 
             ```console
 
-               $ ml Julia/1.8.5-linux-x86_64
-            ```
-
-        === "NSC"
-
-            ```console
-
-               $ module load julia/1.10.2-bdist
-
-            Note: lowercase ``j``.
-
-            For short, you can also use:
-
-            ```console
-
-               $ ml julia/1.10.2-bdist
+               $ ml Julia/1.12.2
             ```
 
         === "PDC"
 
             ```console
 
-               $ module load PDC/23.12 julia/1.10.2-cpeGNU-23.12
+               $ module load julia/1.12.1
             ```
 
             Note: lowercase ``j``.
@@ -684,12 +674,12 @@ where the script is a text file could contain these lines:
 
             ```console
 
-               $ ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+               $ ml julia/1.12.1
             ```
             
 !!! example "Challenge 4. Getting familiar with Julia REPL"
 
-    - It is important that you know how to navigate on the Julia command line. Here is where you work live with data and test aout things and you may install packages.
+    - It is important that you know how to navigate on the Julia command line. Here is where you work live with data and test about things and you may install packages.
     - This exercise will help you to become more familiar with the REPL. Do the following steps:
 
        * Start a Julia session. In the ``Julian`` mode, compute the sum the numbers
@@ -712,9 +702,8 @@ where the script is a text file could contain these lines:
             help?> println
         ```
         
-!!! example "Challenge 5. Load another module and run a script"
+!!! example "Challenge 5.Run a script with the same version"
 
-    - Load the latest version
     - Run the following serial script (``serial-sum.jl``) which accepts two integer arguments as input:
 
     ```julia
@@ -727,61 +716,41 @@ where the script is a text file could contain these lines:
 
     - Enter two numbers, like 2 & 3.
     
-    ??? note "Solution for HPC2N"
+    ??? note "Solution for Arrhenius"
 
         ```console
 
-            $ ml purge  > /dev/null 2>&1       # recommended purge
-            $ ml Julia/1.8.5-linux-x86_64      # Julia module
+            $ julia serial-sum.jl Arg1 Arg2    # run the serial script
+        ```
+    ??? note "Solution for HPC2N"
 
+        ```console
             $ julia serial-sum.jl Arg1 Arg2    # run the serial script
         ```
 
     ??? note "Solution for UPPMAX"
 
-        Rackham/Bianca
+        Bianca
 
         ```console
-
-            $ ml julia/1.8.5                   # Julia module
-
             julia serial-sum.jl Arg1 Arg2      # run the serial script
         ```
 
         Pelle
 
         ```console
-
-            $ ml Julia/1.10.9-LTS-linux-x86_64  # Julia module
-
             julia serial-sum.jl Arg1 Arg2       # run the serial script
         ```
 
     ??? note "Solution for LUNARC"
 
         ```console
-
-            $ ml Julia/1.8.5-linux-x86_64           # Julia module
-
             julia serial-sum.jl Arg1 Arg2      # run the serial script
         ```
-        
-    ??? note "Solution for NSC"
-
-        ```console
-
-            $ ml julia/1.10.2-bdist           # Julia module
-
-            julia serial-sum.jl Arg1 Arg2      # run the serial script
-        ```
-        
+                
     ??? note "Solution for PDC"
 
-        ```console
-
-            $ ml PDC/23.12 julia/1.10.2-cpeGNU-23.12           # Julia module
-
-            julia serial-sum.jl Arg1 Arg2      # run the serial script
+             julia serial-sum.jl Arg1 Arg2      # run the serial script
         ```
 
 !!! example "Challenge 6. Check your understanding"

@@ -210,7 +210,7 @@ version 4.1.1:
 $ mkdir -p $HOME/R-packages-4.1.1
 ``` 
 
-### Automatical download and install from CRAN
+### Automatic download and install from CRAN
 
 !!! note
 
@@ -256,7 +256,7 @@ There are other ways to install R packages, including from GitHub.
 
 ### Automatic download and install from GitHub
 
-If you want to install a package that is not on CRAN, but which do have a GitHub page, then there is an automatic way of installing, but you need to handle prerequsites yourself by installing those first. It can also be that the package is not in as finished a state as those on CRAN, so be careful. 
+If you want to install a package that is not on CRAN, but which do have a GitHub page, then there is an automatic way of installing, but you need to handle prerequisites yourself by installing those first. It can also be that the package is not in as finished a state as those on CRAN, so be careful. 
 
 To install packages from GitHub directly, from inside R, you first need to install the devtools package. Note that you only need to install this **once**.
 

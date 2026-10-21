@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A naiss2025-22-360
+#SBATCH -A naiss2025-3-393
 #SBATCH -p gpu
 #SBATCH --gpus:l40s:1
 # Asking for 30 min (change as you want)

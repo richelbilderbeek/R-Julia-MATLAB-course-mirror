@@ -15,6 +15,7 @@
 
 hpc_cluster="unknown"
 
+[[ "${HOSTNAME}" =~ ^n[0-9]{1,6}$ ]] && hpc_cluster="arrhenius"
 [[ "${HOSTNAME}" =~ bianca.uppmax.uu.se$ ]] && hpc_cluster="bianca"
 [[ "${HOSTNAME}" =~ ^sens[0-9]+-b[0-9]+$ ]] && hpc_cluster="bianca"
 [[ "${HOSTNAME}" =~ ^cn[0-9]{1,6}$ ]] && hpc_cluster="cosmos"
@@ -22,13 +23,13 @@ hpc_cluster="unknown"
 [[ "${HOSTNAME}" =~ ^b-cn[0-9]{1,6}$ ]] && hpc_cluster="kebnekaise"
 [[ "${HOSTNAME}" =~ ^p[0-9]{1,6}$ ]] && hpc_cluster="pelle"
 [[ "${HOSTNAME}" =~ ^r[0-9]{1,6}$ ]] && hpc_cluster="rackham"
-[[ "${HOSTNAME}" =~ ^n[0-9]{1,6}$ ]] && hpc_cluster="tetralith"
 
 echo "HPC cluster: ${hpc_cluster}"
 
 function is_valid_hpc_cluster() 
 { 
   if [ "$1" == "alvis" ]; then return 0; fi
+  if [ "$1" == "arrhenius" ]; then return 0; fi
   if [ "$1" == "bianca" ]; then return 0; fi
   if [ "$1" == "cosmos" ]; then return 0; fi
   if [ "$1" == "dardel" ]; then return 0; fi
@@ -36,12 +37,12 @@ function is_valid_hpc_cluster()
   if [ "$1" == "lumi" ]; then return 0; fi
   if [ "$1" == "pelle" ]; then return 0; fi
   if [ "$1" == "rackham" ]; then return 0; fi
-  if [ "$1" == "tetralith" ]; then return 0; fi
   return 1;
 }
 
 # Testing
 if ! is_valid_hpc_cluster "alvis" ; then echo "Internal error: 'alvis' is a valid hpc_cluster"; exit 41; fi
+if ! is_valid_hpc_cluster "arrhenius" ; then echo "Internal error: 'arrhenius' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "bianca" ; then echo "Internal error: 'bianca' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "cosmos" ; then echo "Internal error: 'cosmos' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "dardel" ; then echo "Internal error: 'dardel' is a valid hpc_cluster"; exit 41; fi
@@ -49,7 +50,6 @@ if ! is_valid_hpc_cluster "kebnekaise" ; then echo "Internal error: 'kebnekaise'
 if ! is_valid_hpc_cluster "lumi" ; then echo "Internal error: 'lumi' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "pelle" ; then echo "Internal error: 'pelle' is a valid hpc_cluster"; exit 41; fi
 if ! is_valid_hpc_cluster "rackham" ; then echo "Internal error: 'rackham' is a valid hpc_cluster"; exit 41; fi
-if ! is_valid_hpc_cluster "tetralith" ; then echo "Internal error: 'tetralith' is a valid hpc_cluster"; exit 41; fi
 
 # Using
 if ! is_valid_hpc_cluster "${hpc_cluster}"
@@ -57,6 +57,7 @@ then
   echo "ERROR: '${hpc_cluster}' with hostname '${HOSTNAME}' is not valid hpc_cluster."
   echo "Supported hpc_clusters: "
   echo "- alvis"
+  echo "- arrhenius"
   echo "- bianca"
   echo "- cosmos"
   echo "- dardel"
@@ -64,13 +65,17 @@ then
   echo "- lumi"
   echo "- pelle"
   echo "- rackham"
-  echo "- tetralith"
   exit 42
 fi
 
 if [ ${hpc_cluster} == "alvis" ]
 then
   echo "No idea which modules to load"
+fi
+
+if [ ${hpc_cluster} == "arrhenius" ]
+then
+  module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11 
 fi
 
 if [ ${hpc_cluster} == "bianca" ]
@@ -108,12 +113,6 @@ fi
 if [ ${hpc_cluster} == "rackham" ]
 then
   module load R_packages/4.1.1 >/dev/null 2>&1
-fi
-
-if [ ${hpc_cluster} == "tetralith" ]
-then
-
-  module load R/4.4.0-hpc1-gcc-11.3.0-bare >/dev/null 2>&1
 fi
 
 echo "Slurm job account used: ${SLURM_JOB_ACCOUNT}"

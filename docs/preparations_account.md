@@ -9,7 +9,7 @@
     user account in a cluster and are able to log in. **This material**
     - Prerequisite 3/3: You have a good Zoom setup.
     - Also, be a bit prepared about Linux environment and some basics
-    of the languages we will cover. See the Prerequistes page](prereqs.md)
+    of the languages we will cover. See the Prerequisites page](prereqs.md)
 
 ## Course project
 

@@ -22,18 +22,20 @@ In the following sections we will extend the last two options.
 
     **Compute allocations in this workshop**
     
-    - Rackham: ``uppmax2025-2-360``
-    - Kebnekaise: ``hpc2n2025-062``
-    - Cosmos: ``lu2025-7-37``
-    - Tetralith: ``naiss-2025-22-262``
-    - Dardel: ``naiss-2025-22-262``
+    - Arrhenius: ``naiss2026-4-1022``
+
+    - Rackham: ``uppmax202t-u-xyz``
+    - Kebnekaise: ``hpc2n202x-xyz``
+    - Cosmos: ``lu202t-u-xyz``
+    - Dardel: ``naiss-202x-tw-xyz``
     
     **Storage space for this workshop**
-    
+
+    - Arrhenius: ``/nobackup/proj/disk/fall-courses-naiss``
+
     - Rackham: ``/proj/r-py-jl-m-rackham``
     - Kebnekaise: ``/proj/nobackup/r-py-jl-m``
     - Cosmos: your home directory should have plenty of space
-    - Tetralith: ``/proj/r-matlab-julia-naiss/users/``
     - Dardel: ``/cfs/klemming/projects/snic/r-matlab-julia-naiss``
 
 !!! warning
@@ -114,7 +116,7 @@ If you are on Desktop On Demand on LUNARC, these settings do not override the pa
 Extensive jobs must be run through SLURM. There are different manners to run MATLAB jobs with SLURM, for instance using:
 
 - using the MATLAB GUI
-    - ThinLinc (LUNARC, UPPMAX, HPC2N)
+    - ThinLinc ([Arrhenius](https://user.naiss.se/applications/matlab/arrhenius/){:target="_blank"}, LUNARC, UPPMAX, HPC2N)
         - interactive (``salloc``/``interactive``) sessions
     - Desktop On Demand (LUNARC)
     - [Open onDemand](https://portal.hpc2n.umu.se/public/landing_page.html){:target="_blank"} (HPC2N). 

@@ -52,7 +52,7 @@ Before the course, you must have done these three things:
 RJCB: I think this is misleading:
 learners perfectly get away with this,
 as we teachers tell all they need to know.
-I think these study prerequirements do more damage than good.
+I think these study prerequisites do more damage than good.
 
 These are the things you need to follow the course:
 

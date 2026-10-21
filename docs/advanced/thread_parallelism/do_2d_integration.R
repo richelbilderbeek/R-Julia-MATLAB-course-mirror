@@ -52,7 +52,7 @@ extract_hpc_cluster <- function(hostname = Sys.getenv("HOSTNAME")) {
     return("cosmos")
   }
   if (stringr::str_detect(hostname, "^login[:digit:]$")) return("dardel")
-  if (stringr::str_detect(hostname, "^n[:digit:]{1,6}$")) return("tetralith")
+  if (stringr::str_detect(hostname, "^n[:digit:]{1,6}$")) return("arrhenius")
   if (stringr::str_detect(hostname, "^nid[:digit:]{1,6}$")) return("dardel")
   if (stringr::str_detect(hostname, "^pelle[:digit:].uppmax.uu.se$")) {
     return("pelle")
@@ -68,6 +68,10 @@ extract_hpc_cluster <- function(hostname = Sys.getenv("HOSTNAME")) {
 
 testthat::expect_equal("unknown", extract_hpc_cluster(""))
 testthat::expect_equal("some.hostname", extract_hpc_cluster("some.hostname"))
+testthat::expect_equal("arrhenius", extract_hpc_cluster("n1301"))
+testthat::expect_equal("arrhenius", extract_hpc_cluster("n130"))
+testthat::expect_equal("arrhenius", extract_hpc_cluster("n13"))
+testthat::expect_equal("arrhenius", extract_hpc_cluster("n1"))
 testthat::expect_equal("cosmos", extract_hpc_cluster("cosmos2.int.lunarc"))
 testthat::expect_equal("cosmos", extract_hpc_cluster("cn1"))
 testthat::expect_equal("cosmos", extract_hpc_cluster("cn12"))
@@ -83,10 +87,6 @@ testthat::expect_equal("pelle", extract_hpc_cluster("p1"))
 testthat::expect_equal("pelle", extract_hpc_cluster("p12"))
 testthat::expect_equal("pelle", extract_hpc_cluster("p123"))
 testthat::expect_equal("pelle", extract_hpc_cluster("pelle4.uppmax.uu.se"))
-testthat::expect_equal("tetralith", extract_hpc_cluster("n1301"))
-testthat::expect_equal("tetralith", extract_hpc_cluster("n130"))
-testthat::expect_equal("tetralith", extract_hpc_cluster("n13"))
-testthat::expect_equal("tetralith", extract_hpc_cluster("n1"))
 
 # grid size
 grid_size <- 16384

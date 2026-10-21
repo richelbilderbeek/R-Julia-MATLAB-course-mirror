@@ -80,7 +80,7 @@ How to open RStudio through OpenOnDemand depends on whether it is through ThinLi
 - Click on RStudio server on
 ![Portal when logged in](../img/portal-logged-in.png)
 - You will get a launcher page like this: 
-![Launching RStudio through OpenOnDemand](rstudio-kebnekaise-portal.png)
+![Launching RStudio through OpenOnDemand](../img/rstudio-kebnekaise-portal.png)
 
 !!! note 
 

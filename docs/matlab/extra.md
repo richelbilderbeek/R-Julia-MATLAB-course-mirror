@@ -1,15 +1,5 @@
 # Matlab - extra reading and links
 
-## Documentation
-
-- Documentation at the HPC centres UPPMAX, HPC2N, LUNARC, NSC, and PDC
-   - [UPPMAX](http://docs.uppmax.uu.se/software/matlab/)
-   - HPC2N: [Matlab](https://www.hpc2n.umu.se/resources/software/matlab) and [Parallel Matlab](https://www.hpc2n.umu.se/documentation/guides/parallel-matlab)
-   - [LUNARC](https://lunarc-documentation.readthedocs.io/en/latest/guides/applications/MATLAB/)
-   - NSC: [general instructions](https://www.nsc.liu.se/software/docs/matlab/) and [installations on Tetralith](https://www.nsc.liu.se/software/catalogue/tetralith/modules/matlab.html) specifically
-   - [PDC](https://support.pdc.kth.se/doc/applications/?sub=matlab/)
-- [Official MATLAB documentation](https://se.mathworks.com/help/matlab/index.html?s_tid=hc_panel)
-
 ## Courses - improving your programming skills
 
 If you have a Mathworks account that is less than 2 years old, Mathworks offers free [MATLAB self-paced online training courses](https://matlabacademy.mathworks.com/?page=1&fq=all-matlab&sort=featured&s_tid=ln_acad_learn_oc). Students at any academic institution with a campus-wide license can use their university email addresses to create a free account to access these resources.
@@ -50,11 +40,6 @@ To learn more about the MATLAB Parallel Computing Toolbox, check out these resou
 - [Parallel Computing Webinars](http://www.mathworks.com/products/parallel-computing/webinars.html)
 
 
-## Interaction with other tools
-
-Coming?
-
-
 ## Add-ons
 
 !!! admonition "Some toolboxes"
@@ -80,5 +65,11 @@ Coming?
         - Stateflow
         - SimEvents
         - Simscape
+    - [BioInfo](https://se.mathworks.com/products/bioinfo.html)
 
 ![Apps](./img/apps.PNG)
+
+
+## Interaction with other tools
+
+Coming?

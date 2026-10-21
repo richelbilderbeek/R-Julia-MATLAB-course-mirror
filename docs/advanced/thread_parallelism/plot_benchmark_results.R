@@ -1,6 +1,7 @@
 #!/bin/env Rscript
 
 csv_files <- list.files(pattern = "csv")
+testthat::expect_true(length(csv_files) != 0)
 
 list_of_tables <- list()
 
@@ -9,6 +10,11 @@ for (i in seq_along(csv_files)) {
 }
 
 t <- dplyr::bind_rows(list_of_tables)
+
+unique(t$hpc_cluster)
+t$hpc_cluster[t$hpc_cluster == "sens2025560-b9"] <- "bianca"
+
+testthat::expect_true("bianca" %in% t$hpc_cluster)
 t$single_core_secs <- t$core_secs / t$n_workers
 
 best_times <- t |>
@@ -52,8 +58,8 @@ ggplot2::ggplot(
   ggplot2::labs(
     title = "Threaded parallelism",
     caption = paste0(
-      "Solid diagonal line: maximumally predicted efficiency. ",
-      "Dashed horizonal line: minimally predicted efficiency ",
+      "Solid diagonal line: maximumally predicted efficiency. \n",
+      "Dashed horizonal line: minimally predicted efficiency. \n",
       "Number of runs: ", nrow(t)
     )
   )
@@ -78,8 +84,8 @@ ggplot2::ggplot(
   ggplot2::labs(
     title = "Threaded parallelism",
     caption = paste0(
-      "Solid diagonal line: maximumally predicted speedup. ",
-      "Dashed horizonal line: minimally predicted speedup. ",
+      "Solid diagonal line: maximumally predicted speedup. \n",
+      "Dashed horizonal line: minimally predicted speedup. \n",
       "Number of runs: ", nrow(t)
     )
   )

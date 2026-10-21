@@ -40,31 +40,19 @@ library(my_package)
 You can load the pre-installed R packages
 
 ```bash
-module load R_packages/4.1.1
+module load buildtool-easybuild/5.2.1-hpca3ef7d197 GCC/14.3.0 R/4.5.2 MPICH/4.3.2 R-bundle-CRAN/2025.11
 ```
 
-You can install an R package from CRAN
+You can install an R package from a CRAN mirror:
 
 ```r
-install.packages("my_package", repos = "my_repo")
+install.packages("my_package", repos = "http://ftp.acc.umu.se/mirror/CRAN/")
 ```
 
-You can install an R package from GitHub
-
-```r
-devtools::install_github("developer_name/package_name")
-```
-
-You can manually download and install an R package
+You can change the folder where R installs its packages:
 
 ```r
 echo R_LIBS_USER="$HOME/R-packages-%V" > ~/.Renviron
-```
-
-- UPPMAX-only: I can manually download and install an R package on Bianca
-
-```bash
-rsync -Pa R ~/
 ```
 
 You can submit a job to the scheduler to run an R script with regular code
@@ -95,25 +83,11 @@ R -q --slave -f my_parallel_script.R
 You can submit a job to the scheduler to run an R script that uses a GPU
 
 ```bash
-#SBATCH --gres=gpu:x
-#SBATCH -C v100
-#SBATCH -p gpua100
-#SBATCH --gres=gpu:1
-```
-
-You can find and load the R machine learning modules
-
-```bash
-module load R/4.1.1 R_packages/4.1.1
-module load GCC/11.2.0 OpenMPI/4.1.1 R/4.1.2 R-bundle-Bioconductor/3.14-R-4.1.2
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1 R-bundle-Bioconductor/3.15-R-4.2.1
-module load GCC/11.3.0 OpenMPI/4.1.4 R/4.2.1 CUDA/12.1.1
-```
-
-You can submit a job to the scheduler to run an R script that uses machine learning
-
-```bash
-sbatch my_ml_script.sh
+#SBATCH -n 8
+#SBATCH -c 72
+#SBATCH --gpus 8
+#SBATCH -A naiss<project_number>-gpu
+#SBATCH -p gpu
 ```
 
 You can start an interactive session

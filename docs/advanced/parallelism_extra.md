@@ -13,7 +13,7 @@ by setting environment variables such as `OMP_NUM_THREADS`.
 Higher-level languages have their own mechanisms to generate threads and this can be
 confusing especially if the code is using external libraries, linear algebra for instance
 (LAPACK, BLAS, ...). These libraries have their own threads (OpenMP for example) and
-the code you are writing (R, Julia, Python, or Matlab) can also have some internal threded mechanism.
+the code you are writing (R, Julia, Python, or Matlab) can also have some internal threaded mechanism.
 
     - Here there are some examples (of many) of what you will need to pay attention when porting
      a parallel code from your laptop (or another HPC center) to our clusters:
@@ -151,7 +151,7 @@ different threads write on the same memory address.
 
     === Matlab
 
-        In Matlab one can use the function `pause()` to wait for some number of secods.
+        In Matlab one can use the function `pause()` to wait for some number of seconds.
         The Matlab module we tested can be loaded as ``ml MATLAB/2023a.Update4``.
 
         ```matlab

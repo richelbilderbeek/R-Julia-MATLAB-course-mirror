@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A hpc2n2025-151
+#SBATCH -A hpc2ncourses2026-017
 # Remember, there are 4 workers and 1 master!
 #SBATCH --ntasks=5
 #SBATCH --cpus-per-task=1

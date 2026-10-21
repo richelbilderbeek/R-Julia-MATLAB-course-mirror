@@ -1384,7 +1384,7 @@ In this exercise we will run a parallelized code that performs the 2D integratio
 
         Short parallel example (using packages "pbdMPI as "Rmpi" does not work correctly on NSC). Loading R/4.2.2. 
 
-        Note: for NSC you first need to install "pdbMPI" (``module load R/4.2.2-hpc1-gcc-11.3.0-bare``, start ``R``, ``install.packages('pbdMPI')``, pick CRAN mirror (Denmark, Finland, Sweden or other closeby)) 
+        Note: for NSC you first need to install "pdbMPI" (``module load R/4.2.2-hpc1-gcc-11.3.0-bare``, start ``R``, ``install.packages('pbdMPI')``, pick CRAN mirror (Denmark, Finland, Sweden or other close by)) 
 
         ```bash  
         #!/bin/bash

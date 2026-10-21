@@ -53,9 +53,22 @@ linkchecking:
       - 1  # tmp, remove for hard failure on internal link failures
       - 64
 
+# Checks if the spelling is correct
 cspell:
   stage: verify
   image: ghcr.io/streetsidesoftware/cspell:latest
   script:
     - cspell-cli 'README.md' 'docs/**/*.md'
   allow_failure: true
+
+# Checks if the URLs of 'wget' commands in the course material are valid
+wget_urls_valid:
+  stage: verify
+  image: python:3.14
+  script:
+    - ./scripts/check_wget_urls.sh
+  allow_failure: true
+
+
+
+

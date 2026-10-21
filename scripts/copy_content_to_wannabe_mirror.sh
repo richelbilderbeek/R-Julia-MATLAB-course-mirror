@@ -25,12 +25,12 @@ fi
 git pull
 
 for file in $(find . -maxdepth 1 -type f); do
-  cp ${file} ~/GitHubs/R-Julia-MATLAB-course-mirror
+  cp --force ${file} ~/GitHubs/R-Julia-MATLAB-course-mirror
 done
 
 echo "Copying folders"
 for folder in $(ls --directory */); do
-  cp --recursive ${folder} ~/GitHubs/R-Julia-MATLAB-course-mirror
+  cp --force --recursive ${folder} ~/GitHubs/R-Julia-MATLAB-course-mirror
 done
 
 cd ~/GitHubs/R-Julia-MATLAB-course-mirror

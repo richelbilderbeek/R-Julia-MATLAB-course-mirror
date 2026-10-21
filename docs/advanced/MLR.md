@@ -53,7 +53,7 @@ This table is not exhaustive, but lists the more popular libraries/packages and 
 | stringr | N/A | R | R | R_packages | R | R | R |
 | kernlab | N/A | R | R | R_packages | R-bundle-CRAN | R-bundle-CRAN | R-bundle-CRAN | 
 
-Some centes have several packages installed with R, some have module "bundles" of R packages installed at the various centres: 
+Some centers have several packages installed with R, some have module "bundles" of R packages installed at the various centres: 
 
 - NSC (R/4.4.0): ~30 packages installed with R. You will have to install the rest yourself. 
 - PDC (R/4.4.2): ~1250 packages installed with R. In addition, there are many Bioconductor packages installed with the Rbio module 

@@ -1,4 +1,4 @@
-# Julia interactively
+# Julia interactively and IDEs
 
 !!! info "Learning outcomes for today"
 
@@ -25,19 +25,19 @@ There are several ways to run Julia interactively
 
 In order to run interactively, you need to have compute nodes allocated to run on, and this is done through the Slurm system.
 
-## Interactive sessions at NSC, PDC, HPC2N, UPPMAX and LUNARC
+## Interactive sessions at Arrhenius, PDC, HPC2N, UPPMAX and LUNARC
 
 Here we define an interactive session as a session with direct access to a compute node.
 Or alternatively: an interactive session is a session, in which there is no queue before a command is run on a compute node.
 
 This differs between HPC2N and UPPMAX :
 
+- Arrhenius: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
 - HPC2N: the user remains on a login node.
   All commands can be sent directly to the compute node using `srun`
 - UPPMAX: the user is actually on a computer node.
   Whatever command is done, it is run on the compute node
 - LUNARC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
-- NSC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
 - PDC: the user is actually on a computer node if the correct menu option is chosen. Whatever command is done, it is run on the compute node
 
 ### Start an interactive session
@@ -49,13 +49,13 @@ The command to request an interactive node differs per HPC cluster:
 
 | Cluster | `interactive` | `salloc`     | GfxLauncher | Open OnDemand |
 |---------|:-------------:|--------------|-------------|---------------|
+|Arrhenius| Recommended   | Works        | N/A         |  N/A  
 | HPC2N   | Works         | Recommended  | N/A         |  Recommended  |
 | UPPMAX  | Recommended   | Works        | N/A         |  N/A  
 | LUNARC  | Works         | N/A          | Recommended |  N/A  
-| NSC     | Recommended   | N/A          | N/A         |  N/A  
 | PDC     | N/A           | Recommended  | Possible    |  N/A  
 
-Example, HPC2N vs. UPPMAX (also valid for NSC, PDC and LUNARC):
+Example, HPC2N vs. UPPMAX (also valid for Arrhenius, PDC and LUNARC):
 
 ```mermaid
 graph TD
@@ -99,10 +99,10 @@ graph TD
 
     Short serial example for running on different clusters.
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        $ interactive -n <tasks> --time=HHH:MM:SS -A naiss2025-22-934
+        $ interactive -n <tasks> --time=HHH:MM:SS -A naiss2026-22-934
         ```
 
     === "PDC"
@@ -168,13 +168,17 @@ logout
 
 !!! important "Documentation at the centers"
 
+   - [Interactive allocation on Arrhenius](https://hpc.pages.naiss.se/user-documentation/support-docs/arrhenius_hpc/job_management/interactive/){:target="_blank"}
    - [Interactive allocation on PDC](https://support.pdc.kth.se/doc/contact/contact_support/?sub=login/interactive_hpc/){:target="_blank"}
-   - [Interactive allocation on NSC](https://www.nsc.liu.se/support/running-applications/#interactive-jobs){:target="_blank"}
    - [Interactive allocation on UPPMAX](https://docs.uppmax.uu.se/cluster_guides/start_interactive_session/){:target="_blank"}
    - [Interactive allocation on HPC2N](https://docs.hpc2n.umu.se/documentation/batchsystem/job_submission/#interactive){:target="_blank"}
    - [Interactive allocation on LUNARC](https://lunarc-documentation.readthedocs.io/en/latest/manual/manual_interactive/#starting-an-interactive-session){:target="_blank"}
 
 ## Exercise interactive session
+
+!!! info "Project numbers and directories"
+
+    https://hpc.pages.naiss.se/training/R-matlab-julia-HPC/projects/
 
 !!! important "Run from ThinLinc (web or client!)"
 
@@ -186,13 +190,13 @@ logout
 
 !!! important "Interactive jobs"
     
-    Requesting 4 cores for 10 minutes, then running Julia
+    Request 4 cores for 10 minutes, then running Julia
     Short serial example for running on different clusters.
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        [sm_bcarl@tetralith3 ~]$ interactive -n 4 -t 0:30:0 -A naiss2025-22-934
+        [sm_bcarl@arrhenius3 ~]$ interactive -n 4 -t 0:30:0 -A naiss2025-22-934
         salloc: Pending job allocation 43071298
         salloc: job 43071298 queued and waiting for resources
         salloc: job 43071298 has been allocated resources
@@ -200,7 +204,7 @@ logout
         salloc: Waiting for resource configuration
         salloc: Nodes n760 are ready for job
 
-        [bjornc@r483 ~]$ module load julia/1.10.2-bdist
+        [bjornc@n483 ~]$ module load julia/1.10.2-bdist
         ```
 
         Let us check that we actually run on the compute node:
@@ -282,10 +286,10 @@ logout
 
         We are. Notice that we got a response from all four cores we have allocated.
 
-    === "UPPMAX (Rackham/Bianca)"
+    === "UPPMAX (Bianca)"
 
         ```bash
-        [bjornc@rackham2 ~]$ interactive -A uppmax2025-2-360 -p core -n 4 -t 0:30:00
+        [bjornc@bianca ~]$ interactive -A uppmax2025-2-360 -p core -n 4 -t 0:30:00
         You receive the high interactive priority.
         There are free cores, so your job is expected to start at once.
 
@@ -300,11 +304,11 @@ logout
         Let us check that we actually run on the compute node:
 
         ```bash
-        [bjornc@r102 ~]$ srun hostname
-        r102.uppmax.uu.se
-        r102.uppmax.uu.se
-        r102.uppmax.uu.se
-        r102.uppmax.uu.se
+        [bjornc@b102 ~]$ srun hostname
+        b102.uppmax.uu.se
+        b102.uppmax.uu.se
+        b102.uppmax.uu.se
+        b102.uppmax.uu.se
         ```
 
         We are. Notice that we got a response from all four cores we have allocated.
@@ -352,7 +356,7 @@ logout
         4
         ```
 
-        We are, because the *$SLURM* environment variable gves an output. Notice that we got 4, which is not the size of the physcial node bt the allocation size.
+        We are, because the *$SLURM* environment variable gives an output. Notice that we got 4, which is not the size of the physical node bt the allocation size.
 
 
 
@@ -415,7 +419,7 @@ logout
 
 !!! info 
 
-    Meanwhile waiting let's talk about notebooks!
+    Meanwhile waiting, let's talk about notebooks!
     
 ## Notebooks
 
@@ -440,7 +444,7 @@ logout
 !!! important
 
     - You should be using ThinLinc.
-    - And from the terminal have started a interactive session
+    - And from the terminal have started an interactive session
     - See [last exercise](#exercise-interactive-session)
 
 - [Start Jupyter](notebook_jupyter.md)
@@ -450,7 +454,7 @@ logout
 
     When you have finished using the allocation, either wait for it to end, or close it with ``exit``
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
         [sm_bcarl@n134 ~]$ exit
@@ -459,7 +463,7 @@ logout
         srun: Terminating StepId=43071803.interactive
         salloc: Relinquishing job allocation 43071803
         salloc: Job allocation 43071803 has been revoked.
-        [sm_bcarl@tetralith3 ~]$
+        [sm_bcarl@arrhenius3 ~]$
         ```
 
     === "PDC"
@@ -474,13 +478,13 @@ logout
     === "UPPMAX"
 
         ```bash
-        [bjornc@r483 ~]$ exit
+        [bjornc@p483 ~]$ exit
 
         exit
         [screen is terminating]
         Connection to r483 closed.
 
-        [bjornc@rackham2 ~]$
+        [bjornc@pelle2 ~]$
         ```
 
     === "HPC2N"

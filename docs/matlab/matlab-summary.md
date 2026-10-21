@@ -24,7 +24,7 @@
 
 **Slurm job scheduler and MATLAB in terminal**
 
-- You can configure the cluster before starting MATLAB, like this:
+- You can configure the cluster before starting MATLAB (Not applicable on Arrhenius and Dardel), like this:
 
    ```bash
    configCluster.sh <project-id if on UPPMAX or LUNARC>
@@ -111,17 +111,4 @@
     - Search in add-ons explorer and install.
     - Installation folder will be in MATLAB's search path, and so should be accessible from anywhere in the file tree.
 
-**Session-UPPMAX: MATLAB client on the desktop**
-
-- You can use the MATLAB client on the desktop
-
-   - download and decompress UPPMAX configure file.
-   - run `configCluster` on local MATLAB and set user name.
-   - Set `parcluster` settings, like you do otherwise.
-
-**Session: MATLAB in Jupyter**
-
-- You can start run MATLAB in Jupyter
-
-   - You need to configure and install some python packages the first time.
-   - After that Jupyter will find the MATLAB kernel during startup.
+## [Extra material](extra.md)

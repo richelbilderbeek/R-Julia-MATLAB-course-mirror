@@ -272,26 +272,14 @@ and, in a general form, is plotted like this:
 
 ## Exercises
 
-## Question -1: change your Zoom name
+## Question 0: change your Zoom name
 
-Change your Zoom name, to include your HPC cluster and favorite
-programming language, e.g. make `Svante` into `Svante [Arrhenius, R]`.
+If you want to work together, then update your Zoom name,
+to include your HPC cluster and favorite
+programming language, e.g. make `Svante` into `[Arrhenius, R] Svante`.
 
 You can do so by right-click on the video of yourself,
 then click 'Rename' to change your Zoom name.
-
-## Question 0: remember your Zoom room
-
-HPC cluster name |Main breakout room
------------------|------------------
-Arrhenius        |Room 1
-Bianca           |Room 2
-COSMOS           |Room 3
-Dardel           |Room 4
-Kebnekaise       |Room 5
-LUMI             |Room 6
-Pelle            |Room 7
-Tetralith        |Room 8
 
 ## Question 1
 
@@ -420,7 +408,7 @@ that could be run in parallel?
 
     Note that these plots are less clear than you may have expected:
 
-    - The total core seconds is expected to increase linearily
+    - The total core seconds is expected to increase linearly
     - The efficiency is expected to follow the dashed line
     - The speedup is expected to be at 100%
 

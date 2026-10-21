@@ -104,7 +104,7 @@ Use the documentation of your HPC cluster for help.
 
     HPC Cluster|Documentation
     -----------|------------
-    Arrhenius  |[Arrhenius documentation](https://richel.bilderbeek.pages.naiss.se/support-docs/arrhenius_hpc/software_development/rstudio/)
+    Arrhenius  |[Arrhenius documentation](https://user.naiss.se/arrhenius_hpc/software_development/rstudio/)
     Bianca     |[UPPMAX documentation](https://docs.uppmax.uu.se/software/rstudio_on_bianca/)
     COSMOS     |[UPPMAX documentation](https://docs.uppmax.uu.se/naiss/rstudio_on_cosmos/)
     Dardel     |[UPPMAX documentation](https://docs.uppmax.uu.se/naiss/rstudio_on_dardel/)

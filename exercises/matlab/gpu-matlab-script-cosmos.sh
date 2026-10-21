@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number
-#SBATCH -A lu2025-7-94
+#SBATCH -A luXXXX-Y-ZZ
 #SBATCH -n 1
 #SBATCH -p gpua100
 # The number of GPUs.#gpus, can be 1 or 2

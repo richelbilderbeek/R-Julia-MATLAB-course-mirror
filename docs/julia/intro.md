@@ -33,7 +33,7 @@ They mention Matlab, Lisp, Python, Ruby, Perl, Mathematica, R and C.
 >
 > We are greedy: we want more.
 
-![Jupyter Julia](../img/two-language.png){: style="width: 600px;"}
+![Jupyter Julia](../img/two-language_50.png){: style="width: 600px;"}
 
 No language can be everything for everyone, but Julia was created to get as
 close as possible for a certain set of users. If the work you do falls in the
@@ -42,7 +42,7 @@ categories mentioned, as HPC work does, this target audience includes you.
 
 ## Reasons to choose Julia
 
-The strengths of Julia are based on flexibility. Moreso than forcing either your
+The strengths of Julia are based on flexibility. Without forcing either your
 code or your workflow into anything, it enables you to choose the right way to
 write or work for the task at hand.
 

@@ -108,6 +108,7 @@ nav = [
     { "More about Julia" = "julia/extra.md" }
   ]},
   { "Misc" = [
+    { "Data" = "data/README.md" },
     { "Evaluations" = "evaluations/README.md" },
     { "Lesson plans" = "lesson_plans/README.md" },
     { "Meeting notes" = "meeting_notes/README.md" },

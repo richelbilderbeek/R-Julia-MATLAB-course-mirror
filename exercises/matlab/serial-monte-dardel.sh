@@ -1,6 +1,6 @@
 #!/bin/bash
 # Change to your actual project number later
-#SBATCH -A naiss2025-22-934
+#SBATCH -A naiss2026-4-1022
 #SBATCH -n 1
 # Asking for 15 min (change as you want)
 #SBATCH -t 00:15:00

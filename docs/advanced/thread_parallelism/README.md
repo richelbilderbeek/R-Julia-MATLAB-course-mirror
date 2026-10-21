@@ -57,7 +57,6 @@ tags:
     Kebnekaise |Yes     |No      |Yes     |.
     LUMI       |Unknown |Unknown |Unknown |. 
     Pelle      |Yes     |No      |Yes     |.
-    Tetralith  |Yes     |No      |Yes     |Seems to eat up jobs
 
 
 ???- hint "Prefer this session as a video?"
@@ -213,17 +212,17 @@ on your HPC cluster, as well as some troubleshooting.
 
 On your HPC cluster:
 
-- Download the benchmark script
+- Download [the benchmark script](benchmark_2d_integration.sh)
 
 ???- hint "How to do that?"
 
     There are many ways to do so.
 
     One way is to download it directly from
-    [this course's repository](https://raw.githubusercontent.com/UPPMAX/R-matlab-julia-HPC/refs/heads/main/docs/advanced/thread_parallelism/benchmark_2d_integration.sh):
+    [this course's repository](https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC/-/raw/main/docs/advanced/thread_parallelism/benchmark_2d_integration.sh):
 
     ```bash
-    wget https://raw.githubusercontent.com/UPPMAX/R-matlab-julia-HPC/refs/heads/main/docs/advanced/thread_parallelism/benchmark_2d_integration.sh
+    wget https://gitlab.naiss.se/hpc/training/R-matlab-julia-HPC/-/raw/main/docs/advanced/thread_parallelism/benchmark_2d_integration.sh
     ```
 
 - Run the benchmark script. 
@@ -664,6 +663,21 @@ programming language. What do you think the advice is?
     - you need to to work from code that has been written
       someone else
 
+???- question "Are there other, more modern, similar studies?"
+
+    Yes:
+
+    - `[Nanz and Furia, 2014]` and `[Zheng and Luo, 2026]`
+      compare multiple languages too,
+      but it does not show a distribution of
+      run-time speeds per problem
+    - `[Rashed et al., 2026]`: cannot read this
+
+    ![Comparison of run-time speed between programming languages](zheng_and_luo_2026_figure_1_a.png)
+
+    > Comparison of run-time speed between programming
+    > languages, adapted from `[Zheng and Luo, 2026]` figure 1, panel a.
+
 ## Where to go next?
 
 If you want to scale up,
@@ -704,7 +718,6 @@ When you see, for example, the text below,
 it is clearly stated that there is no package called `doParallel`.
 
 ```text
-HPC cluster: tetralith
 Slurm job account used: naiss2025-22-934
 Number of cores booked in Slurm: 32
 Error in library(doParallel, quietly = TRUE) : 
@@ -756,21 +769,11 @@ module load R/4.4.0-hpc1-gcc-11.3.0-bare
 To install that package from the terminal,
 [check this course's material on how to do so](../../r/packages.md).
   
-## MATLAB error
-
-```matlab
-Warning: Executing startup failed in matlabrc.
-This indicates a potentially serious problem in your MATLAB setup, which should
-be resolved as soon as possible.  Error detected was:
-MATLAB:undefinedVarOrClass
-Unable to resolve the name 'java.net.InetAddress.getLocalHost.getHostAddress'. 
-Error using run
-RUN cannot execute the file 'do_2d_integration.m 48'. RUN requires a valid
-MATLAB script
-```
-
 ## References
 
 - `[CppCore Per.6]`
   [C++ Core Guidelines: Per.6: Don't make claims about performance without measurements](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#per6-dont-make-claims-about-performance-without-measurements)
 - `[Prechelt, 2000]` Prechelt, Lutz. "An empirical comparison of C, C++, Java, Perl, Python, REXX and TCL." IEEE Computer 33.10 (2000): 23-29.
+- `[Nanz and Furia, 2014]` Nanz, S., & Furia, C. A. (2014). A Comparative Study of Programming Languages in Rosetta Code. 2015 IEEE/ACM 37th IEEE International Conference on Software Engineering, 1, 778-788. https://doi.org/10.1109/icse.2015.90
+- `[Rashed et al., 2026]` Rashed, A. A., Helmy, A., & Fouad, M. M. (2026). A Multi-Dimensional Comparative Analysis of Twelve Programming Languages. 2026 23rd International Learning and Technology Conference (L&T), 23, 294-299. https://doi.org/10.1109/lt68265.2026.11592549
+- `[Zheng and Luo, 2026]` Zheng, Y., & Luo, Q.-M. (2026). Computational Performance of Programming Languages in Mathematical Biology: A Ten-Language Evaluation Across Six Modeling Regimes. Symmetry. https://doi.org/10.3390/sym18091559

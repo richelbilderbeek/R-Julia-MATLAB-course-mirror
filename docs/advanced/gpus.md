@@ -73,45 +73,22 @@ Not every program is suitable for GPU acceleration. GPUs process simple function
 
 One of the most common use of GPUs with and Julia is for machine learning or deep learning.
 
-## GPUs on C3SE, UPPMAX, HPC2N, LUNARC, NSC, and PDC systems
+## GPUs on NAISS Arrhenius, Pelle, Kebnekaise, Cosmos, and Dardel systems
 
 There are generally either not GPUs on the login nodes or they cannot be accessed for computations.
 To use them you need to either launch an interactive job or submit a batch job.
 
-=== "C3SE"
+=== "NAISS Arrhenius"
 
-    Alvis is meant for GPU jobs. There is no node-sharing on multi-node jobs (`--exclusive` is automatic).
-
-    NOTE: Requesting -N 1 does not mean 1 full node
+    Arrhenius has GPU nodes which has four Grace Hopper Superchips from NVIDIA each. 
 
     You would need to add this to your batch script:
 
     ```bash
-    #SBATCH -p alvis
-    #SBATCH -N <nodes>
-    #SBATCH --gpus-per-node=<type>:x
-    ```
-
-    where ``<type>`` is one of
-
-    - V100
-    - T4
-    - A100
-
-    and ``x`` is number of GPU cards
-
-    - 1-4 for V100
-    - 1-8 for T4
-    - 1-4 for A100
-
-=== "NSC"
-
-    Tetralith has Nvidia T4 GPUs. In order to access them, add this to your batch script or interactive job:
-    
-    ```bash
-    #SBATCH -n 1
-    #SBATCH -c 32
-    #SBATCH --gpus-per-task=1
+    #SBATCH <project ID>-gpu 
+    #SBATCH -p gpu
+    #SBATCH -n <same as number of GPUs>
+    #SBATCH --gpus <number of GPUs>
     ```
 
 === "PDC"
@@ -480,7 +457,7 @@ This is how you add GPUs to use in batch jobs submitted from inside MATLAB:
 
     Remember, here you cannot set `AdditionalProperties`. Instead, you do the following: 
 
-    1. Start am interactive sesson asking for a GPU: ``srun --account=naiss2025-22-934 --gpus-per-node=T4:1 --time=01:00:00 --pty /bin/bash``  
+    1. Start am interactive session asking for a GPU: ``srun --account=naiss2025-22-934 --gpus-per-node=T4:1 --time=01:00:00 --pty /bin/bash``  
     2. Load MATLAB: ``module load MATLAB/2024b``
     3. Start MATLAB: ``matlab -singleCompThread -nodisplay -nosplash -nodesktop``
 

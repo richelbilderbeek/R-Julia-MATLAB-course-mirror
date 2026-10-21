@@ -10,7 +10,7 @@
 !!! info "Your background?"
 
     - Have you used Python?
-    - Have you used Matlab? Were you at yesterdays Matlab sessions?
+    - Have you used Matlab? Were you at yesterday's Matlab sessions?
     - Have you used Git?
     - Are you completely new to this, code packages and version control?
 
@@ -189,7 +189,7 @@ environment directory):
               "@"
               "@v#.#"
               "@stdlib"
-              "/sw/comp/julia/1.8.5/rackham/lib/glob_pkg/environments/v1.8"
+              "/sw/comp/julia/1.8.5/bianca/lib/glob_pkg/environments/v1.8"
 
     !!! info "Bianca Intermediate workshop"
 
@@ -200,7 +200,7 @@ environment directory):
 ## Exercises
 
 - We need the packages ``IJulia`` and ``Pluto`` for running the integrated development environments (IDEs) Jupyter and Pluto.
-- We also need the MPI package on Friday.
+- We also need the MPI package for the advanced day.
 
 - Make these exercises be the installation of the packages that we will later use.
 - It might be advisable to install IJulia and Pluto in separate environments.
@@ -210,10 +210,10 @@ environment directory):
     - It may take 5-10 minutes or so.
     - This you can do in an ordinary terminal
 
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
-        $ ml julia/1.10.2-bdist
+        $ ml julia/1.12.2-bdist
         $ julia
         ```
 
@@ -222,26 +222,26 @@ environment directory):
          Note: not fully tested successfully, but this step works
 
          ```bash
-         $ ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+         $ ml julia/1.12.1
          $ julia
          ```
 
-    === "UPPMAX (Bianca/Rackham)"
+    === "UPPMAX (Bianca)"
 
         ```bash
-         $ module load julia/1.8.5
+         $ module load julia/1.11.6
         ```
 
     === "UPPMAX (Pelle)"
 
          ```bash
-         $ module load Julia/1.10.9-LTS-linux-x86_64
+         $ module load Julia/1.12.6
          ```
 
     === "HPC2N & LUNARC"
 
          ```bash
-         $ module load GCCcore/13.2.0  Julia/1.9.3-linux-x86_64
+         $ module Julia/1.12.6
          $ julia
          ```
 
@@ -266,7 +266,7 @@ environment directory):
     - It may take 5-10 minutes or so.
     - This you can do in an ordinary terminal (book an interactive session, for safety)
    
-    === "NSC"
+    === "Arrhenius"
 
         ```bash
         $ ml Python/3.11.5-env-hpc1-gcc-2023b-eb
@@ -277,15 +277,15 @@ environment directory):
     === "PDC"
 
          ```bash
-         $ ml PDC/23.12 julia/1.10.2-cpeGNU-23.12
+         $ ml julia/1.12.1
          $ ml cray-python/3.11.5
          $ julia
          ```
 
-    === "UPPMAX (Bianca/Rackham)"
+    === "UPPMAX (Bianca)"
 
         ```bash
-        $ module load julia/1.8.5
+        $ module load julia/1.11.6
         $ module load python/3.9.5
         $ julia
         ```
@@ -293,7 +293,7 @@ environment directory):
     === "UPPMAX (Pelle)"
 
         ```bash
-        $ module load Julia/1.10.9-LTS-linux-x86_64
+        $ module load Julia/1.12.6
         $ module load JupyterLab/4.2.5-GCCcore-13.3.0
         $ julia
         ```
@@ -302,7 +302,7 @@ environment directory):
 
         ```bash
         $ module load GCC/13.2.0  JupyterLab/4.2.0
-        $ module load Julia/1.8.5-linux-x86_64
+        $ module load Julia/1.12.6
         $ julia
         ```
 
@@ -323,13 +323,25 @@ environment directory):
 
     In order to use MPI with Julia you will need to follow the next steps (only the first time):
 
-    === "UPPMAX (Bianca/Rackham)"
+    === "Arrhenius"
+
+        ```bash
+        # Load the tool chain which contains a MPI library
+        $ ml buildenv-gcc/2026.03 #includes MPICH
+        # Load Julia
+        $ ml Julia/1.12.2-bdist
+        # Start Julia on the command line
+        $ julia
+        # Change to ``package mode``
+        ```
+
+    === "UPPMAX (Bianca)"
 
         ```bash
         # Load the tool chain which contains a MPI library
         $ ml gcc/11.3.0 openmpi/4.1.3
         # Load Julia
-        $ ml Julia/1.8.5
+        $ ml Julia/1.11.6
         # Start Julia on the command line
         $ julia
         # Change to ``package mode`` and add the ``MPI`` package
@@ -342,7 +354,7 @@ environment directory):
         # Load the tool chain which contains a MPI library
         $ ml OpenMPI/5.0.3-GCC-13.3.0
         # Load Julia
-        $ ml Julia/1.10.9-LTS-linux-x86_64 
+        $ ml Julia/1.12.6
         # Start Julia on the command line
         $ julia
         # Change to ``package mode``
@@ -354,7 +366,7 @@ environment directory):
         # Load the tool chain which contains a MPI library
         $ ml foss/2021b
         # Load Julia
-        $ ml Julia/1.8.5-linux-x86_64
+        $ ml Julia/1.12.6
         # Start Julia on the command line
         $ julia
         # Change to ``package mode``
@@ -366,7 +378,7 @@ environment directory):
         # Load the tool chain which contains a MPI library
         $ ml foss/2021b
         # Load Julia
-        $ ml Julia/1.8.5-linux-x86_64
+        $ ml Julia/1.12.6
         # Start Julia on the command line
         $ julia
         # Change to ``package mode``
@@ -376,23 +388,12 @@ environment directory):
 
         ```bash
         # Load the tool chain for Julia which already contains a MPI library (cray-mpich)
-        $ ml PDCOLD/23.12 julia/1.10.2-cpeGNU-23.12
+        $ ml julia/1.12.6
         # Start Julia on the command line
         $ julia
         # Change to ``package mode``
         ```
 
-    === "NSC"
-
-        ```bash
-        # Load the tool chain which contains a MPI library
-        $ ml buildtool-easybuild/4.8.0-hpce082752a2 foss/2023b
-        # Load Julia
-        $ ml julia/1.9.4-bdist
-        # Start Julia on the command line
-        $ julia
-        # Change to ``package mode``
-        ```
 
     In Julia for all clusters (output may differ for different clusters and Julia versions):
    
